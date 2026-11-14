@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://knstntnkek.github.io/qubiq-site/sitemap.xml

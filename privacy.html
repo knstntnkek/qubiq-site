@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qubiq — privacy policy</title>
+<meta name="description" content="Qubiq privacy policy: the app collects nothing — no accounts, no analytics, no telemetry. This website counts visits with cookieless analytics.">
+<meta property="og:title" content="Qubiq — privacy policy">
+<meta property="og:description" content="The Qubiq app collects nothing — no accounts, no analytics, no telemetry.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knstntnkek.github.io/qubiq-site/privacy.html">
+<meta property="og:site_name" content="Qubiq">
+<meta property="og:image" content="https://knstntnkek.github.io/qubiq-site/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://knstntnkek.github.io/qubiq-site/og.png">
+<link rel="canonical" href="https://knstntnkek.github.io/qubiq-site/privacy.html">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261114-1">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <img class="logo-icon" src="icon.png" alt="Qubiq logo">
+      Qubiq
+    </a>
+    <nav>
+      <a href="index.html#why">Why Qubiq</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#privacy">Privacy</a>
+      <a href="docs.html">Docs</a>
+      <a href="index.html#download">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="wrap">
+      <article class="doc-body">
+        <h1>Privacy policy</h1>
+        <p><em>Last updated: November 2026. The short version: the app
+        collects nothing, and this website counts visits with a cookieless,
+        no-tracking analytics tool.</em></p>
+
+        <h2>The Qubiq app</h2>
+        <p>Qubiq has <strong>no telemetry, no analytics, no crash
+        reporting, no ads and no accounts</strong> — and no servers of
+        ours, so there is nothing to breach and nothing to sell. The app
+        makes network connections only to <em>your</em> VPN servers and
+        the subscription providers <em>you</em> add.</p>
+        <ul>
+          <li>Nodes, credentials, Age keys, HWID values and settings live
+          in the app's local database on your device.</li>
+          <li>Optional logs are opt-in and never leave the device except
+          when you export them yourself.</li>
+          <li>Subscription refreshes send a per-source <strong>random
+          UUID</strong> (<code>x-hwid</code>) when enabled — never a
+          hardware, ad or system identifier — and cross-origin redirects
+          strip it. It's a per-source switch.</li>
+          <li>The backup file is deliberately <strong>unencrypted</strong>
+          — you're warned before it's written, and it goes only to the
+          iCloud Drive, OneDrive folder or file you bind yourself.</li>
+        </ul>
+        <p>The <a href="docs.html">user guide</a> covers
+        subscriptions, HWID and backup behaviour in detail.</p>
+
+        <h2>This website</h2>
+        <ul>
+          <li><strong>Hosting</strong> — this site is served by GitHub
+          Pages. Like any web server, GitHub processes your IP address and
+          request details to deliver pages; <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's
+          privacy statement</a> covers their side.</li>
+          <li><strong>Analytics</strong> — we use <a href="https://www.goatcounter.com">GoatCounter</a>,
+          a privacy-friendly, cookieless analytics service. It records that
+          a page was viewed along with the referrer, browser, operating
+          system and country — <strong>no IP address is stored, no cookies
+          are set, and nothing follows you across sites</strong>. Clicks
+          on the download buttons are counted the same way.</li>
+          <li><strong>No ads, no trackers, no cookies</strong> — which is
+          why there's no consent banner: there is nothing to consent
+          to.</li>
+        </ul>
+
+        <h2>Changes &amp; contact</h2>
+        <p>If this policy changes, the update lands on this page — that is
+        the notification. Questions or requests:
+        <a href="https://github.com/knstntnkek/qubiq-site/issues">open an
+        issue on the site repo</a> or the
+        <a href="https://github.com/knstntnkek/yavpnclient/issues">app repo</a>.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span class="brand">
+      <img class="logo-icon" src="icon.png" alt="Qubiq logo">
+      Qubiq
+    </span>
+    <nav class="footer-nav">
+      <a href="docs.html">Docs</a>
+      <a href="https://github.com/knstntnkek/yavpnclient">GitHub</a>
+      <a href="https://github.com/knstntnkek/yavpnclient/releases">Releases</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="index.html#download">Download</a>
+    </nav>
+    <p class="footer-note">GPL-3.0 · includes OneXray by Yuan Dev Team and libXray.</p>
+  </div>
+</footer>
+
+<script data-goatcounter="https://konstantin11.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

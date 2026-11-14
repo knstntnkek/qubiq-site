@@ -1,12 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Qubiq</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qubiq — an open-source Xray client for all your devices</title>
+<meta name="description" content="Qubiq is an open-source Xray-core client for iPhone, iPad, Mac, Android, Windows and Linux — your own servers and subscriptions, smart routing, provider configs, no account, no analytics.">
+<meta property="og:title" content="Qubiq — one Xray client for every device">
+<meta property="og:description" content="Open-source Xray-core client for iOS, macOS, Android, Windows and Linux. Your servers, your routing — no accounts, no telemetry.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knstntnkek.github.io/qubiq-site/">
+<meta property="og:site_name" content="Qubiq">
+<meta property="og:image" content="https://knstntnkek.github.io/qubiq-site/og.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Qubiq — one Xray client for every device">
+<meta name="twitter:description" content="Open-source Xray-core client for iOS, macOS, Android, Windows and Linux. Your servers, your routing — no accounts, no telemetry.">
+<meta name="twitter:image" content="https://knstntnkek.github.io/qubiq-site/og.png">
+<link rel="canonical" href="https://knstntnkek.github.io/qubiq-site/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Qubiq",
+  "url": "https://knstntnkek.github.io/qubiq-site/",
+  "downloadUrl": "https://github.com/knstntnkek/yavpnclient/releases",
+  "operatingSystem": "iOS, iPadOS, macOS, Android, Windows, Linux",
+  "applicationCategory": "UtilitiesApplication",
+  "description": "An open-source Xray-core client for phones, tablets and desktops. Bring your own servers or subscription — smart routing, provider configs, no accounts, no analytics.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "author": { "@type": "Organization", "name": "Qubiq", "url": "https://github.com/knstntnkek/yavpnclient" }
+}
+</script>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261114-1">
 </head>
 <body>
-  <h1>Qubiq</h1>
-  <p>Coming soon.</p>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <img class="logo-icon" src="icon.png" alt="Qubiq logo">
+      Qubiq
+    </a>
+    <nav>
+      <a href="#why">Why Qubiq</a>
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="docs.html">Docs</a>
+      <a href="#download">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="badge">Open source · GPL-3.0 · no telemetry</p>
+      <h1>One Xray client,<br>every device.</h1>
+      <p class="lede">
+        Qubiq is an open-source Xray-core client for iPhone, iPad, Mac,
+        Android, Windows and Linux — your own servers and subscriptions,
+        routing you control.
+        <strong>No account, no ads, no analytics.</strong>
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/knstntnkek/yavpnclient/releases" data-goatcounter-click="download" data-goatcounter-title="Releases — hero">Get Qubiq</a>
+        <a class="btn btn-ghost" href="docs.html">Read the docs</a>
+      </div>
+      <p class="hero-note">iOS 16+ · macOS 13+ · Android 10+ · Windows 10+ · Linux — bring your own servers</p>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <img class="hero-logo" src="icon.png" alt="">
+    </div>
+  </section>
+
+  <!-- PAINS -->
+  <section id="why" class="section section-alt">
+    <div class="wrap">
+      <h2 class="section-title">Sound familiar?</h2>
+
+      <div class="pain-grid">
+
+        <div class="pain-card">
+          <p class="pain">"A different VPN client on every device — every one configured differently."</p>
+          <p class="fix-lead">One client everywhere.</p>
+          <p class="fix">Phone, tablet and desktop share the same servers model,
+          the same routing controls and the same five interface languages —
+          learn it once.</p>
+        </div>
+
+        <div class="pain-card">
+          <p class="pain">"My provider's app is a black box that phones home."</p>
+          <p class="fix-lead">Open by default.</p>
+          <p class="fix">GPL-3.0 source you can build yourself, no accounts,
+          no advertising, no analytics — Qubiq talks only to your servers
+          and your provider.</p>
+        </div>
+
+        <div class="pain-card">
+          <p class="pain">"Every subscription refresh wipes my favorites and groups."</p>
+          <p class="fix-lead">Refresh keeps what's yours.</p>
+          <p class="fix">Favorites, pinned selections, groups and manual order
+          survive updates — new nodes merge into your setup instead of
+          overwriting it.</p>
+        </div>
+
+        <div class="pain-card">
+          <p class="pain">"All-or-nothing tunnel — I want some apps direct and the rest proxied."</p>
+          <p class="fix-lead">Routing you control.</p>
+          <p class="fix">Smart Routing with a direct region and split DNS,
+          ordered custom rules, per-app VPN on Android — or let your
+          provider's config drive.</p>
+        </div>
+
+        <div class="pain-card">
+          <p class="pain">"The panel moved domains and every client broke."</p>
+          <p class="fix-lead">Migrations are automatic.</p>
+          <p class="fix">Provider <code>new-url</code>/<code>new-domain</code>
+          responses move the subscription to its new address on the next
+          refresh — no re-adding, no QR-code hunt.</p>
+        </div>
+
+        <div class="pain-card">
+          <p class="pain">"Sign up for an account… to connect to my own server?"</p>
+          <p class="fix-lead">Bring your own servers.</p>
+          <p class="fix">Qubiq provides no VPN access and sells nothing.
+          Import share links, subscriptions or Xray JSON and go.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">The complete client</h2>
+        <p class="section-sub">Everything below is implemented and shipping today.</p>
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="feature">
+          <span class="idx">01</span>
+          <h3>Every platform</h3>
+          <p>iPhone, iPad, Mac, Android, Windows and Linux — one app, one
+          model. Light/dark themes, five interface languages, Apple icon
+          choices, launch-at-login and hidden start on desktop.</p>
+          <div class="chips"><code>iOS</code><code>macOS</code><code>Android</code><code>Windows</code><code>Linux</code></div>
+        </div>
+
+        <div class="feature">
+          <span class="idx">02</span>
+          <h3>Subscriptions that stay organized</h3>
+          <p>HTTPS downloads with optional Age encryption, per-source
+          User-Agent, auto-update on a schedule or pull-to-refresh — plan
+          usage and expiry shown on the group card when the provider
+          reports them.</p>
+          <div class="chips"><code>Age</code><code>plan info</code><code>auto-update</code></div>
+        </div>
+
+        <div class="feature">
+          <span class="idx">03</span>
+          <h3>Provider configs, first-class</h3>
+          <p>Remnawave and complete Xray JSON subscriptions import as
+          provider-managed configs with their own routing — announcements,
+          support and website links, expiry reminders and automatic
+          address migration included.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">04</span>
+          <h3>Your nodes, your order</h3>
+          <p>Manual groups, drag-to-arrange, favorites, per-source filters
+          and batch latency tests — VMessAEAD/VLESS, Hysteria2, SS, SOCKS
+          and Trojan share links, Xray JSON or QR scan on mobile.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">05</span>
+          <h3>Smart Routing</h3>
+          <p>A direct region, split DNS resolvers, traffic sniffing and
+          optional FakeDNS and fragment — preview the rule set before you
+          connect, tune it without touching JSON.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">06</span>
+          <h3>Complete configs &amp; Raw JSON</h3>
+          <p>Run an entire Xray config as a connection resource — provider
+          configs stay read-only and follow subscription updates; copy one
+          into personal Raw JSON when you need to edit.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">07</span>
+          <h3>Multi-entry &amp; least latency</h3>
+          <p>Spread new connections across your fastest entry nodes —
+          round-robin by default or least-latency probing, with live chain
+          health on the connect page.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">08</span>
+          <h3>LAN proxy share</h3>
+          <p>Offer an unauthenticated HTTP/SOCKS5 inbound on your LAN with
+          one switch — other devices on the network can route through your
+          connection.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">09</span>
+          <h3>Backup that's yours</h3>
+          <p>A single-file backup to iCloud Drive, a OneDrive-synced folder
+          or Android storage — optional scheduled writes, restore with a
+          preview first. Honestly labelled as unencrypted.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">10</span>
+          <h3>System integrations</h3>
+          <p>iOS home/lock-screen widgets and a Control Center button,
+          Android widget and quick-settings tile, desktop tray with
+          start/stop and server switching, mobile quick actions.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">11</span>
+          <h3>Real diagnostics</h3>
+          <p>"Why this connection" explains the actual entry and final exit;
+          the Xray page exposes the running config, logs and a read-only
+          diagnostics view — no fake green lights.</p>
+        </div>
+
+        <div class="feature">
+          <span class="idx">12</span>
+          <h3>External interfaces</h3>
+          <p>A local HTTP API on desktop (localhost only, token-authorized)
+          and Android broadcast automation — start, stop and reconfigure
+          from scripts or other apps you trust.</p>
+        </div>
+
+      </div>
+
+      <p class="feature-note">Qubiq provides no VPN access or proxy servers —
+      it is a client for servers and subscriptions you bring yourself.</p>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section id="privacy" class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Private by design</h2>
+        <p class="section-sub">No accounts, no analytics, no telemetry — and no cloud of ours, because there isn't one.</p>
+      </div>
+
+      <div class="checklist-card">
+        <div class="check-row">
+          <svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Open source, GPL-3.0</strong><span>Read it, audit it, build it yourself — based on OneXray.</span></div>
+        </div>
+        <div class="check-row">
+          <svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Nothing leaves your device</strong><span>Nodes, credentials, Age keys and settings live in the local database — optional logs never leave the device.</span></div>
+        </div>
+        <div class="check-row">
+          <svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>No third-party telemetry</strong><span>No analytics SDK, no crash reporting, no ads — the only requests are to your servers and providers.</span></div>
+        </div>
+        <div class="check-row">
+          <svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Device identity is a random UUID</strong><span>Optional HWID binds devices to a provider account — it's generated per source, never a hardware ID, and can be switched off.</span></div>
+        </div>
+        <div class="check-row">
+          <svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Honest backup</strong><span>The backup file is deliberately unencrypted — you're told before it's written, and you choose where it lives.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section id="download" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Download</h2>
+        <p class="section-sub">Packages are published on GitHub Releases — pick the build for your platform.</p>
+      </div>
+
+      <div class="dl-table">
+        <table>
+          <tr><th>Platform</th><th>Package</th><th>Requirements</th></tr>
+          <tr><td>iPhone / iPad</td><td><code>Qubiq-ios.ipa</code></td><td>iOS / iPadOS 16+, sideloading or enterprise signing</td></tr>
+          <tr><td>macOS</td><td><code>Qubiq-macos-universal.zip</code></td><td>macOS 13+, Apple silicon or Intel</td></tr>
+          <tr><td>Android</td><td><code>Qubiq-android-universal.apk</code></td><td>Android 10+, arm64-v8a or x86_64</td></tr>
+          <tr><td>Windows</td><td><code>Qubiq-windows-amd64.exe</code> / <code>.zip</code><br><code>Qubiq-windows-arm64.exe</code> / <code>.zip</code></td><td>Windows 10 20H2+ (x64) or Windows 11 (ARM64)</td></tr>
+          <tr><td>Linux</td><td><code>Qubiq-linux-x86_64.deb</code> / <code>.zip</code><br><code>Qubiq-linux-aarch64.deb</code> / <code>.zip</code></td><td>Linux 5.3+, glibc 2.39+</td></tr>
+        </table>
+      </div>
+
+      <p class="feature-note">The macOS build uses a System Extension — approve
+      it once during setup. Windows and Linux ask you to pick an outbound
+      interface. Details in <a href="docs.html#getting-started">Getting
+      started</a>.</p>
+    </div>
+  </section>
+
+  <!-- MORE -->
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="coming-card">
+        <h3>Docs for everything above.</h3>
+        <p>Setup per platform, subscriptions and provider fields, routing
+        modes, backups and troubleshooting — the user guide covers the
+        shipped behavior.</p>
+        <a class="mono-link" href="docs.html">Open the guide →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD CTA -->
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <h2>Your servers. Your rules.</h2>
+      <p class="cta-sub">Grab the latest build — free, open source, no account.</p>
+      <img class="cta-logo" src="icon.png" alt="">
+      <a class="btn btn-primary btn-big" href="https://github.com/knstntnkek/yavpnclient/releases" data-goatcounter-click="download" data-goatcounter-title="Releases — CTA">Download latest build</a>
+      <p class="cta-note">GPL-3.0 · based on <a href="https://github.com/YuanDevTeam/OneXray">OneXray</a> by Yuan Dev Team · report bugs and request features on <a href="https://github.com/knstntnkek/yavpnclient/issues">GitHub</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span class="brand">
+      <img class="logo-icon" src="icon.png" alt="Qubiq logo">
+      Qubiq
+    </span>
+    <nav class="footer-nav">
+      <a href="docs.html">Docs</a>
+      <a href="https://github.com/knstntnkek/yavpnclient">GitHub</a>
+      <a href="https://github.com/knstntnkek/yavpnclient/releases">Releases</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="#download">Download</a>
+    </nav>
+    <p class="footer-note">GPL-3.0 · includes OneXray by Yuan Dev Team and libXray.</p>
+  </div>
+</footer>
+
+<script data-goatcounter="https://konstantin11.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
