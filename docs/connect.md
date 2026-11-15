@@ -1,79 +1,71 @@
 # Connect & system entries
 
-The Connect page renders, top to bottom: connection state and the
-primary action, your **connection plan**, the **actual run**, and
-**this session**.
+The home screen is a single vertical flow: a **connection hero** on top
+and your **server list** below, inside a pull-to-refresh scroll view.
+The app bar carries the app mark plus the active provider profile title,
+an add-server action and the settings action.
 
-## Choosing what runs
+## The hero
 
-The plan's server row opens the picker:
+A circular power button inside a ring and radial gradient:
 
-- **Automatic** — Qubiq chooses across usable nodes.
-- A **subscription** source, or **all manual nodes**.
-- A **pinned** node, personal Raw or provider complete config.
+- **Connect** — starts the tunnel with the selected (or automatic)
+  target.
+- **Cancel** — aborts a prepare/connect in flight.
+- **Disconnect** — stops the running tunnel.
+- **Try Again** — after a failure, with the real reason shown beside it.
 
-Tabs and search are browse state — only tapping a resource requests the
-change. The selection is re-checked before commit: if the asset was
-deleted, replaced or its source switched mode while you browsed, the
-stale entry can't be selected.
+While connected it shows the running server name and an elapsed clock.
+Start/stop shows the transition immediately — success is never claimed
+early — and duplicate submissions are prevented.
 
-Provider configs and personal Raw live in the same complete-config
-category. Selecting one makes the routing row read-only (it carries its
-own routing); your ordinary Smart/Custom preference is kept for when you
-return to app-managed nodes — and returning asks for confirmation, with
-cancel changing nothing.
+## The list
 
-## What the page tells you
+An **automatic** entry plus servers grouped by their subscription:
 
-- **Plan vs actual run** — the run identity comes from a snapshot: entry,
-  final exit, Raw/provider names reflect what actually started, not
-  what's currently selected or renamed since.
-- **This session** — real-time rates, up/down totals and duration.
-  Unknown metrics show as unknown — no fake zeros, no invented speeds.
-- **Why this connection** — explains the actual run snapshot: which entry
-  nodes, final exit and config type were chosen and why. It never
-  predicts an unstarted plan; a failed but still-cancellable attempt
-  keeps its explanation available.
-- Start/stop shows the transition immediately — success is never claimed
-  early — and prepare/connect phases can be cancelled.
+- **Tap** a row to pin it as the connection target.
+- **Double-tap / double-click** pins it *and* runs the same connect as
+  the hero — it never disconnects a live tunnel.
+- **Long-press** toggles the favorite where the row supports it.
+- **Pull down** to refresh every subscription source.
 
-Starting never waits for latency tests; candidates with no successful
-delay are still usable, ordered after the ones with measured results.
+Group headers collapse per source ("N servers" summary, persisted) and
+carry the last-check time plus provider data — announcements, support
+and website links, the plan meter and expiry chip when reported. A
+provider-pinned group stays expanded.
 
-## Quick entries
+With no servers, the hero stays and a dashed *No servers yet* card
+offers the add action and a help link.
 
+## What actually runs
+
+Run name, entry and final exit come from the runtime snapshot — renaming
+or re-browsing afterwards doesn't rewrite what connected. Complete
+configs (Remnawave/provider) run their own stored routing; selecting one
+bypasses app-side Smart, custom and region preferences *for that
+session* — your saved preferences survive and apply again on
+app-managed selections. When ordinary candidates are insufficient,
+automatic may run a provider config.
+
+Starting never waits for latency tests — candidates with no successful
+delay are usable, ordered after measured ones.
+
+## Tray and quick entries
+
+- **Desktop tray** — start/stop, reconnect, server and traffic-mode
+  selection, subscription and routing-data updates, window and exit.
+  Picking a provider config disables the app-side traffic-mode items
+  while it's selected or running.
 - **Mobile quick actions** — long-press the app icon: start, stop,
   switch config, update subscriptions.
-- **Desktop tray** — start/stop, reconnect, server/config pickers,
-  traffic mode, subscription and Geodata updates, window and exit.
-  Picking a provider config disables the traffic-mode/Custom items while
-  it's selected or running.
-- **iOS widgets** — home-screen small/medium start-stop button (iOS 17+),
-  lock-screen accessories that open the app, and a Control Center VPN
-  button on iOS 18+.
+- **iOS widgets** — home-screen start/stop (iOS 17+), lock-screen
+  accessories, Control Center VPN button (iOS 18+).
 - **Android** — home-screen widget (state, rate, traffic; icon toggles
   VPN) and a quick-settings tile for start/stop.
 
-## LAN proxy share
+## Settings
 
-A switch in the Xray area offers an **unauthenticated HTTP/SOCKS5
-inbound** on your LAN, with the port on its own settings page. Other
-devices on the trusted network can then route through your connection.
-It's meant for networks you trust — there's no authentication, and it
-doesn't apply while a Raw or provider config runs. The preference saves
-immediately and takes effect on the next app-compiled connection.
-
-## Local HTTP API (desktop)
-
-Desktop platforms expose a token-authorized HTTP API on **127.0.0.1
-only** — scripts and tools on the same machine can read state and issue
-commands while Qubiq runs. It never starts or stops the VPN by itself,
-and the token can be reset from the same Xray settings card. Mobile has
-no API surface.
-
-## Android automation
-
-The app accepts broadcast commands from automation apps — start, stop
-and reconfigure — behind an authorization list you approve in the app.
-Unknown senders are rejected. Configuration lives on its own settings
-page and never forces a reconnect.
+The settings branch holds appearance and language, the Apple app icon,
+launch behavior (launch at login, hidden start, connect on start),
+connection-config backup, data cleanup and About with version info and
+update checks. See [Backup](backup.md) for the backup target rules.

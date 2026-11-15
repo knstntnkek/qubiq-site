@@ -1,62 +1,40 @@
 # Routing
 
 Routing decides which traffic goes through the tunnel, which goes direct
-and which is blocked. The standalone Routing page holds four modes;
-using and editing are always separate actions — drafts only commit on
-save, and a connected VPN asks before an effective change reconnects.
+and which is blocked. Two worlds apply:
 
-## The four modes
-
-| Mode | What it is |
-| --- | --- |
-| **Smart Routing** | App-compiled config: direct region, split DNS, sniffing — the default and best starting point. |
-| **Always VPN** | Everything through the tunnel — minimal rules. |
-| **Custom (ordinary)** | Your own ordered rule list on the app form. |
-| **Custom (advanced JSON)** | Bounded Xray routing JSON: DNS, inbounds, rules — still compiled by the app. |
-
-Custom assets share **one three-item quota** across ordinary and
-advanced kinds — delete one to make room. A corrupt asset is isolated to
-itself and can't block Smart/Always or the other assets.
-
-Complete configs (personal Raw and provider configs) bypass this page —
-they carry their own routing. While one is in effect you can still edit
-your ordinary routing preferences; they apply next time an app-managed
-node runs.
+- **App-managed nodes** run a Qubiq-compiled config driven by your saved
+  routing preferences.
+- **Provider configs** (Remnawave, personal Raw) run their own stored
+  routing — app-side routing preferences are bypassed *for that session*
+  and apply again when you return to app-managed nodes.
 
 ## Smart Routing
 
-Sections, in order: **direct & block**, **proxy connections**, **DNS**,
-**traffic sniffing**, **preview**.
+The default mode for app-managed connections. The compiled config
+combines:
 
-- **Direct region** — at most one region, explicitly clearable; the
-  candidates come from installed Geodata indexes. Traffic matching the
-  region goes direct; the rest follows the proxy rules.
-- **DNS** — separate main-proxy and direct resolvers, each with ordered
-  fallbacks. The DNS cache switch defaults on. Direct DNS can fall back
-  to the proxy resolver on failure; proxied domains never fall back to
-  direct. "Other DNS queries" (non-A/AAAA) pick proxy, direct or empty
-  answer — proxy by default.
-- **Traffic sniffing** — on by default, route-only or metadata-only
-  modes; it never reads content. It can't be disabled while FakeDNS is
-  on — turn FakeDNS off first.
-- **FakeDNS & fragment** — FakeDNS lives under sniffing, fragment under
-  proxy connections.
-- **Preview** — the compiled rule view before you commit.
+- **Direct & block** — traffic matching the selected direct region and
+  block rules skips or never enters the tunnel; a single region can be
+  selected or cleared.
+- **Proxy connections** — the tunnel path, including optional fragment.
+- **DNS** — separate main-proxy and direct resolvers with ordered
+  fallbacks and caching; direct DNS can fall back to the proxy resolver
+  on failure while proxied domains never fall back to direct. Non-A/AAAA
+  queries route to proxy, direct or an empty answer — proxy by default.
+- **Traffic sniffing** — on by default, route-only or metadata-only; it
+  never reads content. FakeDNS and fragment sit alongside it.
 
-## Custom routing (ordinary)
+Smart Routing is the useful starting point for app-managed nodes; the
+persisted values apply at compile time every connect.
 
-Name, ordered rules, proxy connections, DNS and sniffing — rules open in
-their own page with add/delete/reorder, and cancelling a rule page never
-touches the parent draft. Import, export and share tools sit in a
-separate card at the end.
+## Traffic modes
 
-## Advanced custom JSON
-
-A bounded JSON editor for DNS, inbounds and routing that still uses the
-app's compile — the first 1–3 empty objects in `outbounds` stand for the
-entry nodes Qubiq fills in (selected server, `proxy` balancer group,
-`direct`/`block`, platform settings). Extra inbounds need explicit rules.
-Field hints and diagnostics sit in the editor.
+On desktop, the **tray menu** switches the traffic mode without opening
+the app — smart routing, always-VPN or a saved custom routing asset.
+The current mode is respected when an app-managed connection compiles;
+while a provider config is selected or running, the app-side
+traffic-mode items are disabled — provider routing is in charge.
 
 ## Multi-entry and least latency
 
@@ -65,18 +43,17 @@ With several entry candidates, new connections spread across them:
 - **Round-robin** (default) — distribute across the best available
   entries.
 - **Least-latency** — probes at least two proxy chains in the current
-  connection and routes new connections through the fastest. A single
-  node keeps the preference and shows a not-started note. Probe URL and
-  30/60/300-second intervals are in advanced options.
+  connection and routes new connections through the fastest.
 
-New connections pick by least latency; existing sessions never migrate,
-and failures never silently fall back to direct. The connect page shows
-per-chain available/failed/unknown plus last probe latency — it measures
-HTTP reachability of the probe URL, nothing more.
+New connections pick by least latency; existing sessions never migrate
+and failures never silently fall back to direct.
 
-## Geodata
+## About the current build
 
-Routing rules and Smart regions resolve through Geodata indexes. The
-Geodata manager (Xray → routing data) lists built-in and custom HTTPS
-sources, downloads files transactionally and can roll back; custom
-sources share the auto-update schedule under data updates.
+The standalone routing editor pages — the Smart form, custom rule
+editor, advanced JSON, direct-region and final-exit pickers — exist in
+code but have no rendered entry point today. What applies is the saved
+preference set (defaults plus anything stored before), the tray
+traffic-mode switch, and provider-supplied routing. Geodata keeps
+updating underneath: built-in indexes ship with the app and auto-update
+on their schedule.

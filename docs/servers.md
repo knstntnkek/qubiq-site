@@ -1,87 +1,74 @@
 # Servers & nodes
 
-The Servers page manages three resource types: **nodes** (single
-outbounds), **complete configs** (whole Xray JSON documents) and
-**subscriptions** (the sources that feed the first two). Browsing and
-opening details never changes what you're connected to — only the
-**Use** action commits a selection.
+Servers live right on the home screen — grouped by their subscription,
+under the connect hero. There are three resource types: **nodes**
+(single outbounds), **complete configs** (whole Xray JSON documents) and
+**subscriptions** (the sources that feed the first two).
 
-## Adding nodes
+## Working with the list
 
-- **Share links** — one per line: VMessAEAD/VLESS, Hysteria2, SS, SOCKS,
-  Trojan. Old `vmess://Base64(JSON)` QR codes and Clash/Mihomo formats
-  are not supported.
-- **Manual JSON** — paste a single outbound object; it goes through the
-  same validation as links.
+- **Tap** a row to pin it as the connection target.
+- **Double-tap / double-click** to pin and connect in one move — it
+  never disconnects a live tunnel.
+- **Long-press** toggles the favorite where the row supports it.
+- **Pull down** refreshes every source.
+- Group headers **collapse** per source — the choice persists across
+  launches; a provider-pinned group stays open.
+
+Ordinary node rows carry protocol/transport/security and delay labels —
+≤500 ms fast, ≤1000 ms slow — or a dedicated untested/failed status
+(never dressed up as a delay value). Provider rows display their
+Remnawave type and no ordinary delay.
+
+## Import methods
+
+The **＋** action opens the import flow:
+
+- **Subscription** — an HTTPS URL; see
+  [Subscriptions & providers](subscriptions.md).
+- **Share links** — VMessAEAD/VLESS, Hysteria2 (`hysteria2://`,
+  `hy2://`), SS, SOCKS, Trojan — one per line. Old
+  `vmess://Base64(JSON)` QR codes and Clash/Mihomo formats are not
+  supported.
 - **QR scan** — iOS and Android.
-- **File import** — via the system picker.
+- **File** — the system picker.
 
-Imported nodes enter the automatic latency queue — results are not
+Imported nodes join the automatic latency queue — results are not
 required before connecting.
 
-## Complete configs: Raw and provider
+## What refresh keeps
 
-A complete config runs an entire Xray JSON — its own outbounds, routing,
-DNS and balancers — instead of the app's compiled routing.
+A subscription refresh merges rather than overwrites: identical fresh
+rows adopt the survivor's favorite, delay, order and your selection;
+running configs are never rewritten in place. Failed refreshes keep the
+old cache, plan data and drafts — a refresh can never empty your list.
 
-- **Personal Raw** is editable, and the app keeps at most **three** Raw
-  or custom assets in total.
-- **Provider configs** (e.g. Remnawave) arrive through a subscription,
-  are read-only and follow refresh updates. To edit one, copy it into
-  personal Raw — the copy detaches from the source and counts toward the
-  same quota.
+## Complete configs
 
-Complete configs support select, favorite, view original JSON, share,
-delete and copy-to-Raw. Sharing any complete config asks for a
-sensitive-information confirmation first.
+A complete config runs an entire Xray JSON — its own outbounds, routing
+and DNS — instead of the app-compiled routing.
 
-## Groups and order
+- **Provider configs** (e.g. Remnawave) arrive via subscription, are
+  read-only and follow refresh updates.
+- **Personal Raw** copies are editable and capped at three assets across
+  Raw and custom routing combined.
 
-Manual nodes can be organized into **one level of custom groups** —
-create, rename and move-to-group from the node menu. Dissolving a group
-keeps its nodes; deleting a group *and* its nodes asks for a count and
-running-impact confirmation. Groups are for browsing only — they create
-no connection scope.
-
-- The **ungrouped** bucket is pinned first; empty groups are kept.
-- Sort by default, name or delay — the choice applies everywhere
-  (list, final-exit picker, desktop tray).
-- **Arrange** mode (long-press handles on touch, drag handles or
-  up/down buttons on desktop) writes a manual order committed on save;
-  cancelling writes nothing.
-- Search and the favorites filter narrow the list without rewriting
-  your sort preference.
-
-## Latency
-
-Nodes show real delay labels — ≤500 ms fast, ≤1000 ms slow — or a
-dedicated untested/failed status; a failure diagnostic is never dressed
-up as a delay value.
-
-- **Single node** or **whole group** tests run from the menus; a running
-  batch can be cancelled without stopping VPN or other sources' tests.
-- While VPN is connected, manual tests warn that traffic may go through
-  the tunnel and skew results — test with VPN off for accurate numbers.
-- Provider configs never join single-outbound tests; their rows show no
-  delay.
-
-## Favorites
-
-Ordinary nodes and provider configs can be favorited from the list or
-the detail page. Favorites survive subscription refresh — identical
-fresh rows adopt the old row's favorite, delay and manual position.
-Personal Raw has no favorites.
+Sharing a complete config asks for a sensitive-information confirmation
+first.
 
 ## Subscription sources
 
-Each subscription gets its own detail page showing the active mode,
-plan info, cache status and update/edit/share actions. Sources keep a
-tab above the list so management doesn't depend on scrolling. See
+Group-header actions open a source's **edit** (name and URL) and
+**share** pages. The source detail tracks the active mode
+(app-managed or provider-managed), cache status, plan info and the
+update entry — see
 [Subscriptions & providers](subscriptions.md).
 
-## Editing and safety
+## About the current build
 
-The JSON workspace (nodes, Raw, advanced routing) keeps unsaved-change
-guards: closing, cancelling or a system back gesture asks
-*continue editing / discard* when the text actually differs. Explicit
-discard never writes.
+The current UI keeps the surface deliberately thin: group details,
+per-node resource pages, manual groups, arrange mode and the node/Raw
+editors exist in code but have no rendered entry today. What ships is
+the home list, the import flow, and the subscription edit/share pages.
+The underlying services (latency, refresh merge, provider fields) run
+unchanged underneath.

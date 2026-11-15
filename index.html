@@ -38,7 +38,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261114-1">
+<link rel="stylesheet" href="style.css?v=20261114-2">
 </head>
 <body>
 
@@ -49,11 +49,10 @@
       Qubiq
     </a>
     <nav>
-      <a href="#why">Why Qubiq</a>
-      <a href="#features">Features</a>
-      <a href="#privacy">Privacy</a>
-      <a href="docs.html">Docs</a>
-      <a href="#download">Download</a>
+      <a href="#" data-modal="modal-download">Download</a>
+      <a href="docs.html">Documentation</a>
+      <a href="#" data-modal="modal-support">Support</a>
+      <a href="#" data-modal="modal-documents">Documents</a>
     </nav>
   </div>
 </header>
@@ -63,22 +62,30 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap hero-inner">
+      <img class="hero-logo" src="icon.png" alt="Qubiq logo">
+      <h1 class="hero-name">Qubiq</h1>
+      <p class="hero-tag">An open-source Xray-core client for phones, tablets and desktops.</p>
       <p class="badge">Open source · GPL-3.0 · no telemetry</p>
-      <h1>One Xray client,<br>every device.</h1>
-      <p class="lede">
-        Qubiq is an open-source Xray-core client for iPhone, iPad, Mac,
-        Android, Windows and Linux — your own servers and subscriptions,
-        routing you control.
-        <strong>No account, no ads, no analytics.</strong>
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="https://github.com/knstntnkek/yavpnclient/releases" data-goatcounter-click="download" data-goatcounter-title="Releases — hero">Get Qubiq</a>
-        <a class="btn btn-ghost" href="docs.html">Read the docs</a>
-      </div>
-      <p class="hero-note">iOS 16+ · macOS 13+ · Android 10+ · Windows 10+ · Linux — bring your own servers</p>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <img class="hero-logo" src="icon.png" alt="">
+
+    <!-- HUB CARDS -->
+    <div class="wrap hub">
+      <button class="hub-card" data-modal="modal-download">
+        <span class="hub-title">Download</span>
+        <span class="hub-sub">Available for desktop and mobile platforms</span>
+      </button>
+      <a class="hub-card" href="docs.html">
+        <span class="hub-title">Documentation</span>
+        <span class="hub-sub">Guides, help and technical documentation for Qubiq</span>
+      </a>
+      <button class="hub-card" data-modal="modal-support">
+        <span class="hub-title">Support</span>
+        <span class="hub-sub">Report a bug or request a feature</span>
+      </button>
+      <button class="hub-card" data-modal="modal-documents">
+        <span class="hub-title">Documents</span>
+        <span class="hub-sub">Privacy policy, license and third-party credits</span>
+      </button>
     </div>
   </section>
 
@@ -106,19 +113,19 @@
         </div>
 
         <div class="pain-card">
-          <p class="pain">"Every subscription refresh wipes my favorites and groups."</p>
+          <p class="pain">"Every subscription refresh wipes my favorites and order."</p>
           <p class="fix-lead">Refresh keeps what's yours.</p>
-          <p class="fix">Favorites, pinned selections, groups and manual order
+          <p class="fix">Favorites, pinned selections and provider order
           survive updates — new nodes merge into your setup instead of
           overwriting it.</p>
         </div>
 
         <div class="pain-card">
-          <p class="pain">"All-or-nothing tunnel — I want some apps direct and the rest proxied."</p>
+          <p class="pain">"All-or-nothing tunnel — I want some traffic direct."</p>
           <p class="fix-lead">Routing you control.</p>
-          <p class="fix">Smart Routing with a direct region and split DNS,
-          ordered custom rules, per-app VPN on Android — or let your
-          provider's config drive.</p>
+          <p class="fix">Smart Routing compiles the split for app-managed
+          connections, traffic modes switch from the desktop tray — or let
+          your provider's config carry its own routing.</p>
         </div>
 
         <div class="pain-card">
@@ -154,68 +161,67 @@
           <span class="idx">01</span>
           <h3>Every platform</h3>
           <p>iPhone, iPad, Mac, Android, Windows and Linux — one app, one
-          model. Light/dark themes, five interface languages, Apple icon
-          choices, launch-at-login and hidden start on desktop.</p>
+          model. Light/dark themes, five interface languages including RTL
+          Persian, Apple icon choices, launch-at-login and hidden start on
+          desktop.</p>
           <div class="chips"><code>iOS</code><code>macOS</code><code>Android</code><code>Windows</code><code>Linux</code></div>
         </div>
 
         <div class="feature">
           <span class="idx">02</span>
-          <h3>Subscriptions that stay organized</h3>
-          <p>HTTPS downloads with optional Age encryption, per-source
-          User-Agent, auto-update on a schedule or pull-to-refresh — plan
-          usage and expiry shown on the group card when the provider
-          reports them.</p>
-          <div class="chips"><code>Age</code><code>plan info</code><code>auto-update</code></div>
+          <h3>A home that stays simple</h3>
+          <p>One screen: a connect hero above and your servers grouped by
+          subscription below. Tap a row to pin it, double-tap to connect,
+          long-press to favorite — pull down to refresh every source.</p>
         </div>
 
         <div class="feature">
           <span class="idx">03</span>
-          <h3>Provider configs, first-class</h3>
-          <p>Remnawave and complete Xray JSON subscriptions import as
-          provider-managed configs with their own routing — announcements,
-          support and website links, expiry reminders and automatic
-          address migration included.</p>
+          <h3>Subscriptions that stay organized</h3>
+          <p>HTTPS downloads with automatic updates and pull-to-refresh —
+          plan usage, expiry, announcements, support and website links on
+          each group card when the provider reports them.</p>
+          <div class="chips"><code>plan info</code><code>auto-update</code><code>migration</code></div>
         </div>
 
         <div class="feature">
           <span class="idx">04</span>
-          <h3>Your nodes, your order</h3>
-          <p>Manual groups, drag-to-arrange, favorites, per-source filters
-          and batch latency tests — VMessAEAD/VLESS, Hysteria2, SS, SOCKS
-          and Trojan share links, Xray JSON or QR scan on mobile.</p>
+          <h3>Provider configs, first-class</h3>
+          <p>Remnawave and complete Xray JSON subscriptions import as
+          provider-managed configs that run their own routing — expiry
+          reminders and automatic address migration included.</p>
         </div>
 
         <div class="feature">
           <span class="idx">05</span>
           <h3>Smart Routing</h3>
-          <p>A direct region, split DNS resolvers, traffic sniffing and
-          optional FakeDNS and fragment — preview the rule set before you
-          connect, tune it without touching JSON.</p>
+          <p>App-managed connections compile Smart Routing with a direct
+          region, split DNS and traffic sniffing — traffic modes switch
+          from the desktop tray without opening a settings tree.</p>
         </div>
 
         <div class="feature">
           <span class="idx">06</span>
           <h3>Complete configs &amp; Raw JSON</h3>
           <p>Run an entire Xray config as a connection resource — provider
-          configs stay read-only and follow subscription updates; copy one
-          into personal Raw JSON when you need to edit.</p>
+          configs stay read-only and follow subscription updates; a
+          personal Raw copy is there when you need to edit.</p>
         </div>
 
         <div class="feature">
           <span class="idx">07</span>
           <h3>Multi-entry &amp; least latency</h3>
           <p>Spread new connections across your fastest entry nodes —
-          round-robin by default or least-latency probing, with live chain
-          health on the connect page.</p>
+          round-robin by default or least-latency probing, with honest
+          per-chain status while connected.</p>
         </div>
 
         <div class="feature">
           <span class="idx">08</span>
-          <h3>LAN proxy share</h3>
-          <p>Offer an unauthenticated HTTP/SOCKS5 inbound on your LAN with
-          one switch — other devices on the network can route through your
-          connection.</p>
+          <h3>Honest status</h3>
+          <p>The hero shows the real phase — Connect, Cancel, Disconnect,
+          Try Again — with the running server name, an elapsed clock and
+          the actual failure reason. No fake green lights.</p>
         </div>
 
         <div class="feature">
@@ -231,23 +237,8 @@
           <h3>System integrations</h3>
           <p>iOS home/lock-screen widgets and a Control Center button,
           Android widget and quick-settings tile, desktop tray with
-          start/stop and server switching, mobile quick actions.</p>
-        </div>
-
-        <div class="feature">
-          <span class="idx">11</span>
-          <h3>Real diagnostics</h3>
-          <p>"Why this connection" explains the actual entry and final exit;
-          the Xray page exposes the running config, logs and a read-only
-          diagnostics view — no fake green lights.</p>
-        </div>
-
-        <div class="feature">
-          <span class="idx">12</span>
-          <h3>External interfaces</h3>
-          <p>A local HTTP API on desktop (localhost only, token-authorized)
-          and Android broadcast automation — start, stop and reconfigure
-          from scripts or other apps you trust.</p>
+          start/stop, reconnect and traffic-mode switching, mobile quick
+          actions.</p>
         </div>
 
       </div>
@@ -280,63 +271,13 @@
         </div>
         <div class="check-row">
           <svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div><strong>Device identity is a random UUID</strong><span>Optional HWID binds devices to a provider account — it's generated per source, never a hardware ID, and can be switched off.</span></div>
+          <div><strong>Device identity is a random UUID</strong><span>HWID sent to a provider is generated per source — never a hardware, ad or system identifier.</span></div>
         </div>
         <div class="check-row">
           <svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div><strong>Honest backup</strong><span>The backup file is deliberately unencrypted — you're told before it's written, and you choose where it lives.</span></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- DOWNLOAD -->
-  <section id="download" class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="section-title">Download</h2>
-        <p class="section-sub">Packages are published on GitHub Releases — pick the build for your platform.</p>
-      </div>
-
-      <div class="dl-table">
-        <table>
-          <tr><th>Platform</th><th>Package</th><th>Requirements</th></tr>
-          <tr><td>iPhone / iPad</td><td><code>Qubiq-ios.ipa</code></td><td>iOS / iPadOS 16+, sideloading or enterprise signing</td></tr>
-          <tr><td>macOS</td><td><code>Qubiq-macos-universal.zip</code></td><td>macOS 13+, Apple silicon or Intel</td></tr>
-          <tr><td>Android</td><td><code>Qubiq-android-universal.apk</code></td><td>Android 10+, arm64-v8a or x86_64</td></tr>
-          <tr><td>Windows</td><td><code>Qubiq-windows-amd64.exe</code> / <code>.zip</code><br><code>Qubiq-windows-arm64.exe</code> / <code>.zip</code></td><td>Windows 10 20H2+ (x64) or Windows 11 (ARM64)</td></tr>
-          <tr><td>Linux</td><td><code>Qubiq-linux-x86_64.deb</code> / <code>.zip</code><br><code>Qubiq-linux-aarch64.deb</code> / <code>.zip</code></td><td>Linux 5.3+, glibc 2.39+</td></tr>
-        </table>
-      </div>
-
-      <p class="feature-note">The macOS build uses a System Extension — approve
-      it once during setup. Windows and Linux ask you to pick an outbound
-      interface. Details in <a href="docs.html#getting-started">Getting
-      started</a>.</p>
-    </div>
-  </section>
-
-  <!-- MORE -->
-  <section class="section section-alt">
-    <div class="wrap">
-      <div class="coming-card">
-        <h3>Docs for everything above.</h3>
-        <p>Setup per platform, subscriptions and provider fields, routing
-        modes, backups and troubleshooting — the user guide covers the
-        shipped behavior.</p>
-        <a class="mono-link" href="docs.html">Open the guide →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- DOWNLOAD CTA -->
-  <section class="cta">
-    <div class="wrap cta-inner">
-      <h2>Your servers. Your rules.</h2>
-      <p class="cta-sub">Grab the latest build — free, open source, no account.</p>
-      <img class="cta-logo" src="icon.png" alt="">
-      <a class="btn btn-primary btn-big" href="https://github.com/knstntnkek/yavpnclient/releases" data-goatcounter-click="download" data-goatcounter-title="Releases — CTA">Download latest build</a>
-      <p class="cta-note">GPL-3.0 · based on <a href="https://github.com/YuanDevTeam/OneXray">OneXray</a> by Yuan Dev Team · report bugs and request features on <a href="https://github.com/knstntnkek/yavpnclient/issues">GitHub</a></p>
     </div>
   </section>
 
@@ -353,12 +294,105 @@
       <a href="https://github.com/knstntnkek/yavpnclient">GitHub</a>
       <a href="https://github.com/knstntnkek/yavpnclient/releases">Releases</a>
       <a href="privacy.html">Privacy</a>
-      <a href="#download">Download</a>
     </nav>
-    <p class="footer-note">GPL-3.0 · includes OneXray by Yuan Dev Team and libXray.</p>
+    <p class="footer-note">© 2026 Konstantin Barinov · GPL-3.0 · includes OneXray by Yuan Dev Team and libXray.</p>
   </div>
 </footer>
 
+<!-- MODALS -->
+<div class="modal" id="modal-download" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-label="Download Qubiq">
+    <button class="modal-x" data-close aria-label="Close">×</button>
+    <h2 class="modal-title">Download</h2>
+    <p class="modal-sub">Choose your platform — packages on GitHub Releases.</p>
+    <div class="modal-cols">
+      <div class="modal-col">
+        <p class="modal-col-title">Desktop</p>
+        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+          <span class="dl-name">Windows</span>
+          <span class="dl-meta">x64 / ARM64 · exe, zip · Win 10 20H2+</span>
+        </a>
+        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+          <span class="dl-name">macOS</span>
+          <span class="dl-meta">universal zip · macOS 13+ · System Extension</span>
+        </a>
+        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+          <span class="dl-name">Linux</span>
+          <span class="dl-meta">x86_64 / aarch64 · deb, zip · glibc 2.39+</span>
+        </a>
+      </div>
+      <div class="modal-col">
+        <p class="modal-col-title">Mobile</p>
+        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+          <span class="dl-name">iOS / iPadOS</span>
+          <span class="dl-meta">ipa · iOS 16+ · sideload / enterprise signing</span>
+        </a>
+        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+          <span class="dl-name">Android</span>
+          <span class="dl-meta">universal apk · Android 10+</span>
+        </a>
+      </div>
+    </div>
+    <p class="modal-foot">First connect asks for the platform VPN permission —
+    see <a href="docs.html#getting-started">Getting started</a>.</p>
+  </div>
+</div>
+
+<div class="modal" id="modal-support" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-label="Support">
+    <button class="modal-x" data-close aria-label="Close">×</button>
+    <h2 class="modal-title">Support</h2>
+    <p class="modal-sub">Bugs and feature requests are handled in the open.</p>
+    <div class="modal-cols">
+      <div class="modal-col">
+        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/issues">
+          <span class="dl-name">GitHub Issues</span>
+          <span class="dl-meta">bug reports &amp; feature requests</span>
+        </a>
+      </div>
+      <div class="modal-col">
+        <a class="dl-row" href="docs.html#troubleshooting">
+          <span class="dl-name">Troubleshooting &amp; FAQ</span>
+          <span class="dl-meta">common fixes in the guide</span>
+        </a>
+      </div>
+    </div>
+    <p class="modal-foot">Include your platform, app and core versions — and
+    remove credentials from configs, subscription links and logs.</p>
+  </div>
+</div>
+
+<div class="modal" id="modal-documents" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents">
+    <button class="modal-x" data-close aria-label="Close">×</button>
+    <h2 class="modal-title">Documents</h2>
+    <p class="modal-sub">Privacy policy, license and third-party credits.</p>
+    <div class="modal-cols">
+      <div class="modal-col">
+        <a class="dl-row" href="privacy.html">
+          <span class="dl-name">Privacy Policy</span>
+          <span class="dl-meta">the app collects nothing</span>
+        </a>
+        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/blob/main/LICENSE">
+          <span class="dl-name">License</span>
+          <span class="dl-meta">GNU GPL-3.0</span>
+        </a>
+      </div>
+      <div class="modal-col">
+        <a class="dl-row" href="https://github.com/YuanDevTeam/OneXray">
+          <span class="dl-name">OneXray</span>
+          <span class="dl-meta">upstream project by Yuan Dev Team</span>
+        </a>
+        <a class="dl-row" href="https://github.com/XTLS/libXray">
+          <span class="dl-name">libXray</span>
+          <span class="dl-meta">the Xray core binding</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="site.js?v=20261114-2"></script>
 <script data-goatcounter="https://konstantin11.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

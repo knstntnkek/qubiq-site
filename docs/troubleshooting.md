@@ -1,52 +1,50 @@
 # Troubleshooting & FAQ
 
-## First stop: diagnostics
+## First stop: the failure note
 
-**Xray → check & diagnostics** shows the current phase, the original
-error, app and core versions, run duration and the real run JSON plus
-log entries. Refresh only re-reads state — it never starts/stops the
-VPN or marks an error resolved. Log viewing and export live under the
-same card; export streams a copy to a file you pick.
+When a connect attempt fails, the hero shows **Try Again** with the real
+reason beside it — read that first; it reports the actual phase and
+error, not a generic message. The row names also reflect the real run:
+the connected server name is the actual entry, which may differ from
+what you pinned if automatic fallback stepped in.
 
 When reporting a bug on
 [GitHub](https://github.com/knstntnkek/yavpnclient/issues): include the
-platform, app and core versions and reproduction steps — and **remove
-credentials** from shared configs, subscription links and logs.
+platform, app and core versions (Settings → About) and reproduction
+steps — and **remove credentials** from shared configs, subscription
+links and logs.
 
 ## Connect fails or hangs
 
 - **Nothing usable to run** — the plan needs at least one active,
-  readable candidate: a node, or a complete config when the mode
-  matches. Check the source's mode and refresh a subscription with an
-  empty cache.
+  readable candidate: a node, or a complete config matching the source's
+  mode. Refresh a subscription whose cache is empty.
 - **macOS System Extension pending** — approve it: macOS 15+ *General →
   Login Items & Extensions → Network Extensions*; macOS 14- *Privacy &
-  Security*. The connect flow re-submits activation on retry.
+  Security*. Connect re-submits activation on retry.
 - **Windows EXE first connect** — the one-time UAC elevation registers
   the *Qubiq VPN Core* scheduled tasks; declining it leaves the core
   unable to start.
 - **Windows/Linux exit interface** — a missing or invalid saved
-  interface blocks connect until you re-pick it in the VPN tunnel page.
+  interface prompts a re-pick at connect time.
 - **Permission denied earlier** — denied VPN/LAN permissions don't
   re-ask on every entry, but connect retries the authorization; tap the
   explanation to open system settings.
 
 ## Connected but nothing flows
 
-- Check **Why this connection** on the connect page — it shows the
-  actual entry and final exit, which may not be the node you expected
-  (automatic fallback reports the real result).
-- Look at per-chain status for multi-entry: available/failed/unknown
-  plus last probe. A failed chain isn't retried silently — existing
-  sessions never migrate mid-run.
-- Smart Routing suspects: the **direct region** may be routing more
-  than intended — clear it explicitly to test; check **DNS** resolvers
-  and that sniffing is on if rules rely on it.
+- Check which server the hero names — automatic fallback may have run a
+  different (or provider) config when ordinary candidates were
+  insufficient.
+- A provider/Remnawave row runs its **own** routing — app-side Smart
+  and traffic-mode preferences don't apply to it.
+- For app-managed runs, the saved Smart Routing set decides direct vs
+  proxied traffic — see [Routing](routing.md) for what persists today.
 
 ## Latency numbers look wrong
 
-- Tests run **through the VPN** when connected — the app warns about
-  this; test disconnected for real numbers.
+- Tests run **through the VPN** when connected — test disconnected for
+  real numbers.
 - Provider (Remnawave) rows intentionally show no delay — they never
   join single-outbound tests.
 - Untested/failed states are shown as status, not delay values — a
@@ -55,15 +53,16 @@ credentials** from shared configs, subscription links and logs.
 ## Subscription problems
 
 - **Refresh failed** — the old cache, plan and your edits are kept; the
-  error sits on the source. Check the URL, then try a manual refresh.
+  error sits on the source. Check the URL, then pull-to-refresh again.
 - **Remnawave returned links, not JSON** — Qubiq asks whether to convert
   to an ordinary app-managed subscription; consent parses the nodes and
   flips the mode.
 - **Provider renamed/migrated the sub** — `new-url`/`new-domain` apply
-  automatically; a manual edit of the URL clears provider metadata until
-  the next refresh.
-- **Age decryption fails** — check the secret key; failures never
-  overwrite a working cache.
+  automatically; a manual URL edit clears provider metadata until the
+  next refresh.
+- **Plan meter gone** — the provider stopped sending
+  `subscription-userinfo`; withdrawn fields clear on the response that
+  omits them.
 
 ## FAQ
 
@@ -76,15 +75,16 @@ syncs anywhere unless you bind a backup target yourself.
 
 **What does HWID send?**
 A per-source random UUID — no hardware/ad/system identifier — to that
-source's provider only, and only when the switch is on.
+source's provider only.
 
-**iOS can't be distributed via the App Store?**
+**Where did page X go?**
+The current UI is deliberately thin: home (hero + list), the import
+flow, subscription edit/share and Settings. Routing, tunnel and other
+editor pages exist in code but have no rendered entry today — saved
+values still apply. The docs note this where relevant.
+
+**iOS can't be installed from the App Store?**
 The `.ipa` requires sideloading or enterprise signing today.
-
-**A feature seems missing on Linux/Windows/…**
-Some surfaces are platform-specific: backup (not on Linux), system-VPN
-policy (MSIX only), per-app VPN (Android), widgets and tiles (mobile),
-local API (desktop). Platform tables on each docs page list the bounds.
 
 **Is there telemetry?**
 No — no analytics SDK, no crash reporting, no accounts. Logs are local

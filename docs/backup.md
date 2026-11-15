@@ -62,8 +62,7 @@ Two different destructive operations in Settings:
   logs. Keeps platform policies, preferences, the login item, backup
   binding, API/automation authorizations and default Geodata.
 - **Wipe all data** — also cancels the login item, clears preferences
-  and rebuilds defaults (without rerunning Setup). Only this removes
-  the local backup binding.
+  and rebuilds defaults. Only this removes the local backup binding.
 
 Neither deletes external files — iCloud, OneDrive or SAF copies stay
 where they are.
