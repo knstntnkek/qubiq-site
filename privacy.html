@@ -18,30 +18,36 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261116-1">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261116-2">
 </head>
-<body>
+<body class="subpage">
 
-<header class="nav">
-  <div class="wrap nav-inner">
+<div class="bg-shape one" aria-hidden="true"></div>
+<div class="bg-shape two" aria-hidden="true"></div>
+
+<div class="page">
+
+  <header class="topbar">
     <a class="brand" href="index.html">
-      <img class="logo-icon" src="icon.png" alt="Qubiq logo">
-      Qubiq
+      <img class="brand-icon" src="icon.png" alt="Qubiq logo">
+      <span class="brand-text">
+        <strong>Qubiq</strong>
+        <span>Xray client</span>
+      </span>
     </a>
     <nav>
-      <a href="index.html#why">Why Qubiq</a>
-      <a href="index.html#features">Features</a>
-      <a href="index.html#privacy">Privacy</a>
-      <a href="docs.html">Docs</a>
-      <a href="index.html#download">Download</a>
+      <ul class="nav-links">
+        <li><a href="index.html#modal-download">Download</a></li>
+        <li><a href="docs.html">Documentation</a></li>
+        <li><a href="index.html#modal-support">Support</a></li>
+        <li><a href="index.html#modal-documents">Documents</a></li>
+      </ul>
     </nav>
-  </div>
-</header>
+  </header>
 
-<main>
-  <section class="section">
-    <div class="wrap">
+  <main>
+    <div class="docs-layout">
       <article class="doc-body">
         <h1>Privacy policy</h1>
         <p><em>Last updated: November 2026. The short version: the app
@@ -58,11 +64,13 @@
           <li>Nodes, credentials, Age keys, HWID values and settings live
           in the app's local database on your device.</li>
           <li>Optional logs are opt-in and never leave the device except
-          when you export them yourself.</li>
+          when you share them yourself — the <strong>Send logs</strong>
+          action produces a bundle with credentials redacted and your
+          subscription URL removed before anything is written.</li>
           <li>Subscription refreshes send a per-source <strong>random
           UUID</strong> (<code>x-hwid</code>) when enabled — never a
           hardware, ad or system identifier — and cross-origin redirects
-          strip it. It's a per-source switch.</li>
+          strip it.</li>
           <li>The backup file is deliberately <strong>unencrypted</strong>
           — you're warned before it's written, and it goes only to the
           iCloud Drive, OneDrive folder or file you bind yourself.</li>
@@ -80,8 +88,7 @@
           a privacy-friendly, cookieless analytics service. It records that
           a page was viewed along with the referrer, browser, operating
           system and country — <strong>no IP address is stored, no cookies
-          are set, and nothing follows you across sites</strong>. Clicks
-          on the download buttons are counted the same way.</li>
+          are set, and nothing follows you across sites</strong>.</li>
           <li><strong>No ads, no trackers, no cookies</strong> — which is
           why there's no consent banner: there is nothing to consent
           to.</li>
@@ -95,26 +102,20 @@
         <a href="https://github.com/knstntnkek/yavpnclient/issues">app repo</a>.</p>
       </article>
     </div>
-  </section>
-</main>
+  </main>
 
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <span class="brand">
-      <img class="logo-icon" src="icon.png" alt="Qubiq logo">
-      Qubiq
-    </span>
-    <nav class="footer-nav">
-      <a href="docs.html">Docs</a>
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="https://github.com/knstntnkek/yavpnclient/blob/main/LICENSE">License</a>
       <a href="https://github.com/knstntnkek/yavpnclient">GitHub</a>
-      <a href="https://github.com/knstntnkek/yavpnclient/releases">Releases</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="index.html#download">Download</a>
-    </nav>
-    <p class="footer-note">GPL-3.0 · includes OneXray by Yuan Dev Team and libXray.</p>
-  </div>
-</footer>
+    </div>
+    <span>© 2026 Konstantin Barinov. All rights reserved.</span>
+  </footer>
 
+</div>
+
+<script src="site.js?v=20261116-2"></script>
 <script data-goatcounter="https://konstantin11.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

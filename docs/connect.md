@@ -31,8 +31,8 @@ An **automatic** entry plus servers grouped by their subscription:
 
 Group headers collapse per source ("N servers" summary, persisted) and
 carry the last-check time plus provider data — announcements, support
-and website links, the plan meter and expiry chip when reported. A
-provider-pinned group stays expanded.
+and website links, a **Send logs** diagnostics action, and the plan meter
+and expiry chip when reported. A provider-pinned group stays expanded.
 
 With no servers, the hero stays and a dashed *No servers yet* card
 offers the add action and a help link.

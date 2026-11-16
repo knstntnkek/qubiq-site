@@ -30,4 +30,10 @@
     if (e.key !== 'Escape') return;
     document.querySelectorAll('.modal:not([hidden])').forEach(close);
   });
+
+  // deep links: index.html#modal-download opens that modal on load
+  const h = location.hash.replace(/^#/, "");
+  if (h && document.getElementById(h) && document.getElementById(h).classList.contains('modal')) {
+    open(h);
+  }
 })();

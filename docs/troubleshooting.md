@@ -11,8 +11,11 @@ what you pinned if automatic fallback stepped in.
 When reporting a bug on
 [GitHub](https://github.com/knstntnkek/yavpnclient/issues): include the
 platform, app and core versions (Settings → About) and reproduction
-steps — and **remove credentials** from shared configs, subscription
-links and logs.
+steps. For provider or connection issues, the group's **Send logs**
+action shares a `qubiq-diagnostics-*.txt` bundle with credentials
+redacted and the subscription URL removed — it even covers the previous
+session after a failed start. Attach it to the issue rather than pasting
+raw configs or logs yourself.
 
 ## Connect fails or hangs
 

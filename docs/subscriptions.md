@@ -69,6 +69,25 @@ body comments (headers win). Fields Qubiq honours:
 Provider fields are withdrawn when they disappear from a later response,
 and cleared when you change the request URL.
 
+## Send logs
+
+The group card strip also carries a **Send logs** action — it writes a
+single `qubiq-diagnostics-*.txt` bundle and opens the system share sheet
+(a save dialog where file sharing is unavailable, e.g. Linux). The bundle
+holds:
+
+- app, platform and connection metadata, live traffic counters and
+  per-path probe results
+- the source's panel fields including HWID — **never** its URL
+- the runtime Xray config with credentials `***`-redacted and core file
+  paths trimmed to basenames
+- the last 256 KB of each core log file — the warning-level error log is
+  always collected per session, so it exists even with record-logs off
+
+Disconnected or after a failed start, the bundle still recovers the
+previous session's config (redacted the same way) and declared log paths.
+Empty logs are marked `(empty)` — nothing is silently omitted.
+
 ## Address migration
 
 When a provider's domain is blocked or moved, the old URL's response can
