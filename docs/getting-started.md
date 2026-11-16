@@ -12,10 +12,10 @@ Packages are published on
 | Platform | Package | Requirements |
 | --- | --- | --- |
 | iPhone / iPad | `Qubiq-ios.ipa` | iOS / iPadOS 16+, sideloading or enterprise signing |
-| macOS | `Qubiq-macos-universal.zip` | macOS 13+, Apple silicon or Intel |
+| macOS | `Qubiq-macos-universal.dmg` | macOS 13+, Apple silicon or Intel |
 | Android | `Qubiq-android-universal.apk` | Android 10+, arm64-v8a or x86_64 |
 | Windows | `Qubiq-windows-amd64.exe` / `.zip` · `Qubiq-windows-arm64.exe` / `.zip` | Windows 10 20H2+ (x64) or Windows 11 (ARM64) |
-| Linux | `Qubiq-linux-x86_64.deb` / `.zip` · `Qubiq-linux-aarch64.deb` / `.zip` | Linux 5.3+, glibc 2.39+ |
+| Linux | `Qubiq-linux-x86_64.deb` / `.rpm` / `.zip` · `Qubiq-linux-aarch64.deb` / `.rpm` / `.zip` | Linux 5.3+, glibc 2.39+ |
 
 ## First run
 
@@ -43,7 +43,7 @@ actually connect.
   interface before each connect; if it's missing or invalid you'll be
   prompted to pick one at that point.
 - **Linux** — the core needs execute permission, TUN and capabilities;
-  the .deb handles this, the .zip may need manual setup.
+  the .deb and .rpm handle this, the .zip may need manual setup.
 
 ## Add a server
 

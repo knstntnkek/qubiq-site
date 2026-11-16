@@ -54,9 +54,9 @@ links and logs.
 
 - **Refresh failed** — the old cache, plan and your edits are kept; the
   error sits on the source. Check the URL, then pull-to-refresh again.
-- **Remnawave returned links, not JSON** — Qubiq asks whether to convert
-  to an ordinary app-managed subscription; consent parses the nodes and
-  flips the mode.
+- **Remnawave returned links, not JSON** — the nodes import as an
+  ordinary app-managed subscription silently, then one `/json` retry
+  recovers the provider view if the panel has it.
 - **Provider renamed/migrated the sub** — `new-url`/`new-domain` apply
   automatically; a manual URL edit clears provider metadata until the
   next refresh.

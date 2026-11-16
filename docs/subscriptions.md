@@ -19,9 +19,14 @@ New sources enter with the Remnawave panel default and an undecided mode
 complete JSON becomes provider-managed, and the stored mode shows on the
 source afterwards.
 
-A Remnawave source that answers with non-JSON text offers to **convert to
-an ordinary subscription** — on consent the nodes are parsed and the
-source becomes generic app-managed. Declining keeps everything as it was.
+A Remnawave source that answers with non-JSON text **converts silently** —
+the same response's nodes are parsed and the source becomes generic
+app-managed, no prompt and no re-download. When that happens Qubiq makes
+one recovery attempt: it retries the same URL with `/json` appended
+(query preserved, `Happ/4.0` User-Agent guaranteed) — a usable
+provider-managed result replaces the ordinary one, while any error or
+non-provider response keeps the original ordinary result. The stored URL
+is never rewritten.
 
 ## Refresh behaviour
 
@@ -63,10 +68,6 @@ body comments (headers win). Fields Qubiq honours:
 
 Provider fields are withdrawn when they disappear from a later response,
 and cleared when you change the request URL.
-
-Fields Qubiq deliberately ignores: provider-picked ping methods
-(`ping-type`, `check-url-via-proxy`), `hide-settings`, third-party
-telemetry parameters (`providerid`), and `happ://crypt` links.
 
 ## Address migration
 
