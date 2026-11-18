@@ -28,6 +28,13 @@ combines:
 Smart Routing is the useful starting point for app-managed nodes; the
 persisted values apply at compile time every connect.
 
+**Google Play while CN is direct** — when the direct region includes CN,
+`services.googleapis.cn` and `xn--ngstr-lra8j.com` (including its download
+subdomains) are routed through the proxy, with matching proxied DNS, ahead
+of the broad CN direct rules — so the Play Store keeps working. Removing
+CN drops the exception. It is compiled into the run configuration only:
+saved, custom, Raw and provider configurations are never rewritten.
+
 ## Traffic modes
 
 On desktop, the **tray menu** switches the traffic mode without opening

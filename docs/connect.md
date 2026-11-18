@@ -50,6 +50,15 @@ automatic may run a provider config.
 Starting never waits for latency tests — candidates with no successful
 delay are usable, ordered after measured ones.
 
+## Sessions that outlive the app
+
+A running tunnel does not depend on the app staying open. If Qubiq is
+quit or killed while the VPN keeps running, reopening it restores the
+session from the recorded run metadata — the hero shows the live
+connection rather than claiming a fresh disconnected state. The native
+state wins over missing details: absent counters or a missing
+description are never read as "disconnected".
+
 ## Tray and quick entries
 
 - **Desktop tray** — start/stop, reconnect, server and traffic-mode
