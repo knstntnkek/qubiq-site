@@ -1,6 +1,6 @@
 # Getting started
 
-Qubiq is an open-source Xray-core client. It provides **no VPN access and
+Qubiq is a cross-platform Xray-core client. It provides **no VPN access and
 no servers of its own** — you bring share links, a subscription from your
 provider, or Xray JSON, and Qubiq runs the tunnel.
 

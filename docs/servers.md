@@ -13,7 +13,9 @@ under the connect hero. There are three resource types: **nodes**
 - **Long-press** toggles the favorite where the row supports it.
 - **Pull down** refreshes every source.
 - Group headers **collapse** per source — the choice persists across
-  launches; a provider-pinned group stays open.
+  launches; a provider-pinned group stays open. Headers carry the
+  provider logo while its branding is active — opt out per source via
+  its details page's *Provider appearance* switch.
 
 Ordinary node rows carry protocol/transport/security and delay labels —
 ≤500 ms fast, ≤1000 ms slow — or a dedicated untested/failed status

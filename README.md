@@ -1,7 +1,7 @@
 # qubiq-site
 
 Website for [Qubiq](https://github.com/knstntnkek/yavpnclient) — an
-open-source Xray-core client. Static site on GitHub Pages:
+cross-platform Xray-core client. Static site on GitHub Pages:
 <https://knstntnkek.github.io/qubiq-site/>
 
 No build step. `docs/*.md` pages render client-side via `docs.html` +

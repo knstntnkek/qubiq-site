@@ -65,9 +65,34 @@ body comments (headers win). Fields Qubiq honours:
 | `new-url` / `new-domain` | Subscription address migrates automatically |
 | `subscriptions-collapse: 0` | Group pinned open against manual collapse |
 | `notification-subs-expire` | Opts into expiry reminders (mobile) |
+| `color-profile` / `profile-logo` | Provider theme and logo — see [Provider branding](#provider-branding) |
 
 Provider fields are withdrawn when they disappear from a later response,
 and cleared when you change the request URL.
+
+## Provider branding
+
+A provider can restyle the app while its subscription is in use — two
+response fields drive it:
+
+- **`color-profile`** — a JSON theme applied to the app palette. Themes
+  authored for Happ apply unchanged; Qubiq also accepts its own semantic
+  palette slots directly (a canonical slot wins over a Happ alias for
+  the same slot). Hex values only, 16 KB cap, unknown keys skipped,
+  malformed documents ignored. The literal `resetcolors` — or removing
+  the field — withdraws the theme.
+- **`profile-logo`** — the provider's mark on the app bar, the group
+  card and the details page. Inline `data:` images or HTTPS URLs
+  (≤512 KB, format-verified, cached across refreshes; a failed refetch
+  keeps the cache, a withdrawn declaration clears it).
+
+Branding follows the subscription in use — the connected provider
+profile, otherwise the selected source or server, otherwise the only
+branded provider. Switching source swaps the theme; deleting the source
+reverts it. Each subscription's details page lists what the provider set
+and carries a **Provider appearance** switch that opts that source out —
+the choice is yours and survives edits and refreshes. Branding never
+touches the window title, the app identity, or what you can edit.
 
 ## Send logs
 

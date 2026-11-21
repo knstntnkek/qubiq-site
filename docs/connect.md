@@ -2,8 +2,9 @@
 
 The home screen is a single vertical flow: a **connection hero** on top
 and your **server list** below, inside a pull-to-refresh scroll view.
-The app bar carries the app mark plus the active provider profile title,
-an add-server action and the settings action.
+The app bar carries the app mark — or the provider logo while a branded
+subscription is in use — plus the active provider profile title, an
+add-server action and the settings action.
 
 ## The hero
 
@@ -30,9 +31,11 @@ An **automatic** entry plus servers grouped by their subscription:
 - **Pull down** to refresh every subscription source.
 
 Group headers collapse per source ("N servers" summary, persisted) and
-carry the last-check time plus provider data — announcements, support
-and website links, a **Send logs** diagnostics action, and the plan meter
-and expiry chip when reported. A provider-pinned group stays expanded.
+carry the provider's logo while its branding is active, the last-check
+time plus provider data — announcements, support and website links, a
+**Send logs** diagnostics action, and the plan meter and expiry chip when
+reported. Collapsing hides the announcement and support strip while the
+meter and expiry chip stay. A provider-pinned group stays expanded.
 
 With no servers, the hero stays and a dashed *No servers yet* card
 offers the add action and a help link.
