@@ -6,8 +6,8 @@ provider, or Xray JSON, and Qubiq runs the tunnel.
 
 ## Install
 
-Packages are published on
-[GitHub Releases](https://github.com/knstntnkek/yavpnclient/releases).
+Packages are published on this site — see the
+[Download section](index.html#modal-download).
 
 | Platform | Package | Requirements |
 | --- | --- | --- |

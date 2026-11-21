@@ -1,6 +1,6 @@
 # qubiq-site
 
-Website for [Qubiq](https://github.com/knstntnkek/yavpnclient) — an
+Website for [Qubiq](https://knstntnkek.github.io/qubiq-site/) — an
 cross-platform Xray-core client. Static site on GitHub Pages:
 <https://knstntnkek.github.io/qubiq-site/>
 

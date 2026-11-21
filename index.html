@@ -24,13 +24,12 @@
   "@type": "SoftwareApplication",
   "name": "Qubiq",
   "url": "https://knstntnkek.github.io/qubiq-site/",
-  "downloadUrl": "https://github.com/knstntnkek/yavpnclient/releases",
+  "downloadUrl": "https://knstntnkek.github.io/qubiq-site/",
   "operatingSystem": "iOS, iPadOS, macOS, Android, Windows, Linux",
   "applicationCategory": "UtilitiesApplication",
   "description": "A cross-platform Xray-core client for phones, tablets and desktops. Bring your own servers or subscription — no accounts, no analytics.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "license": "https://github.com/knstntnkek/yavpnclient/blob/main/LICENSE",
-  "author": { "@type": "Organization", "name": "Qubiq", "url": "https://github.com/knstntnkek/yavpnclient" }
+  "author": { "@type": "Organization", "name": "Qubiq", "url": "https://knstntnkek.github.io/qubiq-site/" }
 }
 </script>
 <link rel="icon" type="image/png" href="icon.png">
@@ -38,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261121-1">
+<link rel="stylesheet" href="style.css?v=20261121-2">
 </head>
 <body>
 
@@ -88,7 +87,7 @@
     <section class="bento">
       <button class="bento-card wide reveal" data-modal="modal-download">
         <span class="bento-kicker">Downloads</span>
-        <h2>One build per platform, straight from GitHub</h2>
+        <h2>One build per platform, served from this site</h2>
         <ul class="bento-list">
           <li><b>iOS / iPadOS</b><small>ipa · sideload or enterprise signing</small></li>
           <li><b>macOS</b><small>universal dmg · System Extension</small></li>
@@ -127,7 +126,7 @@
       <button class="bento-card half reveal" data-modal="modal-support">
         <span class="bento-kicker neutral">Support</span>
         <h2>Found a bug?</h2>
-        <p>Issues and feature requests are handled in the open on GitHub —
+        <p>Issues and feature requests are tracked on the site repository —
         attach a Send logs bundle for connection problems.</p>
         <span class="bento-cta">Get help →</span>
       </button>
@@ -169,52 +168,50 @@
   <div class="modal-card" role="dialog" aria-modal="true" aria-label="Download Qubiq">
     <button class="modal-x" data-close aria-label="Close">×</button>
     <h2 class="modal-title">Download</h2>
-    <p class="modal-sub">Choose your platform — packages on GitHub Releases.</p>
+    <p class="modal-sub">Choose your platform — packages are served right
+    here, no repo access needed.</p>
     <div class="modal-cols">
       <div class="modal-col">
         <p class="modal-col-title">Desktop</p>
-        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+        <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">Windows</span>
-            <span class="dl-meta">x64 / ARM64 · exe, zip · Win 10 20H2+</span>
+            <span class="dl-meta">x64 / ARM64 · exe, zip · Win 10 20H2+ · soon</span>
           </span>
-          <span class="dl-arrow">→</span>
-        </a>
-        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+        </div>
+        <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">macOS</span>
-            <span class="dl-meta">universal dmg · macOS 13+ · System Extension</span>
+            <span class="dl-meta">universal dmg · macOS 13+ · System Extension · soon</span>
           </span>
-          <span class="dl-arrow">→</span>
-        </a>
-        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+        </div>
+        <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">Linux</span>
-            <span class="dl-meta">x86_64 / aarch64 · deb, rpm, zip · glibc 2.39+</span>
+            <span class="dl-meta">x86_64 / aarch64 · deb, rpm, zip · glibc 2.39+ · soon</span>
           </span>
-          <span class="dl-arrow">→</span>
-        </a>
+        </div>
       </div>
       <div class="modal-col">
         <p class="modal-col-title">Mobile</p>
-        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+        <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">iOS / iPadOS</span>
-            <span class="dl-meta">ipa · iOS 16+ · sideload / enterprise signing</span>
+            <span class="dl-meta">ipa · iOS 16+ · sideload / enterprise signing · soon</span>
           </span>
-          <span class="dl-arrow">→</span>
-        </a>
-        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/releases">
+        </div>
+        <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">Android</span>
-            <span class="dl-meta">universal apk · Android 10+</span>
+            <span class="dl-meta">universal apk · Android 10+ · soon</span>
           </span>
-          <span class="dl-arrow">→</span>
-        </a>
+        </div>
       </div>
     </div>
-    <p class="modal-foot">First connect asks for the platform VPN permission —
-    see <a href="docs.html#getting-started">Getting started</a>.</p>
+    <p class="modal-foot">Published builds replace their platform row with a
+    direct download automatically. First connect asks for the platform VPN
+    permission — see <a href="docs.html#getting-started">Getting
+    started</a>.</p>
   </div>
 </div>
 
@@ -225,10 +222,10 @@
     <p class="modal-sub">Bugs and feature requests are handled in the open.</p>
     <div class="modal-cols">
       <div class="modal-col">
-        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/issues">
+        <a class="dl-row" href="https://github.com/knstntnkek/qubiq-site/issues">
           <span class="dl-main">
             <span class="dl-name">GitHub Issues</span>
-            <span class="dl-meta">bug reports &amp; feature requests</span>
+            <span class="dl-meta">site repo · bug reports &amp; feature requests</span>
           </span>
           <span class="dl-arrow">→</span>
         </a>
@@ -264,13 +261,12 @@
           </span>
           <span class="dl-arrow">→</span>
         </a>
-        <a class="dl-row" href="https://github.com/knstntnkek/yavpnclient/blob/main/LICENSE">
+        <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">License</span>
             <span class="dl-meta">proprietary · all rights reserved</span>
           </span>
-          <span class="dl-arrow">→</span>
-        </a>
+        </div>
       </div>
       <div class="modal-col">
         <a class="dl-row" href="https://github.com/YuanDevTeam/OneXray">
@@ -292,7 +288,7 @@
   </div>
 </div>
 
-<script src="site.js?v=20261119-1"></script>
+<script src="site.js?v=20261121-2"></script>
 <script data-goatcounter="https://konstantin11.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

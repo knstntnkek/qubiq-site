@@ -8,8 +8,9 @@ error, not a generic message. The row names also reflect the real run:
 the connected server name is the actual entry, which may differ from
 what you pinned if automatic fallback stepped in.
 
-When reporting a bug on
-[GitHub](https://github.com/knstntnkek/yavpnclient/issues): include the
+When reporting a bug via the
+[site repository's issues](https://github.com/knstntnkek/qubiq-site/issues):
+include the
 platform, app and core versions (Settings → About) and reproduction
 steps. For provider or connection issues, the group's **Send logs**
 action shares a `qubiq-diagnostics-*.txt` bundle with credentials

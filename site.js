@@ -37,10 +37,10 @@
     open(h);
   }
 
-  // Download modal: replace generic Releases rows with direct package
+  // Download modal: replace static platform rows with direct package
   // links once downloads/release.json exists (the Azure pipeline pushes
-  // it on tag builds). Platforms absent from the manifest keep their
-  // static Releases link.
+  // it on tag and merge builds). Platforms absent from the manifest
+  // keep their "soon" placeholder row.
   const labels = { windows: 'Windows', linux: 'Linux', macos: 'macOS',
                    android: 'Android', ios: 'iOS / iPadOS' };
   const hydrateDownloads = () => {
