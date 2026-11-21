@@ -481,6 +481,11 @@ button.bento-card:hover {
 .docs-toc a:hover { color: var(--text); text-decoration: none; }
 
 .doc-body { min-width: 0; }
+.docs-layout > .doc-body:only-child {
+  grid-column: 1 / -1;
+  max-width: 720px;
+  margin: 0 auto;
+}
 .doc-body h1 {
   font-family: var(--display);
   font-size: 30px;
