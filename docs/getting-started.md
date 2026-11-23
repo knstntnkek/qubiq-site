@@ -50,11 +50,11 @@ actually connect.
 Tap **＋** (or the empty-state *Add server* action) to open the import
 flow:
 
-- **Subscription** — paste the HTTPS URL your provider gave you. That's
-  all the form needs: provider panel and mode are decided by what the
-  response actually contains.
-- **Share links** — VMessAEAD/VLESS, Hysteria2, SS, SOCKS, Trojan — one
-  per line.
+- **Subscription** — paste the HTTPS URL your provider gave you, or tap
+  a provider's `qubiq://add` button which prefills the same form. Panel
+  and mode are decided by what the response actually contains.
+- **Share links** — VMessAEAD/VLESS, legacy VMess QR, WireGuard,
+  Hysteria2, SS, SOCKS, Trojan — one per line.
 - **QR scan** — iOS and Android.
 - **File** — via the system picker.
 

@@ -15,8 +15,9 @@ platform, app and core versions (Settings → About) and reproduction
 steps. For provider or connection issues, the group's **Send logs**
 action shares a `qubiq-diagnostics-*.txt` bundle with credentials
 redacted and the subscription URL removed — it even covers the previous
-session after a failed start. Attach it to the issue rather than pasting
-raw configs or logs yourself.
+session after a failed start, and it re-requests that URL live to dump
+the response status and headers verbatim. Attach it to the issue rather
+than pasting raw configs or logs yourself.
 
 ## Connect fails or hangs
 
@@ -61,9 +62,13 @@ raw configs or logs yourself.
 - **Remnawave returned links, not JSON** — the nodes import as an
   ordinary app-managed subscription silently, then one `/json` retry
   recovers the provider view if the panel has it.
-- **Provider renamed/migrated the sub** — `new-url`/`new-domain` apply
-  automatically; a manual URL edit clears provider metadata until the
-  next refresh.
+- **Provider renamed/migrated the sub** — `new-url`/`new-domain` targets
+  are adopted only after they answer with a usable subscription; a
+  failing target is remembered and retried on each refresh, and a manual
+  URL edit clears provider metadata until the next refresh.
+- **Main URL down, provider has a mirror** — a declared
+  `fallback-domain` is retried once per refresh with the host swapped;
+  the stored URL itself never rewrites to it.
 - **Plan meter gone** — the provider stopped sending
   `subscription-userinfo`; withdrawn fields clear on the response that
   omits them.
@@ -79,7 +84,8 @@ syncs anywhere unless you bind a backup target yourself.
 
 **What does HWID send?**
 A per-source random UUID — no hardware/ad/system identifier — to that
-source's provider only.
+source's provider only. It goes out with every subscription download;
+there is no opt-out.
 
 **Where did page X go?**
 The current UI is deliberately thin: home (hero + list), the import

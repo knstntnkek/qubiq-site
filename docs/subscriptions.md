@@ -43,32 +43,46 @@ is never rewritten.
 
 Providers reporting `subscription-userinfo` give Qubiq usage bytes
 (`upload`/`download`/`total`) and an `expire` timestamp. The group card
-shows a thin used/total meter and an expiry chip — labelled as
-provider-reported, not live app traffic. `total=0` means unlimited,
-`expire=0` means no expiry. An expired or exhausted plan only informs —
+shows the usage and expiry — a thin used/total meter for capped plans,
+text for unlimited ones — labelled as provider-reported, not live app
+traffic, with a warning tint inside the last 7 days. `expire=0` means
+no expiry. An expired or exhausted plan only informs —
 it never blocks connecting. Mobile can remind you 72 hours before expiry
 when the provider opts in.
 
 ## Provider fields
 
 Panels control parts of the UI through response headers or `#key: value`
-body comments (headers win). Fields Qubiq honours:
+body comments. For text and URL fields a valid header wins over the same
+body key, and missing or invalid header values may be filled from the
+body; flags like the expiry reminder and collapse lock merge by logical
+OR. Fields Qubiq honours:
 
 | Field | What you see |
 | --- | --- |
 | `profile-title` | Names the source unless you typed a name |
-| `subscription-userinfo` | Plan meter + expiry chip on the group card |
+| `subscription-name` | Title fallback after `profile-title` |
+| `content-disposition` | Filename supplies the last title fallback |
+| `profile-description` | Secondary text under the provider title |
+| `subscription-userinfo` | Plan usage + expiry on the group card |
 | `announce` | Announcement line in the group card |
-| `support-url` | Support button in the group card |
-| `profile-web-page-url` | Globe button to the provider's site |
+| `announce-url` | Makes the announcement tappable (web or Telegram) |
+| `support-url` | Support action (web, Telegram or email) |
+| `support-email` | Email fallback when `support-url` is absent |
+| `profile-web-page-url` | Website action to the provider's page |
+| `homepage` | Website fallback when `profile-web-page-url` is absent |
 | `profile-update-interval` | Per-source refresh cadence (1–720 h) |
 | `new-url` / `new-domain` | Subscription address migrates automatically |
-| `subscriptions-collapse: 0` | Group pinned open against manual collapse |
+| `fallback-domain` | Mirror host retried once when the URL fails |
+| `subscriptions-collapse` | `0`/`false` pins the group open |
 | `notification-subs-expire` | Opts into expiry reminders (mobile) |
 | `color-profile` / `profile-logo` | Provider theme and logo — see [Provider branding](#provider-branding) |
 
-Provider fields are withdrawn when they disappear from a later response,
-and cleared when you change the request URL.
+A blank editable name resolves as `profile-title` → `subscription-name`
+→ the `content-disposition` filename → the URL's host; a name you typed
+always wins and survives refreshes. Provider fields are withdrawn when
+they disappear from a later response, and cleared when you change the
+request URL.
 
 ## Provider branding
 
@@ -97,13 +111,15 @@ touches the window title, the app identity, or what you can edit.
 ## Send logs
 
 The group card strip also carries a **Send logs** action — it writes a
-single `qubiq-diagnostics-*.txt` bundle and opens the system share sheet
-(a save dialog where file sharing is unavailable, e.g. Linux). The bundle
+single `qubiq-diagnostics-*.txt` bundle; mobile hands it to the system
+share sheet while desktop goes straight to a save dialog. The bundle
 holds:
 
 - app, platform and connection metadata, live traffic counters and
   per-path probe results
 - the source's panel fields including HWID — **never** its URL
+- a live re-request of the subscription URL — its response status and
+  headers are dumped verbatim
 - the runtime Xray config with credentials `***`-redacted and core file
   paths trimmed to basenames
 - the last 256 KB of each core log file — the warning-level error log is
@@ -113,28 +129,62 @@ Disconnected or after a failed start, the bundle still recovers the
 previous session's config (redacted the same way) and declared log paths.
 Empty logs are marked `(empty)` — nothing is silently omitted.
 
-## Address migration
+## Address migration & fallback
 
 When a provider's domain is blocked or moved, the old URL's response can
 carry `new-url` (replaces the whole subscription URL) or `new-domain`
-(rewrites just the host). The migration applies on add and on every
-refresh and can chain — never onto an address already used by another
-stored source.
+(rewrites just the host of an HTTPS URL). A declared target is adopted
+**only after it proves itself** — Qubiq downloads it through the normal
+pipeline and stores it only when it returns a usable subscription. The
+check runs on add and on every refresh — one hop per refresh, each
+response's own declaration scheduling the next.
+
+A target that fails is remembered per source and retried on every
+refresh — the current URL keeps working meanwhile, so a provider can
+announce a new address before it goes live. The newest declaration
+replaces a remembered one; the pending target is dropped when the
+provider stops declaring it or you edit the request. If the current URL
+stops responding entirely, the remembered target is tried right away as
+the recovery address. A target that collides with another stored
+subscription is deferred without a probe and adopted automatically once
+the collision clears.
+
+`fallback-domain` is a mirror, not a move. A successful response can
+declare a bare mirror host; when the stored URL later stops answering,
+the same request is retried once with the host swapped to it — port,
+path and query preserved — and the mirror's data serves that refresh.
+The stored URL is never rewritten to the fallback: every refresh tries
+the real domain first, a pending migration target outranks it, and a
+mirror response can itself declare migrations. The fallback stays armed
+until the real URL answers again or you edit the request.
 
 ## Stored request fields
 
 Each source also carries per-source request values — User-Agent, Age key
-pair and the HWID send flag — kept from the stored or default state:
+pair and the HWID identity — kept from the stored or default state:
 
 - **User-Agent** — defaults to a compat UA for panel recognition.
 - **Age keys** — where present, `ageSecretKey` decrypts **locally** and
   `agePublicKey` goes to the server via `X-Age-Public-Key`. Age protects
   the response body only — it doesn't hide the URL or replace HTTPS, and
   failed decryption keeps the old cache.
-- **HWID** — a per-source random UUID sent as `x-hwid`, on by default so
-  panels can bind devices to accounts. It's never a hardware, ad or
-  system identifier, never appears in shared links or Xray configs, and
-  cross-origin redirects strip it permanently for that request.
+- **HWID** — a per-source random UUID sent as `x-hwid` with **every**
+  subscription download; there is no opt-out and
+  `subscription-always-hwid-enable` is not honoured. It's never a
+  hardware, ad or system identifier, never appears in shared links or
+  Xray configs, and cross-origin redirects strip it permanently for that
+  request. The identity survives URL edits — only deleting and
+  recreating the source produces a new one.
+
+## Add-to-Qubiq links
+
+Providers can put a `qubiq://add?url=…&name=…` button on their panel —
+tapping it opens the prefilled subscription form (name optional);
+nothing saves or connects without your confirmation.
+`qubiq://import?data=…` does the same for node or config content, taking
+Base64, Base64url or percent-encoded text. Links carry credentials in
+plain encoding — providers should treat them like secrets and keep real
+tokens out of examples.
 
 ## Source actions
 

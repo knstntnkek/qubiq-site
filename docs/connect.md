@@ -8,13 +8,14 @@ add-server action and the settings action.
 
 ## The hero
 
-A circular power button inside a ring and radial gradient:
+A circular power button inside a thin outer ring with a centered accent
+glow:
 
 - **Connect** — starts the tunnel with the selected (or automatic)
   target.
 - **Cancel** — aborts a prepare/connect in flight.
 - **Disconnect** — stops the running tunnel.
-- **Try Again** — after a failure, with the real reason shown beside it.
+- **Try Again** — after a failure, with the real reason shown below it.
 
 While connected it shows the running server name and an elapsed clock.
 Start/stop shows the transition immediately — success is never claimed
@@ -29,13 +30,23 @@ An **automatic** entry plus servers grouped by their subscription:
   the hero — it never disconnects a live tunnel.
 - **Long-press** toggles the favorite where the row supports it.
 - **Pull down** to refresh every subscription source.
+- **Latency** shows as coloured milliseconds or **signal bars** per the
+  node-latency settings' *Latency display* option — three green bars up
+  to 300 ms, two amber through 800 ms, one red above; tooltips keep the
+  exact ms either way.
 
-Group headers collapse per source ("N servers" summary, persisted) and
-carry the provider's logo while its branding is active, the last-check
-time plus provider data — announcements, support and website links, a
-**Send logs** diagnostics action, and the plan meter and expiry chip when
-reported. Collapsing hides the announcement and support strip while the
-meter and expiry chip stay. A provider-pinned group stays expanded.
+Group headers collapse per source ("N servers" summary, persisted):
+collapsing hides the rows and the announcement while plan info, expiry
+and the provider actions — **Support**, **Send logs**, **Website** —
+stay reachable as labeled chips. **Settings → Appearance → Compact home
+layout** moves those actions to labeled header icons and tightens
+spacing; it's off by default, local to the device and excluded from
+backups. A provider-pinned group stays expanded. Headers carry the
+provider's logo while its branding is active, the last-check time and
+update cadence; provider descriptions appear under the title.
+Announcements show one line with **More** for the full text — linked
+announcements open their destination, and support actions can hand off
+to Telegram or email.
 
 With no servers, the hero stays and a dashed *No servers yet* card
 offers the add action and a help link.

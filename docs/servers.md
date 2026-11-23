@@ -17,10 +17,13 @@ under the connect hero. There are three resource types: **nodes**
   provider logo while its branding is active — opt out per source via
   its details page's *Provider appearance* switch.
 
-Ordinary node rows carry protocol/transport/security and delay labels —
-≤500 ms fast, ≤1000 ms slow — or a dedicated untested/failed status
-(never dressed up as a delay value). Provider rows display their
-Remnawave type and no ordinary delay.
+Ordinary node rows carry protocol/transport/security and a latency
+badge — exact milliseconds by default, or **signal bars** per the
+node-latency settings' *Latency display* option (three green bars up to
+300 ms, two amber through 800 ms, one red above; tooltips keep the exact
+ms). Untested/failed states show dedicated status text — never dressed
+up as a delay value. Provider rows display their Remnawave type and no
+ordinary delay.
 
 ## Import methods
 
@@ -28,12 +31,14 @@ The **＋** action opens the import flow:
 
 - **Subscription** — an HTTPS URL; see
   [Subscriptions & providers](subscriptions.md).
-- **Share links** — VMessAEAD/VLESS, Hysteria2 (`hysteria2://`,
-  `hy2://`), SS, SOCKS, Trojan — one per line. Old
-  `vmess://Base64(JSON)` QR codes and Clash/Mihomo formats are not
-  supported.
+- **Share links** — VMessAEAD/VLESS, legacy VMess QR
+  (`vmess://Base64(JSON)`), WireGuard (`wireguard://`, `wg://`),
+  Hysteria2 (`hysteria2://`, `hy2://`), SS, SOCKS (`socks://`,
+  `socks5://`, `socks5h://`), Trojan — one per line. Clash/Mihomo
+  formats are not supported.
 - **QR scan** — iOS and Android.
-- **File** — the system picker.
+- **File** — the system picker, including WireGuard `.conf` files and
+  single-outbound WireGuard JSON.
 
 Imported nodes join the automatic latency queue — results are not
 required before connecting.

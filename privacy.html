@@ -66,9 +66,12 @@
           <li>Optional logs are opt-in and never leave the device except
           when you share them yourself — the <strong>Send logs</strong>
           action produces a bundle with credentials redacted and your
-          subscription URL removed before anything is written.</li>
+          subscription URL removed before anything is written. Producing
+          it re-requests that URL once, live, to dump the response
+          status and headers.</li>
           <li>Subscription refreshes send a per-source <strong>random
-          UUID</strong> (<code>x-hwid</code>) when enabled — never a
+          UUID</strong> (<code>x-hwid</code>) on every download — always
+          on, no opt-out — never a
           hardware, ad or system identifier — and cross-origin redirects
           strip it.</li>
           <li>The backup file is deliberately <strong>unencrypted</strong>
