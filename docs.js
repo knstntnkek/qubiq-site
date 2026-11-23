@@ -1,7 +1,8 @@
 /* docs.js — renders docs/*.md into the guide. Edit the markdown, not this file.
-   Page list lives in PAGES; hash routing: docs.html#<page>/<anchor>.
+   Page list lives in PAGES; real URLs: docs.html?page=<slug>#<anchor>.
    Bilingual: RU pages live under ru/ — same slugs, translated titles.
-   RU headings carry explicit {#id} anchors matching the EN slugs. */
+   RU headings carry explicit <!-- #id --> anchors matching the EN slugs
+   (rendered as comments on GitHub). */
 
 const LANG = document.documentElement.lang.startsWith("ru") ? "ru" : "en";
 
@@ -95,17 +96,80 @@ const slugify = s => s.toLowerCase().replace(/<[^>]+>/g, "")
   .replace(/[^\p{L}\p{N}]+/gu, "-")
   .replace(/^-+|-+$/g, "");
 
+const safeDecode = s => { try { return decodeURIComponent(s); } catch { return s; } };
+
+let currentPage = "";
+
 function route() {
-  const h = decodeURIComponent(location.hash.replace(/^#/, ""));
-  const [page, anchor] = h.split("/");
+  const q = new URLSearchParams(location.search).get("page") || "";
   return {
-    page: PAGES.some(p => p.slug === page) ? page : PAGES[0].slug,
-    anchor: anchor || "",
+    page: PAGES.some(p => p.slug === q) ? q : PAGES[0].slug,
+    anchor: safeDecode(location.hash.replace(/^#/, "")),
   };
+}
+
+// legacy #<slug>/<anchor> hashes → ?page=<slug>#<anchor>
+function upgradeLegacyHash() {
+  if (new URLSearchParams(location.search).get("page")) return;
+  const h = location.hash.replace(/^#/, "");
+  if (!h) return;
+  const [slug, anchor] = h.split("/");
+  if (!PAGES.some(p => p.slug === slug)) return;
+  history.replaceState(null, "",
+    `${location.pathname}?page=${slug}${anchor ? "#" + anchor : ""}`);
+}
+
+const SITE_ORIGIN = "https://knstntnkek.github.io/qubiq-site";
+
+function setHead(selector, tag, attrs) {
+  let el = document.head.querySelector(selector);
+  if (!el) {
+    el = document.createElement(tag);
+    document.head.appendChild(el);
+  }
+  for (const k in attrs) el.setAttribute(k, attrs[k]);
+}
+
+function setDocHead(page, title) {
+  document.title = `${title} ${T.titleSuffix}`;
+
+  let p = bodyEl.querySelector("h1");
+  while (p && p.tagName !== "P") p = p.nextElementSibling;
+  let desc = p ? p.textContent.trim().replace(/\s+/g, " ") : "";
+  if (desc.length > 160) {
+    desc = desc.slice(0, 160);
+    const cut = desc.lastIndexOf(" ");
+    if (cut > 40) desc = desc.slice(0, cut);
+    desc = desc.trimEnd() + "…";
+  }
+
+  const prefix = LANG === "ru" ? "ru/" : "";
+  const pageUrl = slug =>
+    `${SITE_ORIGIN}/${prefix}docs.html?page=${slug}`;
+  setHead('meta[name="description"]', "meta",
+    { name: "description", content: desc });
+  setHead('meta[property="og:title"]', "meta",
+    { property: "og:title", content: title });
+  setHead('meta[property="og:description"]', "meta",
+    { property: "og:description", content: desc });
+  setHead('meta[property="og:url"]', "meta",
+    { property: "og:url", content: pageUrl(page) });
+  setHead('link[rel="canonical"]', "link",
+    { rel: "canonical", href: pageUrl(page) });
+  setHead('link[rel="alternate"][hreflang="en"]', "link",
+    { rel: "alternate", hreflang: "en",
+      href: `${SITE_ORIGIN}/docs.html?page=${page}` });
+  setHead('link[rel="alternate"][hreflang="ru"]', "link",
+    { rel: "alternate", hreflang: "ru",
+      href: `${SITE_ORIGIN}/ru/docs.html?page=${page}` });
+  setHead('link[rel="alternate"][hreflang="x-default"]', "link",
+    { rel: "alternate", hreflang: "x-default",
+      href: `${SITE_ORIGIN}/docs.html?page=${page}` });
 }
 
 async function render() {
   const { page, anchor } = route();
+  currentPage = page;
 
   [...navEl.querySelectorAll("a")].forEach(a =>
     a.classList.toggle("on", a.dataset.slug === page));
@@ -120,16 +184,17 @@ async function render() {
     return;
   }
 
-  // explicit heading ids: a trailing {#id} on a heading line wins over the
-  // auto-slug (used by the RU pages to keep EN anchors). Fenced code ignored.
+  // explicit heading ids: a trailing <!-- #id --> on a heading line wins
+  // over the auto-slug (used by the RU pages to keep EN anchors; renders
+  // as a comment on GitHub). Fenced code ignored.
   const explicitIds = [];
   let inFence = false;
   md = md.split("\n").map(line => {
     if (/^\s*```/.test(line)) { inFence = !inFence; return line; }
     if (inFence || !/^#{1,3} /.test(line)) return line;
-    const m = line.match(/\s*\{#([A-Za-z0-9-]+)\}\s*$/);
+    const m = line.match(/\s*<!--\s*#([A-Za-z0-9-]+)\s*-->\s*$/);
     explicitIds.push(m ? m[1] : null);
-    return m ? line.replace(/\s*\{#[A-Za-z0-9-]+\}\s*$/, "") : line;
+    return m ? line.replace(/\s*<!--\s*#[A-Za-z0-9-]+\s*-->\s*$/, "") : line;
   }).join("\n");
 
   bodyEl.innerHTML = marked.parse(md);
@@ -142,11 +207,11 @@ async function render() {
     img.setAttribute("loading", "lazy");
   });
 
-  // a.md links → #a (hash routing); a.md#b → #a/b
+  // a.md links → ?page=a ; a.md#b → ?page=a#b
   bodyEl.querySelectorAll('a[href]').forEach(a => {
     const href = a.getAttribute("href");
     const m = href.match(/^([\w-]+)\.md(?:#(.*))?$/);
-    if (m) a.setAttribute("href", `#${m[1]}${m[2] ? "/" + m[2] : ""}`);
+    if (m) a.setAttribute("href", `?page=${m[1]}${m[2] ? "#" + m[2] : ""}`);
     else if (/^(https?:)?\/\//.test(href)) { a.target = "_blank"; a.rel = "noopener"; }
   });
 
@@ -165,7 +230,7 @@ async function render() {
 
   tocEl.innerHTML = h2s.length > 1
     ? `<p class="toc-title">${T.onThisPage}</p>` +
-      h2s.map(h => `<a href="#${page}/${h.id}">${h.textContent}</a>`).join("")
+      h2s.map(h => `<a href="#${h.id}">${h.textContent}</a>`).join("")
     : "";
 
   const lb = bodyEl.querySelector("[data-link-builder]");
@@ -176,15 +241,17 @@ async function render() {
   const prev = PAGES[i - 1], next = PAGES[i + 1];
   bodyEl.insertAdjacentHTML("beforeend",
     `<nav class="docs-prevnext">
-       ${prev ? `<a class="pn" href="#${prev.slug}">← ${prev.title}</a>` : "<span></span>"}
-       ${next ? `<a class="pn" href="#${next.slug}">${next.title} →</a>` : "<span></span>"}
+       ${prev ? `<a class="pn" href="?page=${prev.slug}">← ${prev.title}</a>` : "<span></span>"}
+       ${next ? `<a class="pn" href="?page=${next.slug}">${next.title} →</a>` : "<span></span>"}
      </nav>`);
 
-  document.title = `${PAGES[i].title} ${T.titleSuffix}`;
+  setDocHead(page, PAGES[i].title);
 
   const target = anchor && document.getElementById(anchor);
   (target || bodyEl).scrollIntoView(target ? {} : { block: "start" });
   if (!target) window.scrollTo(0, 0);
+
+  document.dispatchEvent(new CustomEvent("docs:rendered"));
 }
 
 function mountLinkBuilder(el) {
@@ -299,9 +366,56 @@ function mountLinkBuilder(el) {
   update();
 }
 
+function scrollToAnchor(anchor) {
+  const el = anchor && document.getElementById(anchor);
+  if (el) el.scrollIntoView();
+}
+
+function countView() {
+  if (window.goatcounter && window.goatcounter.count)
+    window.goatcounter.count({ path: location.pathname + location.search });
+}
+
 // sidebar
 navEl.innerHTML = `<p class="docs-nav-title">${T.guide}</p>` +
-  PAGES.map(p => `<a href="#${p.slug}" data-slug="${p.slug}">${p.title}</a>`).join("");
+  PAGES.map(p => `<a href="?page=${p.slug}" data-slug="${p.slug}">${p.title}</a>`).join("");
 
-addEventListener("hashchange", render);
+// same-document navigation: ?page= links render without a reload
+document.addEventListener("click", e => {
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+    return;
+  const a = e.target.closest("a[href]");
+  if (!a || !a.closest(".docs-layout") || a.target === "_blank") return;
+  const url = new URL(a.href, location.href);
+  if (url.origin !== location.origin || url.pathname !== location.pathname)
+    return;
+  const q = url.searchParams.get("page");
+  const target = PAGES.some(p => p.slug === q) ? q : PAGES[0].slug;
+  if (target === currentPage && url.search === location.search)
+    return; // only the hash differs — native scroll
+  e.preventDefault();
+  history.pushState(null, "", url.pathname + url.search + url.hash);
+  if (target === currentPage) {
+    scrollToAnchor(safeDecode(url.hash.replace(/^#/, "")));
+    return;
+  }
+  countView();
+  render();
+});
+
+addEventListener("popstate", () => {
+  const { page, anchor } = route();
+  if (page === currentPage) {
+    if (anchor) scrollToAnchor(anchor);
+    else window.scrollTo(0, 0);
+    return;
+  }
+  countView();
+  render();
+});
+
+// manual hash edits scroll to the anchor; page changes go through ?page=
+addEventListener("hashchange", () => scrollToAnchor(route().anchor));
+
+upgradeLegacyHash();
 render();

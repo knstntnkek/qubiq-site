@@ -8,15 +8,17 @@
   };
   const t = k => S[k][LANG];
 
-  // language switch: carry the current hash across languages
+  // language switch: carry the current query + hash across languages
   const langSwitch = document.querySelector("a.lang-switch");
   const syncLangSwitch = () => {
     if (!langSwitch) return;
-    const base = langSwitch.getAttribute("href").split("#")[0];
-    langSwitch.setAttribute("href", base + (location.hash || ""));
+    const base = langSwitch.getAttribute("href").split(/[?#]/)[0];
+    langSwitch.setAttribute("href", base + location.search + location.hash);
   };
   syncLangSwitch();
   addEventListener("hashchange", syncLangSwitch);
+  addEventListener("popstate", syncLangSwitch);
+  document.addEventListener("docs:rendered", syncLangSwitch);
 
   const open = id => {
     const m = document.getElementById(id);
