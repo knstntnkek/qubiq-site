@@ -92,7 +92,18 @@ description are never read as "disconnected".
 
 ## Settings
 
-The settings branch holds appearance and language, the Apple app icon,
-launch behavior (launch at login, hidden start, connect on start),
-connection-config backup, data cleanup and About with version info and
-update checks. See [Backup](backup.md) for the backup target rules.
+Settings is a single page in sections:
+
+- **Appearance** — theme (system, light or dark), **Connect button
+  size** and **Compact home layout**; Android adds **Add traffic
+  widget**.
+- **Language** — the interface language.
+- **Startup** — **Connect after app launch**; desktop adds **Launch at
+  login** and **Start hidden**, and macOS **Hide Dock icon**.
+- **Advanced** — **Routing**, **Servers**, **VPN tunnel & Xray** and
+  **Allow VPN control from links** (off by default).
+- **Data** — **Backup & restore** (iOS, macOS, Android and Windows),
+  **Clear connection resources** and **Clear all app data**.
+- **About** — the app and Xray-core versions.
+
+See [Backup](backup.md) for the backup target rules.

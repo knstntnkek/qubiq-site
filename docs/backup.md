@@ -6,8 +6,7 @@ sync and no cloud account to sign into.
 
 > **The backup file is unencrypted.** It contains node credentials,
 > subscription URLs, Age private keys and the HWID — Base64 is encoding,
-> not secrecy. Choose where it lives accordingly; the app warns you
-> before writing.
+> not secrecy. Choose where it lives accordingly.
 
 ## Targets by platform
 
