@@ -1,6 +1,6 @@
 # qubiq-site
 
-Website for [Qubiq](https://knstntnkek.github.io/qubiq-site/) — an
+Website for [Qubiq](https://knstntnkek.github.io/qubiq-site/) — a
 cross-platform Xray-core client. Static site on GitHub Pages:
 <https://knstntnkek.github.io/qubiq-site/>
 
@@ -10,8 +10,15 @@ array in `docs.js`. Doc files also read fine directly on GitHub.
 
 ## Conventions
 
-- Bump `?v=` on `style.css`/`docs.js` after editing them — Pages caches
-  aggressively.
+- Bump `?v=` on `style.css`/`docs.js`/`site.js` after editing them —
+  Pages caches aggressively.
 - Internal doc links use `page.md` / `page.md#anchor` form; `docs.js`
   rewrites them to hash routes, so they work on GitHub too.
 - Update `sitemap.xml` whenever a page is added, removed or renamed.
+
+## Languages
+
+The site is bilingual — English at the root, Russian under `ru/`
+(`ru/docs/<slug>.md` mirrors each `docs/<slug>.md`; RU headings carry
+explicit `{#en-slug}` anchors). Every user-visible change updates both
+languages in the same change.

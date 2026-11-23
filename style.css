@@ -116,6 +116,10 @@ img { max-width: 100%; }
   background: rgba(255, 255, 255, .07);
   text-decoration: none;
 }
+.nav-links a.lang-switch {
+  border: 1px solid var(--border-hi);
+  font-weight: 600;
+}
 
 /* ============ hero ============ */
 .hero {
@@ -313,6 +317,51 @@ button.bento-card:hover {
   margin-bottom: 6px;
 }
 .step p { font-size: 13.5px; color: var(--text-mute); }
+
+/* ============ providers section ============ */
+.providers { padding-bottom: 56px; }
+.providers h2 {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  margin-bottom: 10px;
+}
+.providers-sub {
+  color: var(--text-soft);
+  max-width: 620px;
+  margin-bottom: 22px;
+}
+.providers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.provider-feature {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+.provider-feature h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.provider-feature p { font-size: 14px; color: var(--text-soft); }
+.provider-feature code {
+  font-family: var(--mono);
+  font-size: .86em;
+  background: rgba(255, 255, 255, .07);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.providers-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
 
 /* ============ footer ============ */
 .footer {
@@ -586,6 +635,91 @@ button.bento-card:hover {
 }
 .docs-prevnext .pn:hover { color: var(--teal); border-color: rgba(52,208,180,.4); }
 
+/* ============ link builder (For providers) ============ */
+.link-builder {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin-bottom: 16px;
+}
+.link-builder [hidden] { display: none; }
+.link-builder label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 14px 0 6px;
+}
+.link-builder label:first-child { margin-top: 0; }
+.link-builder input {
+  box-sizing: border-box;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.link-builder input:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+  border-color: var(--teal);
+}
+.doc-body .link-builder-error {
+  font-size: 13.5px;
+  color: #f2a65a;
+  margin: 12px 0 0;
+}
+.link-builder-output { margin-top: 16px; }
+.link-builder-output pre {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  margin-bottom: 10px;
+}
+.link-builder-output pre code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.doc-body .link-builder-caption {
+  font-size: 13px;
+  color: var(--text-mute);
+  margin: 0 0 8px;
+}
+.link-builder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.link-builder-actions:last-child { margin-bottom: 0; }
+.link-builder-actions button,
+.link-builder-actions a {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-soft);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.link-builder-actions button:hover,
+.link-builder-actions a:hover {
+  color: var(--teal);
+  border-color: rgba(52,208,180,.4);
+}
+
 /* entrance animation — subtle, not Happ's staggered cards */
 .reveal { animation: rise .5s ease-out backwards; }
 .reveal:nth-child(2) { animation-delay: .06s; }
@@ -601,6 +735,13 @@ button.bento-card:hover {
 @media (max-width: 960px) {
   .docs-layout { grid-template-columns: 180px minmax(0,1fr); }
   .docs-toc { display: none; }
+  .providers-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .providers-grid { grid-template-columns: 1fr; }
+  .doc-body table { font-size: 12.5px; }
+  .doc-body th, .doc-body td { padding: 7px 8px; }
+  .doc-body td code { overflow-wrap: anywhere; }
 }
 @media (max-width: 780px) {
   .bento { grid-template-columns: 1fr 1fr; }
@@ -619,4 +760,10 @@ button.bento-card:hover {
   .docs-nav a { border-left: 0; border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; }
   .hero { padding: 40px 0; }
   .footer { justify-content: center; text-align: center; }
+  /* narrow header: brand row, then wrapped nav row (RU labels are longer) */
+  .topbar { flex-wrap: wrap; row-gap: 8px; padding: 16px 0; }
+  .topbar nav { order: 3; width: 100%; }
+  .nav-links { flex-wrap: wrap; }
+  .nav-links a { padding: 6px 10px; font-size: 13px; }
+  .brand-text span { display: none; }
 }

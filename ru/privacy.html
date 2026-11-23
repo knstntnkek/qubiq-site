@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru" data-root="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qubiq — политика конфиденциальности</title>
+<meta name="description" content="Политика конфиденциальности Qubiq: приложение ничего не собирает — ни аккаунтов, ни аналитики, ни телеметрии. Этот сайт считает посещения анонимной статистикой без cookie.">
+<meta property="og:title" content="Qubiq — политика конфиденциальности">
+<meta property="og:description" content="Приложение Qubiq ничего не собирает — ни аккаунтов, ни аналитики, ни телеметрии.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knstntnkek.github.io/qubiq-site/ru/privacy.html">
+<meta property="og:site_name" content="Qubiq">
+<meta property="og:image" content="https://knstntnkek.github.io/qubiq-site/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://knstntnkek.github.io/qubiq-site/og.png">
+<link rel="canonical" href="https://knstntnkek.github.io/qubiq-site/ru/privacy.html">
+<link rel="alternate" hreflang="en" href="https://knstntnkek.github.io/qubiq-site/privacy.html">
+<link rel="alternate" hreflang="ru" href="https://knstntnkek.github.io/qubiq-site/ru/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://knstntnkek.github.io/qubiq-site/privacy.html">
+<meta property="og:locale" content="ru_RU">
+<link rel="icon" type="image/png" href="../icon.png">
+<link rel="apple-touch-icon" href="../icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=20261123-3">
+</head>
+<body >
+
+<div class="bg-glow teal" aria-hidden="true"></div>
+<div class="bg-glow violet" aria-hidden="true"></div>
+
+<div class="page">
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <img class="brand-icon" src="../icon.png" alt="Логотип Qubiq">
+      <span class="brand-text">
+        <strong>Qubiq</strong>
+        <span>Xray-клиент</span>
+      </span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html#modal-download">Скачать</a></li>
+        <li><a href="docs.html">Документация</a></li>
+        <li><a href="index.html#modal-support">Поддержка</a></li>
+        <li><a href="index.html#modal-documents">Документы</a></li>
+        <li><a class="lang-switch" href="../privacy.html" hreflang="en" lang="en" aria-label="English version">EN</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="docs-layout">
+      <article class="doc-body">
+        <h1>Политика конфиденциальности</h1>
+        <p><em>Обновлено: ноябрь 2026. Коротко: приложение ничего не
+        собирает, а этот сайт считает посещения инструментом статистики
+        без cookie и отслеживания.</em></p>
+
+        <h2>Приложение Qubiq</h2>
+        <p>В Qubiq <strong>нет телеметрии, аналитики, отчётов о сбоях,
+        рекламы и аккаунтов</strong> — и нет наших серверов, так что
+        взламывать и продавать нечего. Приложение выходит в сеть только до
+        <em>ваших</em> VPN-серверов и провайдеров подписок, которых
+        добавляете <em>вы</em>.</p>
+        <ul>
+          <li>Узлы, учётные данные, ключи Age, значения HWID и настройки
+          живут в локальной базе приложения на вашем устройстве.</li>
+          <li>Необязательные журналы включаются по желанию и не покидают
+          устройство, пока вы сами их не отправите — действие
+          <strong>«Отправить журналы»</strong> формирует пакет, в котором
+          учётные данные замаскированы, а URL подписки удалён ещё до
+          записи. При его создании приложение один раз повторно запрашивает
+          этот URL, чтобы зафиксировать статус и заголовки ответа.</li>
+          <li>Обновление подписки отправляет <strong>случайный
+          UUID</strong> на источник (<code>x-hwid</code>) при каждой
+          загрузке — всегда включено, отключить нельзя — и это никогда не
+          аппаратный, рекламный или системный идентификатор; при редиректе
+          на другой домен он снимается.</li>
+          <li>Файл резервной копии намеренно остаётся
+          <strong>незашифрованным</strong> — приложение предупреждает об
+          этом перед записью, а попадает он только в iCloud Drive, папку
+          OneDrive или файл, который вы привязываете сами.</li>
+        </ul>
+        <p><a href="docs.html">Руководство пользователя</a> подробно
+        описывает подписки, HWID и поведение резервных копий.</p>
+
+        <h2>Этот сайт</h2>
+        <ul>
+          <li><strong>Хостинг</strong> — сайт раздаётся через GitHub
+          Pages. Как и любой веб-сервер, GitHub обрабатывает ваш IP-адрес
+          и параметры запроса, чтобы отдать страницы; их сторону описывает
+          <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">политика
+          конфиденциальности GitHub</a>.</li>
+          <li><strong>Статистика</strong> — мы используем <a href="https://www.goatcounter.com">GoatCounter</a>,
+          этичный сервис статистики без cookie. Он записывает факт
+          просмотра страницы вместе с источником перехода, браузером,
+          операционной системой и страной — <strong>IP-адрес не
+          сохраняется, cookie не ставятся и за вами не следят между
+          сайтами</strong>.</li>
+          <li><strong>Ни рекламы, ни трекеров, ни cookie</strong> — поэтому
+          здесь нет баннера согласия: соглашаться не на что.</li>
+        </ul>
+
+        <h2>Изменения и контакты</h2>
+        <p>Если политика изменится, обновление появится на этой странице —
+        это и есть уведомление. Вопросы и запросы:
+        <a href="https://github.com/knstntnkek/qubiq-site/issues">создайте
+        issue в репозитории сайта</a>.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>© 2026 Konstantin Barinov.</span>
+    <div class="footer-links">
+      <a href="docs.html">Документация</a>
+      <a href="https://github.com/knstntnkek/qubiq-site/issues">Ошибки и идеи</a>
+      <a href="privacy.html">Конфиденциальность</a>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../site.js?v=20261123-1"></script>
+<script data-goatcounter="https://konstantin11.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

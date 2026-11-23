@@ -1,5 +1,23 @@
 // Modal hub cards — open/close, ESC and backdrop handling.
 (function () {
+  const LANG = document.documentElement.lang.startsWith("ru") ? "ru" : "en";
+  const ROOT = document.documentElement.dataset.root || "";
+  const S = {
+    mb:        { en: "MB",        ru: "МБ" },
+    published: { en: "published", ru: "опубликовано" },
+  };
+  const t = k => S[k][LANG];
+
+  // language switch: carry the current hash across languages
+  const langSwitch = document.querySelector("a.lang-switch");
+  const syncLangSwitch = () => {
+    if (!langSwitch) return;
+    const base = langSwitch.getAttribute("href").split("#")[0];
+    langSwitch.setAttribute("href", base + (location.hash || ""));
+  };
+  syncLangSwitch();
+  addEventListener("hashchange", syncLangSwitch);
+
   const open = id => {
     const m = document.getElementById(id);
     if (!m) return;
@@ -44,7 +62,7 @@
   const labels = { windows: 'Windows', linux: 'Linux', macos: 'macOS',
                    android: 'Android', ios: 'iOS / iPadOS' };
   const hydrateDownloads = () => {
-    fetch('downloads/release.json')
+    fetch(ROOT + 'downloads/release.json')
       .then(r => r.ok ? r.json() : null)
       .then(m => {
         const files = m && Array.isArray(m.files) ? m.files : [];
@@ -56,10 +74,10 @@
           if (!mm) return null;
           const [, plat, arch, ext] = mm;
           const mb = (f.bytes / 1048576).toFixed(1);
-          return { plat, html: `<a class="dl-row" href="downloads/${f.name}">
+          return { plat, html: `<a class="dl-row" href="${ROOT}downloads/${f.name}">
             <span class="dl-main">
               <span class="dl-name">${labels[plat]}${arch ? ' ' + arch.replaceAll('_', ' ') : ''}</span>
-              <span class="dl-meta">.${ext} · ${mb} MB</span>
+              <span class="dl-meta">.${ext} · ${mb} ${t('mb')}</span>
             </span>
             <span class="dl-arrow">↓</span>
           </a>` };
@@ -82,7 +100,7 @@
         const foot = document.querySelector('#modal-download .modal-foot');
         if (foot && m.tag) {
           foot.insertAdjacentHTML('afterbegin',
-            `<strong>${m.tag}</strong> — published ${String(m.published).slice(0, 10)}.<br>`);
+            `<strong>${m.tag}</strong> — ${t('published')} ${String(m.published).slice(0, 10)}.<br>`);
         }
       })
       .catch(() => {});

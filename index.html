@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-root="">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qubiq — a cross-platform Xray client for all your devices</title>
-<meta name="description" content="Qubiq is a cross-platform Xray-core client for iPhone, iPad, Mac, Android, Windows and Linux — your own servers and subscriptions, no account, no analytics.">
+<meta name="description" content="Qubiq is a cross-platform Xray-core client for iPhone, iPad, Mac, Android, Windows and Linux — your own servers and subscriptions; the app has no account and no analytics.">
 <meta property="og:title" content="Qubiq — one Xray client for every device">
 <meta property="og:description" content="Cross-platform Xray-core client for iOS, macOS, Android, Windows and Linux. Your servers, your routing — no accounts, no telemetry.">
 <meta property="og:type" content="website">
@@ -18,6 +18,10 @@
 <meta name="twitter:description" content="Cross-platform Xray-core client for iOS, macOS, Android, Windows and Linux. Your servers, your routing — no accounts, no telemetry.">
 <meta name="twitter:image" content="https://knstntnkek.github.io/qubiq-site/og.png">
 <link rel="canonical" href="https://knstntnkek.github.io/qubiq-site/">
+<link rel="alternate" hreflang="en" href="https://knstntnkek.github.io/qubiq-site/">
+<link rel="alternate" hreflang="ru" href="https://knstntnkek.github.io/qubiq-site/ru/">
+<link rel="alternate" hreflang="x-default" href="https://knstntnkek.github.io/qubiq-site/">
+<meta property="og:locale" content="en_US">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -29,7 +33,7 @@
   "applicationCategory": "UtilitiesApplication",
   "description": "A cross-platform Xray-core client for phones, tablets and desktops. Bring your own servers or subscription — no accounts, no analytics.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "author": { "@type": "Organization", "name": "Qubiq", "url": "https://knstntnkek.github.io/qubiq-site/" }
+  "author": { "@type": "Person", "name": "Konstantin Barinov" }
 }
 </script>
 <link rel="icon" type="image/png" href="icon.png">
@@ -37,7 +41,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261121-2">
+<link rel="stylesheet" href="style.css?v=20261123-3">
 </head>
 <body>
 
@@ -60,6 +64,7 @@
         <li><a href="docs.html">Documentation</a></li>
         <li><a href="#" data-modal="modal-support">Support</a></li>
         <li><a href="#" data-modal="modal-documents">Documents</a></li>
+        <li><a class="lang-switch" href="ru/index.html" hreflang="ru" lang="ru" aria-label="Русская версия">RU</a></li>
       </ul>
     </nav>
   </header>
@@ -106,7 +111,7 @@
         <span class="bento-cta">Browse the docs →</span>
       </a>
 
-      <a class="bento-card third reveal" href="docs.html#subscriptions">
+      <a class="bento-card third reveal" href="docs.html#subscriptions/send-logs">
         <span class="bento-kicker violet">Diagnostics</span>
         <h2>Send logs</h2>
         <p>One tap shares a diagnostics bundle with credentials redacted
@@ -132,6 +137,44 @@
       </button>
     </section>
 
+    <section class="providers" aria-labelledby="providers-title">
+      <span class="bento-kicker">For providers</span>
+      <h2 id="providers-title">Your panel, inside the app</h2>
+      <p class="providers-sub">Qubiq reads the subscription headers your
+      panel already sends — and a few more. No SDK and nothing to
+      register.</p>
+      <div class="providers-grid">
+        <div class="provider-feature">
+          <h3>Your branding</h3>
+          <p>Themes written for Happ's <code>color-profile</code> apply
+          unchanged; a <code>profile-logo</code> puts your mark on the app
+          bar and group card.</p>
+        </div>
+        <div class="provider-feature">
+          <h3>Plan &amp; support</h3>
+          <p><code>subscription-userinfo</code> shows usage and expiry;
+          <code>announce</code>, <code>support-url</code> and
+          <code>profile-web-page-url</code> put notices and help on the
+          group card.</p>
+        </div>
+        <div class="provider-feature">
+          <h3>Blocked domain? Move it</h3>
+          <p><code>new-url</code> and <code>new-domain</code> migrate
+          subscriptions once the new address answers;
+          <code>fallback-domain</code> adds a mirror for outages.</p>
+        </div>
+        <div class="provider-feature">
+          <h3>One-tap import</h3>
+          <p>An Add to Qubiq button opens a prefilled form — nothing is
+          saved until the user confirms.</p>
+        </div>
+      </div>
+      <div class="providers-cta">
+        <a class="btn btn-primary" href="docs.html#providers">Provider guide</a>
+        <a class="btn btn-ghost" href="docs.html#providers/link-builder">Build an Add to Qubiq link</a>
+      </div>
+    </section>
+
     <section class="steps">
       <div class="step">
         <p class="step-num">01</p>
@@ -142,8 +185,8 @@
       <div class="step">
         <p class="step-num">02</p>
         <h3>Pick a server</h3>
-        <p>Check latency, pin favorites — or just tap the hero button and
-        let the pinned server connect.</p>
+        <p>Check latency and tap a row to pin it — or pin nothing and
+        let automatic selection pick.</p>
       </div>
       <div class="step">
         <p class="step-num">03</p>
@@ -157,6 +200,8 @@
   <footer class="footer">
     <span>© 2026 Konstantin Barinov.</span>
     <div class="footer-links">
+      <a href="docs.html">Documentation</a>
+      <a href="https://github.com/knstntnkek/qubiq-site/issues">Issues</a>
       <a href="privacy.html">Privacy</a>
     </div>
   </footer>
@@ -281,7 +326,7 @@
   </div>
 </div>
 
-<script src="site.js?v=20261121-2"></script>
+<script src="site.js?v=20261123-1"></script>
 <script data-goatcounter="https://konstantin11.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -78,6 +78,9 @@ OR. Fields Qubiq honours:
 | `notification-subs-expire` | Opts into expiry reminders (mobile) |
 | `color-profile` / `profile-logo` | Provider theme and logo — see [Provider branding](subscriptions.md#provider-branding) |
 
+Running a panel? The full reference — validation rules, the Happ colour
+mapping, logo limits — is in [For providers](providers.md).
+
 A blank editable name resolves as `profile-title` → `subscription-name`
 → the `content-disposition` filename → the URL's host; a name you typed
 always wins and survives refreshes. Provider fields are withdrawn when
@@ -184,7 +187,8 @@ nothing saves or connects without your confirmation.
 `qubiq://import?data=…` does the same for node or config content, taking
 Base64, Base64url or percent-encoded text. Links carry credentials in
 plain encoding — providers should treat them like secrets and keep real
-tokens out of examples.
+tokens out of examples. Providers can generate a button with the
+[link builder](providers.md#link-builder).
 
 ## Source actions
 
