@@ -1,7 +1,8 @@
 # Servers & nodes
 
-Servers live right on the home screen — grouped by their subscription,
-under the connect hero. There are three resource types: **nodes**
+Servers live right on the home screen under the connect hero —
+ungrouped manual servers first, then manual groups, then one card per
+subscription. There are three resource types: **nodes**
 (single outbounds), **complete configs** (whole Xray JSON documents) and
 **subscriptions** (the sources that feed the first two).
 
@@ -10,7 +11,9 @@ under the connect hero. There are three resource types: **nodes**
 - **Tap** a row to pin it as the connection target.
 - **Double-tap / double-click** to pin and connect in one move — it
   never disconnects a live tunnel.
-- **Long-press** toggles the favorite where the row supports it.
+- **Favorites** live in the
+  [Servers manager](servers.md#servers-manager) and in a resource's
+  details — not on the home rows.
 - **Pull down** refreshes every source.
 - Group headers **collapse** per source — the choice persists across
   launches; a provider-pinned group stays open. Headers carry the
@@ -71,11 +74,30 @@ Group-header actions open a source's **edit** (name and URL) and
 update entry — see
 [Subscriptions & providers](subscriptions.md).
 
-## About the current build
+## Servers manager
 
-The current UI keeps the surface deliberately thin: group details,
-per-node resource pages, manual groups, arrange mode and the node/Raw
-editors exist in code but have no rendered entry today. What ships is
-the home list, the import flow, and the subscription edit/share pages.
-The underlying services (latency, refresh merge, provider fields) run
-unchanged underneath.
+*Settings → Advanced → Servers* opens the resource manager — the full
+browser behind the home list. Tabs cover **nodes**, **complete
+configs** and **subscriptions**, with a search field over the lists.
+
+- **Sort** — default, name or delay; the choice saves locally, also
+  orders the desktop tray and the final-exit picker, and the default
+  order never shifts from latency updates.
+- **Favorites** — favorite or unfavorite nodes and provider configs
+  and filter a list to favorites; personal Raw has no favorites.
+- **Manual groups** — one level of groups for ordinary manual nodes:
+  create, rename and move nodes via the node menu; dissolving a group
+  keeps its nodes.
+- **Arrange** — reorder via phone long-press handles, desktop drag
+  handles or the up/down buttons, only while search is empty and the
+  favorite filter is off.
+- **Automatic selection** — a button that returns the connection
+  target to automatic.
+
+A resource's details show its protocol, source and delay plus a
+read-only JSON preview — browsing never changes the connection target,
+**use** does. Ordinary nodes edit as JSON; provider configs can be
+viewed, shared, deleted or copied to personal Raw (the copy counts
+toward the three-Raw quota). A subscription's detail shows its current
+mode, plan and cache status, with **Update**, **Edit** and a
+destructive **Delete this source**.

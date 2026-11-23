@@ -23,17 +23,21 @@ early — and duplicate submissions are prevented.
 
 ## The list
 
-An **automatic** entry plus servers grouped by their subscription:
+Your servers as cards — ungrouped manual servers first, then manual
+groups, then one card per subscription:
 
 - **Tap** a row to pin it as the connection target.
 - **Double-tap / double-click** pins it *and* runs the same connect as
   the hero — it never disconnects a live tunnel.
-- **Long-press** toggles the favorite where the row supports it.
 - **Pull down** to refresh every subscription source.
 - **Latency** shows as coloured milliseconds or **signal bars** per the
   node-latency settings' *Latency display* option — three green bars up
   to 300 ms, two amber through 800 ms, one red above; tooltips keep the
   exact ms either way.
+
+Automatic selection is the default while nothing is pinned — return to
+it via **Automatic selection** in *Settings → Advanced → Servers* or
+the desktop tray.
 
 Group headers collapse per source ("N servers" summary, persisted):
 collapsing hides the rows and the announcement while plan info, expiry

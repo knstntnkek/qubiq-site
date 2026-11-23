@@ -65,12 +65,12 @@ Details live in [Servers & nodes](servers.md) and
 
 The home screen is the whole loop:
 
-- Tap a server row to **pin** it — or leave the automatic entry and let
-  Qubiq choose.
+- Tap a server row to **pin** it — or pin nothing and let automatic
+  selection choose.
 - Press the **hero button** — or **double-tap / double-click a row** to
   pin and connect in one move.
 - Connected shows the running server name and an elapsed clock;
-  **long-press** a row to favorite it.
+  favorites live in *Settings → Advanced → Servers*.
 
 Pull the list down to refresh every subscription. The full model is in
 [Connect & system entries](connect.md).

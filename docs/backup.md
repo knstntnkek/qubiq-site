@@ -57,12 +57,12 @@ the original binding rolls back.
 
 Two different destructive operations in Settings:
 
-- **Clean connection resources** — removes nodes, subscriptions, Raw
+- **Clear connection resources** — removes nodes, subscriptions, Raw
   and caches, manual groups, custom routes and Geodata, and old run
   logs. Keeps platform policies, preferences, the login item, backup
   binding, API/automation authorizations and default Geodata.
-- **Wipe all data** — also cancels the login item, clears preferences
-  and rebuilds defaults. Only this removes the local backup binding.
+- **Clear all app data** — also cancels the login item, clears
+  preferences and rebuilds defaults. Only this removes the local backup binding.
 
 Neither deletes external files — iCloud, OneDrive or SAF copies stay
 where they are.

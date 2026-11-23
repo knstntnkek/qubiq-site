@@ -55,12 +55,29 @@ With several entry candidates, new connections spread across them:
 New connections pick by least latency; existing sessions never migrate
 and failures never silently fall back to direct.
 
-## About the current build
+## Where to edit
 
-The standalone routing editor pages — the Smart form, custom rule
-editor, advanced JSON, direct-region and final-exit pickers — exist in
-code but have no rendered entry point today. What applies is the saved
-preference set (defaults plus anything stored before), the tray
-traffic-mode switch, and provider-supplied routing. Geodata keeps
-updating underneath: built-in indexes ship with the app and auto-update
-on their schedule.
+*Settings → Advanced → Routing* opens the routing page: **Smart
+Routing**, **always-VPN** and the ordinary/advanced **custom assets** —
+custom assets share one three-item quota. Using a routing and editing
+it are separate actions.
+
+- **Smart** — the form runs in order: direct & block, proxy
+  connections, DNS, traffic sniffing and a preview. At most one direct
+  region is selected, and it can be explicitly cleared.
+- **Custom routing** — a name and ordered rules (each opens its own
+  rule page; add, delete, drag or move up/down), then proxy
+  connections, DNS and sniffing; import, export and share tools sit at
+  the end. An **advanced JSON editor** covers the same parameters
+  directly.
+- **Sniffing** can't be turned off while FakeDNS is on.
+- **Saving while connected** goes through a confirm-reconnect; while a
+  Raw or provider config is in effect only the ordinary preferences
+  save — the running graph is never rewritten.
+- **Multi-entry** — the round-robin / least-latency choice sits next
+  to the entry count, with a probe URL, 30/60/300-second interval and
+  concurrency options.
+
+Geodata keeps updating underneath: built-in indexes ship with the app
+and auto-update on their schedule; the **routing data** entry reuses
+the same resource library as the Xray tab.

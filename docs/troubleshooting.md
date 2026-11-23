@@ -44,7 +44,7 @@ than pasting raw configs or logs yourself.
 - A provider/Remnawave row runs its **own** routing — app-side Smart
   and traffic-mode preferences don't apply to it.
 - For app-managed runs, the saved Smart Routing set decides direct vs
-  proxied traffic — see [Routing](routing.md) for what persists today.
+  proxied traffic — see [Routing](routing.md).
 
 ## Latency numbers look wrong
 
@@ -87,11 +87,10 @@ A per-source random UUID — no hardware/ad/system identifier — to that
 source's provider only. It goes out with every subscription download;
 there is no opt-out.
 
-**Where did page X go?**
-The current UI is deliberately thin: home (hero + list), the import
-flow, subscription edit/share and Settings. Routing, tunnel and other
-editor pages exist in code but have no rendered entry today — saved
-values still apply. The docs note this where relevant.
+**Where are routing, tunnel and server settings?**
+Under *Settings → Advanced*: **Routing**, **Servers** and **VPN tunnel
+& Xray**. Favorites, manual groups and ordering live in the Servers
+manager.
 
 **iOS can't be installed from the App Store?**
 The `.ipa` requires sideloading or enterprise signing today.

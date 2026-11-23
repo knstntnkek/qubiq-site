@@ -76,7 +76,7 @@ OR. Fields Qubiq honours:
 | `fallback-domain` | Mirror host retried once when the URL fails |
 | `subscriptions-collapse` | `0`/`false` pins the group open |
 | `notification-subs-expire` | Opts into expiry reminders (mobile) |
-| `color-profile` / `profile-logo` | Provider theme and logo — see [Provider branding](#provider-branding) |
+| `color-profile` / `profile-logo` | Provider theme and logo — see [Provider branding](subscriptions.md#provider-branding) |
 
 A blank editable name resolves as `profile-title` → `subscription-name`
 → the `content-disposition` filename → the URL's host; a name you typed
