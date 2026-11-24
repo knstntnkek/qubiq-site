@@ -66,21 +66,16 @@
         makes network connections only to <em>your</em> VPN servers and
         the subscription providers <em>you</em> add.</p>
         <ul>
-          <li>Nodes, credentials, Age keys, HWID values and settings live
-          in the app's local database on your device.</li>
+          <li>Nodes, credentials, Age keys, the HWID and settings live
+          in the app's local storage on your device.</li>
           <li>Optional logs are opt-in and never leave the device except
           when you share them yourself — the <strong>Send logs</strong>
           action produces a bundle with credentials redacted and your
           subscription URL removed before anything is written. Producing
           it re-requests that URL once, live, to dump the response
           status and headers.</li>
-          <li>Subscription refreshes send a per-source <strong>random
-          UUID</strong> (<code>x-hwid</code>) on every download — always
-          on, no opt-out — never a
-          hardware, ad or system identifier — and cross-origin redirects
-          strip it.</li>
           <li>The backup file is deliberately <strong>unencrypted</strong>
-          and holds your credentials, Age keys and HWID. It goes only to
+          and holds your credentials and Age keys. It goes only to
           the iCloud Drive, OneDrive folder or file you bind yourself —
           keep that location private.</li>
         </ul>

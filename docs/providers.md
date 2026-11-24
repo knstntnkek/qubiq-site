@@ -64,7 +64,7 @@ an enabling body comment. Values that contain characters unsafe for headers
 can be sent as `base64:<payload>` (base64url) — Qubiq decodes it transparently.
 
 A field that disappears from a later response is treated as withdrawn and
-cleared; a manual edit that changes the request (URL, Age keys, HWID,
+cleared; a manual edit that changes the request (URL, Age keys,
 User-Agent) clears all provider fields until the next refresh.
 
 ## Field reference
@@ -405,7 +405,7 @@ row:
   header icons in Compact home layout. Update cadence remains in the header.
 - **Diagnostics handoff** — a Send logs bundle that a user shares with
   you holds the response status and headers verbatim, the source's panel
-  fields including HWID, the redacted runtime config and core log tails —
+  fields and the HWID, the redacted runtime config and core log tails —
   never the subscription URL. See [Send logs](subscriptions.md#send-logs).
 - **Plan and expiry** — the card shows usage and the absolute expiry
   date when supplied via `subscription-userinfo`. Capped plans show a thin
@@ -414,12 +414,10 @@ row:
 
 ## Device identity (HWID)
 
-Qubiq always attaches a per-subscription random UUID in the `x-hwid` header
-to subscription downloads so panels can bind devices to accounts. Legacy
-disabled rows are re-enabled on refresh, retaining their saved UUID or generating
-one if absent. It is
-never shown in ordinary UI, never leaves with shared links and never
-appears in Xray configs. `subscription-always-hwid-enable` is not supported;
-transmission is not optional. The identity survives URL edits; deleting and
-recreating the source generates a different identity. See
-[Stored request fields](subscriptions.md#stored-request-fields).
+Qubiq generates one random UUID once, when the app is installed, and
+sends it in the `x-hwid` header with every subscription download — the
+same value for every subscription — so panels can bind devices to
+accounts. It is never shown in ordinary UI, never leaves with shared
+links and never appears in Xray configs; cross-origin redirects strip
+it. `subscription-always-hwid-enable` is not supported; transmission is
+not optional.

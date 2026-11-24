@@ -83,9 +83,9 @@ In the app's local database — nodes, keys, HWID, plan caches. Nothing
 syncs anywhere unless you bind a backup target yourself.
 
 **What does HWID send?**
-A per-source random UUID — no hardware/ad/system identifier — to that
-source's provider only. It goes out with every subscription download;
-there is no opt-out.
+A random UUID generated once when the app is installed — no
+hardware/ad/system identifier. It goes to your subscription providers
+with every subscription download; there is no opt-out.
 
 **Where are routing, tunnel and server settings?**
 Under *Settings → Advanced*: **Routing**, **Servers** and **VPN tunnel

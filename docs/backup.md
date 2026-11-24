@@ -5,7 +5,7 @@ serves both backup and restore — there's no version list, no two-way
 sync and no cloud account to sign into.
 
 > **The backup file is unencrypted.** It contains node credentials,
-> subscription URLs, Age private keys and the HWID — Base64 is encoding,
+> subscription URLs and Age private keys — Base64 is encoding,
 > not secrecy. Choose where it lives accordingly.
 
 ## Targets by platform

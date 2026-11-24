@@ -121,7 +121,7 @@ holds:
 
 - app, platform and connection metadata, live traffic counters and
   per-path probe results
-- the source's panel fields including HWID — **never** its URL
+- the source's panel fields and the HWID — **never** its URL
 - a live re-request of the subscription URL — its response status and
   headers are dumped verbatim
 - the runtime Xray config with credentials `***`-redacted and core file
@@ -164,21 +164,14 @@ until the real URL answers again or you edit the request.
 
 ## Stored request fields
 
-Each source also carries per-source request values — User-Agent, Age key
-pair and the HWID identity — kept from the stored or default state:
+Each source also carries per-source request values — User-Agent and Age
+key pair — kept from the stored or default state:
 
 - **User-Agent** — defaults to a compat UA for panel recognition.
 - **Age keys** — where present, `ageSecretKey` decrypts **locally** and
   `agePublicKey` goes to the server via `X-Age-Public-Key`. Age protects
   the response body only — it doesn't hide the URL or replace HTTPS, and
   failed decryption keeps the old cache.
-- **HWID** — a per-source random UUID sent as `x-hwid` with **every**
-  subscription download; there is no opt-out and
-  `subscription-always-hwid-enable` is not honoured. It's never a
-  hardware, ad or system identifier, never appears in shared links or
-  Xray configs, and cross-origin redirects strip it permanently for that
-  request. The identity survives URL edits — only deleting and
-  recreating the source produces a new one.
 
 ## Add-to-Qubiq links
 
