@@ -47,8 +47,8 @@ actually connect.
 
 ## Add a server
 
-Tap **＋** (or the empty-state *Add server* action) to open the import
-flow:
+Tap **＋** in the header — or, on an empty Home, the Connect circle or
+**Add connection** — to open the import flow:
 
 - **Subscription** — paste the HTTPS URL your provider gave you, or tap
   a provider's `qubiq://add` button which prefills the same form. Panel

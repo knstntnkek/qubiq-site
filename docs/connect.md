@@ -2,9 +2,12 @@
 
 The home screen is a single vertical flow: a **connection hero** on top
 and your **server list** below, inside a pull-to-refresh scroll view.
-The app bar carries the app mark — or the provider logo while a branded
-subscription is in use — plus the active provider profile title, an
-add-server action and the settings action.
+Until you add a subscription, the app bar shows the Qubiq logo and name.
+With subscriptions it shows the active provider's logo — when it sends
+one and its *Provider appearance* is on — or the Qubiq logo, next to the
+provider profile title or *Connect*. The add-server (**＋**) and settings
+actions are always there. The active provider's theme can also color
+Home and the hero — see [Provider branding](subscriptions.md#provider-branding).
 
 ## The hero
 
@@ -52,8 +55,10 @@ Announcements show one line with **More** for the full text — linked
 announcements open their destination, and support actions can hand off
 to Telegram or email.
 
-With no servers, the hero stays and a dashed *No servers yet* card
-offers the add action and a help link.
+With no servers, the hero stays and the list shows a borderless *No
+servers yet* section with **Add connection**. The idle hero then opens
+the same import flow — its tooltip says *Add connection* — while a saved
+complete Raw config still connects directly.
 
 ## What actually runs
 

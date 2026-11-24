@@ -79,6 +79,10 @@ update entry — see
 *Settings → Advanced → Servers* opens the resource manager — the full
 browser behind the home list. Tabs cover **nodes**, **complete
 configs** and **subscriptions**, with a search field over the lists.
+With nothing added yet it shows the same *No servers yet* section with
+**Add connection**, plus **Restore from backup** where backups are
+supported; with subscriptions but no cached servers it offers
+**Updates and sources** and **Add server** instead.
 
 - **Sort** — default, name or delay; the choice saves locally, also
   orders the desktop tray and the final-exit picker, and the default

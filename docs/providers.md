@@ -88,8 +88,8 @@ User-Agent) clears all provider fields until the next refresh.
 | `fallback-domain` | header / comment | Mirror host retried once when the URL fails |
 | `subscriptions-collapse` | header / comment | `0` or `false` pins the group open against manual collapse |
 | `notification-subs-expire` | header / comment | Opt-in flag for expiry reminders |
-| `color-profile` | header / comment | Provider theme on the app palette while the subscription is in use |
-| `profile-logo` | header / comment | Provider logo on the app bar, group card and details page |
+| `color-profile` | header / comment | Happ theme for Home, the Connect circle and the provider's own rows while the subscription is in use |
+| `profile-logo` | header / comment | Provider logo in the Home header, on its source card and details page |
 
 ### `profile-title`
 
@@ -248,74 +248,73 @@ Reminders are inexact alarms — no special alarm permission is requested.
 
 ### `color-profile`
 
-A JSON object restyling the app while this subscription is in use, e.g.
+A [Happ theme](https://www.happ.su/main/dev-docs/app-management) is sent unchanged, for example
 `color-profile: {"buttonColor":"#1E3AFF","backgroundColors":["#0B1020","#1A2340"]}`.
-Two key families are accepted:
+Send plain JSON, or `base64:` followed by base64-encoded UTF-8 JSON; the
+profile is capped at 16 KB after decoding. Keys are case-sensitive and
+colors are `#RRGGBB` or alpha-last `#RRGGBBAA`. Invalid fields and
+unknown keys are ignored; malformed JSON is ignored as a whole.
 
-- **Happ `color-profile` keys** — themes authored for Happ apply
-  unchanged. Every Happ key is an alias onto a palette slot, and several
-  keys can share one target — a canonical slot wins over every alias
-  pointing at it:
+| Happ key | Qubiq role (hex unless noted) |
+|---|---|
+| `backgroundColors` | Ordered hex list; Home gradient and canvas. A single stop is solid. |
+| `backgroundGradientRotationAngle` | Finite number; accepted, not applied. |
+| `backgroundGradientColorIntensity` | Finite number; accepted, not applied. |
+| `backgroundImageType` | String; ignored (no matching artwork). |
+| `elipseColors` | Hex list; ignored (no matching artwork). |
+| `buttonImageType` | String; ignored (no matching artwork). |
+| `buttonColor` | Connect circle fill. |
+| `buttonTextColor` | Connect circle status and server name. |
+| `buttonTimerColor` | Connect circle elapsed timer. |
+| `powerIconColor` | Connect circle power icon. |
+| `supportIconColor` | Provider Support icon. |
+| `profileWebPageIconColor` | Provider Website icon. |
+| `serverRowBackgroundColor` | Normal provider server row. |
+| `selectedServerRowColor` | Selected or running provider server row. |
+| `serverRowTitleTextColor` | Provider server name. |
+| `serverRowSubTitleTextColor` | Provider server subtitle. |
+| `serverRowChevronColor` | Provider server-row chevron where shown. |
+| `subsHeaderColor` | Provider source header fill. |
+| `subHeaderButtonColor` | Provider source-header actions without a more specific key. |
+| `disclosureHeaderTextColor` | Provider group heading. |
+| `disclosureSubHeaderTextColor` | Provider group metadata. |
+| `subscriptionInfoBackgroundColor` | Package and usage info background. |
+| `subscriptionInfoTextColor` | Package and usage info text. |
+| `subscriptionTrafficBackgroundColor` | Usage meter track. |
+| `topBarButtonsColor` | Home toolbar action icons. |
+| `additionalOptionsButtonColor` | Provider source overflow icon. |
+| `settingsControlsTintColor` | Selected Settings controls. |
 
-  | Happ key | Palette slot |
-  |---|---|
-  | `backgroundColors` (list; first and last stops) | `background` + `pageBackgroundEnd` |
-  | `buttonColor` | `primarySolid` |
-  | `buttonTextColor` | `primaryForeground` |
-  | `settingsControlsTintColor`, `subHeaderButtonColor` | `primary` |
-  | `powerIconColor`, `supportIconColor` | `accentForeground` |
-  | `serverRowBackgroundColor` | `card` |
-  | `serverRowTitleTextColor` | `cardForeground` |
-  | `selectedServerRowColor` | `selectedSurface` |
-  | `serverRowSubTitleTextColor`, `subscriptionInfoTextColor`, `disclosureSubHeaderTextColor`, `profileWebPageIconColor` | `mutedForeground` |
-  | `serverRowChevronColor`, `topBarButtonsColor`, `additionalOptionsButtonColor` | `mutedStrong` |
-  | `disclosureHeaderTextColor` | `foreground` |
-  | `subsHeaderColor` | `insetSurface` |
-  | `subscriptionInfoBackgroundColor`, `subscriptionTrafficBackgroundColor` | `muted` |
+A valid profile in the HTTP header wins over a body profile as a whole.
+A header `resetcolors` withdraws the theme even if the body carries a
+valid profile; a body `resetcolors` applies when the header has no valid
+profile. Removing the field also withdraws the theme on the next
+successful refresh.
 
-  Happ layout keys with no Qubiq counterpart — ellipses, button
-  images/timers, gradient angle and intensity — are ignored, so an
-  existing Happ theme degrades gracefully.
-- **Qubiq palette slots** — the semantic names on `AppPalette`:
-  `background`, `pageBackgroundEnd`, `foreground`, `card`,
-  `cardForeground`, `popover`, `popoverForeground`, `primary`,
-  `primaryHover`, `primaryText`, `primarySolid`, `primarySolidHover`,
-  `primaryForeground`, `surfaceHover`, `secondary`, `secondaryForeground`,
-  `muted`, `mutedForeground`, `mutedStrong`, `insetSurface`, `accent`,
-  `accentForeground`, `border`, `borderStrong`, `input`, `ring`,
-  `selection`, `switchUnchecked`, `header`, `brand`, `sidebar`,
-  `sidebarForeground`, `sidebarPrimary`, `sidebarPrimaryForeground`,
-  `sidebarAccent`, `sidebarAccentForeground`, `sidebarBorder`,
-  `sidebarRing` and `selectedSurface`. A canonical slot always wins over
-  a Happ alias mapping to the same slot.
+There are no Qubiq-only keys. The older flat Qubiq palette keys
+(`background`, `primary`, `card` …) are ignored, even mixed into a Happ
+profile. To migrate a legacy Home gradient, replace `background` and
+`pageBackgroundEnd` with `backgroundColors`. Palettes cached in the old
+format no longer apply; the next successful refresh loads your Happ
+profile.
 
-Some slots paint more than one element and cannot be split:
-`accentForeground` colors the disconnected connect button's power icon
-and label *and* the help-strip action icons and pill text — setting it
-yellow turns all of them yellow; the connected button instead takes
-`primary` for its face, border and glow with `primaryForeground` for its
-label. `insetSurface` is the help strip's background, which is what
-`subsHeaderColor` actually recolors.
-
-Values are hex only; the payload is capped at 16 KB, unknown keys are
-skipped and a malformed document is ignored entirely. The literal
-`color-profile: resetcolors` withdraws the profile, as does removing the
-field.
-
-Branding belongs to the subscription in use — the connected provider
-profile, otherwise the selected source or server, otherwise the only
-branded provider. Switching to another subscription swaps the theme;
-deleting the source reverts it. A profile that only sets accents merges
-into the user's light and dark themes; a profile that redefines surfaces
-renders one coherent look under both. Error, status and chart colors are
-never overridable, and text colors missing from the theme derive from
-the provided surfaces so contrast is preserved.
+The theme follows the subscription in use — the running provider,
+otherwise the selected source or server, otherwise the only branded
+provider. Home chrome, the Connect circle and Settings controls take the
+active profile; only that provider's source headers, actions, rows and
+usage info use its row colors — other subscriptions and manual servers
+keep their own look. Missing colors fall back to Qubiq's theme or are
+derived from the surrounding surface, and low-contrast text may be
+adjusted. A profile that supplies a backdrop looks the same in light and
+dark mode. Status, warning, error and chart colors always stay Qubiq's.
 
 ### `profile-logo`
 
-The provider's mark, shown in the connect app bar in place of the shield
-icon, on the group card and in the details page's provider section.
-Two transports:
+While **Provider appearance** is on, the active provider's logo replaces
+the Qubiq logo in the Home header; otherwise Home shows the Qubiq logo.
+The logo also appears on the provider's source card while its appearance
+is on, and in the provider appearance section of the subscription
+details. Two transports:
 
 - `data:image/png|jpeg|webp|gif;base64,…` — an inline image decoded at
   parse time.

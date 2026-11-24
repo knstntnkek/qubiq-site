@@ -92,14 +92,15 @@ request URL.
 A provider can restyle the app while its subscription is in use — two
 response fields drive it:
 
-- **`color-profile`** — a JSON theme applied to the app palette. Themes
-  authored for Happ apply unchanged; Qubiq also accepts its own semantic
-  palette slots directly (a canonical slot wins over a Happ alias for
-  the same slot). Hex values only, 16 KB cap, unknown keys skipped,
-  malformed documents ignored. The literal `resetcolors` — or removing
-  the field — withdraws the theme.
-- **`profile-logo`** — the provider's mark on the app bar, the group
-  card and the details page. Inline `data:` images or HTTPS URLs
+- **`color-profile`** — a [Happ theme](providers.md#color-profile),
+  sent unchanged as JSON or `base64:` JSON. It colors Home, the Connect
+  circle and Settings controls, plus the provider's own headers, rows and
+  usage info — other subscriptions and manual servers keep their look.
+  Hex values only, 16 KB cap; unknown keys, old Qubiq-only palette keys
+  and malformed JSON are ignored. The literal `resetcolors` — or
+  removing the field — withdraws the theme.
+- **`profile-logo`** — the provider's mark in the Home header in place
+  of the Qubiq logo, on its source card and on the details page. Inline `data:` images or HTTPS URLs
   (≤512 KB, format-verified, cached across refreshes; a failed refetch
   keeps the cache, a withdrawn declaration clears it).
 
