@@ -308,6 +308,58 @@ derived from the surrounding surface, and low-contrast text may be
 adjusted. A profile that supplies a backdrop looks the same in light and
 dark mode. Status, warning, error and chart colors always stay Qubiq's.
 
+### Example themes
+
+Seven complete profiles to send as they are or adapt to your brand.
+Each passes Qubiq's parser and keeps text at 4.5:1 contrast or better
+on its own surfaces (3:1 for icons). Each also sets its own backdrop, so
+it looks the same in light and dark mode — light themes stay light on a
+dark-mode device. Send the JSON on one line as the `color-profile`
+value; the color strip above each block is a rough sketch, not an app
+screenshot.
+
+**Midnight Indigo** — dark: deep navy with an electric-blue button; the full version of the example above.
+
+```json
+{"backgroundColors":["#0B1020","#1A2340"],"buttonColor":"#1E3AFF","buttonTextColor":"#FFFFFF","buttonTimerColor":"#C7D2FE","powerIconColor":"#FFFFFF","supportIconColor":"#818CF8","profileWebPageIconColor":"#818CF8","serverRowBackgroundColor":"#141B33","selectedServerRowColor":"#1F2A55","serverRowTitleTextColor":"#E8ECFF","serverRowSubTitleTextColor":"#9AA5D1","serverRowChevronColor":"#6B76A8","subsHeaderColor":"#111830","subHeaderButtonColor":"#A5B4FC","disclosureHeaderTextColor":"#F1F4FF","disclosureSubHeaderTextColor":"#9AA5D1","subscriptionInfoBackgroundColor":"#182040","subscriptionInfoTextColor":"#C7D2FE","subscriptionTrafficBackgroundColor":"#2A3566","topBarButtonsColor":"#C7D2FE","additionalOptionsButtonColor":"#8A95C4","settingsControlsTintColor":"#4F6BFF"}
+```
+
+**Aurora Teal** — dark: calm teal with dark text on the button.
+
+```json
+{"backgroundColors":["#04161A","#0B2E33"],"buttonColor":"#14B8A6","buttonTextColor":"#04201D","buttonTimerColor":"#053B35","powerIconColor":"#04201D","supportIconColor":"#5EEAD4","profileWebPageIconColor":"#5EEAD4","serverRowBackgroundColor":"#0A2226","selectedServerRowColor":"#0F3A3A","serverRowTitleTextColor":"#E6FFFB","serverRowSubTitleTextColor":"#8CC7C0","serverRowChevronColor":"#5E9A94","subsHeaderColor":"#081D21","subHeaderButtonColor":"#5EEAD4","disclosureHeaderTextColor":"#F0FFFC","disclosureSubHeaderTextColor":"#8CC7C0","subscriptionInfoBackgroundColor":"#0D2A2E","subscriptionInfoTextColor":"#B7F0E8","subscriptionTrafficBackgroundColor":"#16454A","topBarButtonsColor":"#B7F0E8","additionalOptionsButtonColor":"#7FB8B1","settingsControlsTintColor":"#2DD4BF"}
+```
+
+**Ember** — dark: warm charcoal-brown with an orange accent.
+
+```json
+{"backgroundColors":["#1A0B07","#2E140C"],"buttonColor":"#F97316","buttonTextColor":"#1F0A02","buttonTimerColor":"#4A1D05","powerIconColor":"#1F0A02","supportIconColor":"#FDBA74","profileWebPageIconColor":"#FDBA74","serverRowBackgroundColor":"#24110B","selectedServerRowColor":"#3B1A0E","serverRowTitleTextColor":"#FFF1E8","serverRowSubTitleTextColor":"#D2A48C","serverRowChevronColor":"#A2735C","subsHeaderColor":"#200F09","subHeaderButtonColor":"#FDBA74","disclosureHeaderTextColor":"#FFF5EE","disclosureSubHeaderTextColor":"#D2A48C","subscriptionInfoBackgroundColor":"#2C150C","subscriptionInfoTextColor":"#FED7AA","subscriptionTrafficBackgroundColor":"#4A2414","topBarButtonsColor":"#FED7AA","additionalOptionsButtonColor":"#C08C72","settingsControlsTintColor":"#FB923C"}
+```
+
+**Royal Violet** — dark: purple gradient with lavender details.
+
+```json
+{"backgroundColors":["#140B24","#2A1448"],"buttonColor":"#7C3AED","buttonTextColor":"#FFFFFF","buttonTimerColor":"#EDE9FE","powerIconColor":"#FFFFFF","supportIconColor":"#C4B5FD","profileWebPageIconColor":"#C4B5FD","serverRowBackgroundColor":"#1C1233","selectedServerRowColor":"#2E1D54","serverRowTitleTextColor":"#F5F0FF","serverRowSubTitleTextColor":"#B1A2D6","serverRowChevronColor":"#7E6FA8","subsHeaderColor":"#180F2C","subHeaderButtonColor":"#C4B5FD","disclosureHeaderTextColor":"#FAF7FF","disclosureSubHeaderTextColor":"#B1A2D6","subscriptionInfoBackgroundColor":"#22173D","subscriptionInfoTextColor":"#DDD6FE","subscriptionTrafficBackgroundColor":"#3A2766","topBarButtonsColor":"#DDD6FE","additionalOptionsButtonColor":"#9C8CC8","settingsControlsTintColor":"#A78BFA"}
+```
+
+**Neon Night** — dark: near-black with a cyan button and magenta icons.
+
+```json
+{"backgroundColors":["#07070F","#140A2A"],"buttonColor":"#00E5FF","buttonTextColor":"#00161A","buttonTimerColor":"#004652","powerIconColor":"#00161A","supportIconColor":"#FF2BD6","profileWebPageIconColor":"#00E5FF","serverRowBackgroundColor":"#0F0D1F","selectedServerRowColor":"#1E1240","serverRowTitleTextColor":"#F2F7FF","serverRowSubTitleTextColor":"#9C9BC7","serverRowChevronColor":"#FF2BD6","subsHeaderColor":"#0C0A1A","subHeaderButtonColor":"#FF5CE1","disclosureHeaderTextColor":"#FFFFFF","disclosureSubHeaderTextColor":"#9C9BC7","subscriptionInfoBackgroundColor":"#151030","subscriptionInfoTextColor":"#7DF3FF","subscriptionTrafficBackgroundColor":"#2A1F55","topBarButtonsColor":"#7DF3FF","additionalOptionsButtonColor":"#FF5CE1","settingsControlsTintColor":"#00E5FF"}
+```
+
+**Arctic Light** — light: cool white-blue with white server rows.
+
+```json
+{"backgroundColors":["#F4F8FC","#DDEBF8"],"buttonColor":"#0369A1","buttonTextColor":"#FFFFFF","buttonTimerColor":"#E0F2FE","powerIconColor":"#FFFFFF","supportIconColor":"#0369A1","profileWebPageIconColor":"#0369A1","serverRowBackgroundColor":"#FFFFFF","selectedServerRowColor":"#E0F0FB","serverRowTitleTextColor":"#0B2540","serverRowSubTitleTextColor":"#4F6780","serverRowChevronColor":"#8195AA","subsHeaderColor":"#EAF2FA","subHeaderButtonColor":"#0369A1","disclosureHeaderTextColor":"#0B2540","disclosureSubHeaderTextColor":"#4F6780","subscriptionInfoBackgroundColor":"#E6F0FA","subscriptionInfoTextColor":"#164E75","subscriptionTrafficBackgroundColor":"#C8DCEF","topBarButtonsColor":"#164E75","additionalOptionsButtonColor":"#5D7894","settingsControlsTintColor":"#0284C7"}
+```
+
+**Desert Sand** — light: cream and beige with an amber-brown accent.
+
+```json
+{"backgroundColors":["#FBF7F0","#EFE3CF"],"buttonColor":"#B45309","buttonTextColor":"#FFFFFF","buttonTimerColor":"#FEF3C7","powerIconColor":"#FFFFFF","supportIconColor":"#92400E","profileWebPageIconColor":"#92400E","serverRowBackgroundColor":"#FFFDF8","selectedServerRowColor":"#F6E9D2","serverRowTitleTextColor":"#2B1D0E","serverRowSubTitleTextColor":"#6B5A45","serverRowChevronColor":"#A3907A","subsHeaderColor":"#F7EFE1","subHeaderButtonColor":"#92400E","disclosureHeaderTextColor":"#2B1D0E","disclosureSubHeaderTextColor":"#6B5A45","subscriptionInfoBackgroundColor":"#F4EADA","subscriptionInfoTextColor":"#78350F","subscriptionTrafficBackgroundColor":"#E6D3B3","topBarButtonsColor":"#78350F","additionalOptionsButtonColor":"#8C7760","settingsControlsTintColor":"#D97706"}
+```
+
 ### `profile-logo`
 
 While **Provider appearance** is on, the active provider's logo replaces

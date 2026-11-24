@@ -720,6 +720,40 @@ button.bento-card:hover {
   border-color: rgba(52,208,180,.4);
 }
 
+.theme-example { margin-bottom: 14px; }
+.theme-example pre { margin-bottom: 10px; }
+.theme-example pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+.theme-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.tp-power {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+.tp-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+.tp-ms { font-size: 10px; opacity: .85; }
+.tp-switch { width: 34px; height: 20px; flex: none; border-radius: 999px; }
+
 /* entrance animation — subtle, not Happ's staggered cards */
 .reveal { animation: rise .5s ease-out backwards; }
 .reveal:nth-child(2) { animation-delay: .06s; }

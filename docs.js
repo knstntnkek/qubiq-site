@@ -41,6 +41,7 @@ const I18N = {
       copyHtml: "Copy HTML",
       copied: "Copied",
       addBtn: "Add to Qubiq",
+      copyJson: "Copy JSON",
     },
   },
   ru: {
@@ -77,6 +78,7 @@ const I18N = {
       copyHtml: "Копировать HTML",
       copied: "Скопировано",
       addBtn: "Добавить в Qubiq",
+      copyJson: "Копировать JSON",
     },
   },
 };
@@ -235,6 +237,7 @@ async function render() {
 
   const lb = bodyEl.querySelector("[data-link-builder]");
   if (lb) mountLinkBuilder(lb);
+  mountThemeExamples(bodyEl);
 
   // prev / next footer
   const i = PAGES.findIndex(p => p.slug === page);
@@ -344,26 +347,127 @@ function mountLinkBuilder(el) {
     out.hidden = false;
   }
 
-  function wireCopy(btn, code) {
-    btn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(code.textContent);
-        const label = btn.textContent;
-        btn.textContent = L.copied;
-        setTimeout(() => { btn.textContent = label; }, 1500);
-      } catch {
-        const s = getSelection();
-        s.removeAllRanges();
-        s.selectAllChildren(code);
-      }
-    });
-  }
-  wireCopy(copyLink, linkCode);
-  wireCopy(copyHtml, htmlCode);
+  wireCopy(copyLink, linkCode, L.copied);
+  wireCopy(copyHtml, htmlCode, L.copied);
 
   urlInput.addEventListener("input", update);
   nameInput.addEventListener("input", update);
   update();
+}
+
+function wireCopy(btn, code, copiedLabel) {
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(code.textContent);
+      const label = btn.textContent;
+      btn.textContent = copiedLabel;
+      setTimeout(() => { btn.textContent = label; }, 1500);
+    } catch {
+      const s = getSelection();
+      s.removeAllRanges();
+      s.selectAllChildren(code);
+    }
+  });
+}
+
+const HEX_COLOR = /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
+
+// Happ theme JSON blocks get a color preview strip and a Copy button.
+function mountThemeExamples(root) {
+  root.querySelectorAll("pre > code.language-json").forEach(code => {
+    let theme;
+    try { theme = JSON.parse(code.textContent); }
+    catch { return; }
+    if (!theme || typeof theme !== "object" || Array.isArray(theme) ||
+        !Array.isArray(theme.backgroundColors) ||
+        typeof theme.buttonColor !== "string") return;
+
+    // marked leaves a trailing newline inside fenced code; drop it so
+    // the rendered block and the copied JSON stay a single line
+    code.textContent = code.textContent.replace(/\n+$/, "");
+
+    const pick = k =>
+      typeof theme[k] === "string" && HEX_COLOR.test(theme[k])
+        ? theme[k] : null;
+
+    const pre = code.parentElement;
+    const wrap = document.createElement("div");
+    wrap.className = "theme-example";
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+
+    const strip = document.createElement("div");
+    strip.className = "theme-preview";
+    strip.setAttribute("aria-hidden", "true");
+    const stops = theme.backgroundColors.filter(c =>
+      typeof c === "string" && HEX_COLOR.test(c));
+    if (stops.length)
+      strip.style.background = stops.length === 1 ? stops[0]
+        : `linear-gradient(90deg, ${stops.join(", ")})`;
+
+    const chip = () => {
+      const d = document.createElement("div");
+      d.className = "tp-chip";
+      return d;
+    };
+    const rowChip = (bg, name, ms, title, sub) => {
+      const c = chip();
+      c.style.background = bg;
+      const n = document.createElement("span");
+      n.textContent = name;
+      n.style.color = title;
+      const t = document.createElement("span");
+      t.className = "tp-ms";
+      t.textContent = ms;
+      t.style.color = sub;
+      c.append(n, t);
+      strip.appendChild(c);
+    };
+
+    const btnBg = pick("buttonColor"), pwr = pick("powerIconColor");
+    if (btnBg && pwr) {
+      const c = document.createElement("div");
+      c.className = "tp-power";
+      c.style.background = btnBg;
+      c.style.color = pwr;
+      c.textContent = "⏻";
+      strip.appendChild(c);
+    }
+    const hdr = pick("subsHeaderColor"), hdrTxt = pick("disclosureHeaderTextColor");
+    if (hdr && hdrTxt) {
+      const c = chip();
+      c.style.background = hdr;
+      c.style.color = hdrTxt;
+      c.textContent = "Aa";
+      strip.appendChild(c);
+    }
+    const sel = pick("selectedServerRowColor"),
+      rowTitle = pick("serverRowTitleTextColor"),
+      rowSub = pick("serverRowSubTitleTextColor");
+    if (sel && rowTitle && rowSub)
+      rowChip(sel, "Amsterdam", "38 ms", rowTitle, rowSub);
+    const rowBg = pick("serverRowBackgroundColor");
+    if (rowBg && rowTitle && rowSub)
+      rowChip(rowBg, "Frankfurt", "52 ms", rowTitle, rowSub);
+    const tint = pick("settingsControlsTintColor");
+    if (tint) {
+      const sw = document.createElement("div");
+      sw.className = "tp-switch";
+      sw.style.background = tint;
+      strip.appendChild(sw);
+    }
+
+    const copyRow = document.createElement("div");
+    copyRow.className = "link-builder-actions";
+    const copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.textContent = T.lb.copyJson;
+    copyRow.appendChild(copyBtn);
+
+    wrap.insertBefore(strip, pre);
+    wrap.appendChild(copyRow);
+    wireCopy(copyBtn, code, T.lb.copied);
+  });
 }
 
 function scrollToAnchor(anchor) {
