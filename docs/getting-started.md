@@ -13,7 +13,7 @@ Packages are published on this site — see the
 | --- | --- | --- |
 | iPhone / iPad | `Qubiq-ios.ipa` | iOS / iPadOS 16+, sideloading or enterprise signing |
 | macOS | `Qubiq-macos-universal.dmg` | macOS 13+, Apple silicon or Intel |
-| Android | `Qubiq-android-universal.apk` | Android 10+, arm64-v8a or x86_64 |
+| Android | `Qubiq-android-arm64.apk` | Android 10+, arm64-v8a |
 | Windows | `Qubiq-windows-amd64.exe` / `.zip` · `Qubiq-windows-arm64.exe` / `.zip` | Windows 10 20H2+ (x64) or Windows 11 (ARM64) |
 | Linux | `Qubiq-linux-x86_64.deb` / `.rpm` / `.zip` · `Qubiq-linux-aarch64.deb` / `.rpm` / `.zip` | Linux 5.3+, glibc 2.39+ |
 
