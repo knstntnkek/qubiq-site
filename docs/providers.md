@@ -64,24 +64,19 @@ an enabling body comment. Values that contain characters unsafe for headers
 can be sent as `base64:<payload>` (base64url) — Qubiq decodes it transparently.
 
 A field that disappears from a later response is treated as withdrawn and
-cleared; a manual edit that changes the request (URL, Age keys,
-User-Agent) clears all provider fields until the next refresh.
+cleared; a manual edit that changes the request (URL or Age keys)
+clears all provider fields until the next refresh.
 
 ## Field reference
 
 | Field | Sent as | What the user sees |
 |---|---|---|
 | `profile-title` | header / comment | Names the subscription when the user did not type a name |
-| `subscription-name` | header / comment | Title fallback after `profile-title` |
 | `content-disposition` | header / comment | Filename supplies the last provider-title fallback |
-| `profile-description` | header / comment | Secondary text below the provider title |
 | `subscription-userinfo` | header | Plan usage and expiry on the group card |
 | `announce` | header / comment | Announcement line in the group card |
-| `announce-url` | header / comment | Makes the announcement open a web or Telegram destination |
 | `support-url` | header / comment | Support button in the group card |
-| `support-email` | header / comment | Email support fallback when `support-url` is missing or invalid |
 | `profile-web-page-url` | header / comment | Globe button opening the provider's website |
-| `homepage` | header / comment | Website fallback when `profile-web-page-url` is missing or invalid |
 | `profile-update-interval` | header / comment | Per-source auto-refresh cadence, shown in the header |
 | `new-url` | header / comment | Subscription address replaced automatically |
 | `new-domain` | header / comment | Subscription host rewritten automatically |
@@ -94,7 +89,7 @@ User-Agent) clears all provider fields until the next refresh.
 ### `profile-title`
 
 The display name of the subscription. Qubiq resolves a name in this order:
-the name the user typed, then `profile-title`, then `subscription-name`, then
+the name the user typed, then `profile-title`, then
 the `content-disposition` filename, then the URL's host and finally the raw
 URL. These fallbacks apply when adding a source or clearing its editable
 name; refresh keeps the stored name, including custom names.
@@ -107,14 +102,6 @@ are stripped. Malformed percent escapes or UTF-8 in `filename*` parameters, and
 malformed Base64 metadata, are ignored without failing the subscription refresh.
 Plain `filename=` text is kept raw, including non-ASCII characters and literal
 percent signs; it is not percent-decoded or validated as URL encoding.
-Header precedence is applied per field before resolving
-fallbacks, so a body `profile-title` still outranks a header `subscription-name`.
-
-### `profile-description`
-
-Plain text or `base64:` text, trimmed and limited to 4,096 Unicode characters,
-like `announce`. It appears below the subscription title as up to two lines
-of secondary text. Without a description, the header keeps its existing layout.
 
 ### `subscription-userinfo`
 
@@ -132,12 +119,6 @@ Provider text rendered in the group card's help strip, e.g. maintenance
 notices or migration warnings. Plain or `base64:` text is trimmed and
 limited to 4,096 Unicode characters.
 
-### `announce-url`
-
-An http/https or `tg:` URL makes the announcement text tappable. Invalid or
-absent URLs leave the announcement as ordinary text; a URL without text
-does not add a standalone action. `mailto:` is not accepted for announcements.
-
 ### `support-url`
 
 An http/https, `tg:` or `mailto:` URL behind the help-strip support button —
@@ -146,14 +127,9 @@ the provider's help desk, bot, email or docs page. Other schemes, including
 are handed to an external application on every platform; an installed
 handler is required. Provider action URLs are limited to 2,048 characters.
 HTTP(S) action URLs require a host and no userinfo; an explicit port must be
-1–65535. An invalid primary URL does not suppress its website or email fallback.
-
-### `support-email`
-
-A plain email address (or a `base64:`-encoded address) supplies a `mailto:`
-support action only when there is no valid `support-url`. Display names,
-multiple addresses and query/header suffixes are not accepted.
-For this field and the address path of a `mailto:` support URL, domains must
+1–65535.
+For the address path of a `mailto:` support URL, display names,
+multiple addresses and query/header suffixes are not accepted. Domains must
 have at least two ASCII labels, each 1–63 alphanumeric/hyphen characters without
 leading or trailing hyphens, and total at most 253 characters. The TLD must be
 alphabetic (at least two characters) or an `xn--` A-label. Providers must send
@@ -167,11 +143,6 @@ local part. This email validation does not change the separate `new-domain` /
 An http/https URL behind the help-strip globe button — the provider's
 website or personal cabinet. Unlike `support-url`, which is meant for
 help, this is the general provider page.
-
-### `homepage`
-
-An http/https website fallback, used only when `profile-web-page-url` is
-absent or invalid. It accepts plain URLs or the same `base64:` encoding.
 
 ### `profile-update-interval`
 
@@ -278,7 +249,7 @@ unknown keys are ignored; malformed JSON is ignored as a whole.
 | `subHeaderButtonColor` | Provider source-header actions without a more specific key. |
 | `disclosureHeaderTextColor` | Provider group heading. |
 | `disclosureSubHeaderTextColor` | Provider group metadata. |
-| `subscriptionInfoBackgroundColor` | Package and usage info background. |
+| `subscriptionInfoBackgroundColor` | Package and usage info background, including the Compact Home plan band. |
 | `subscriptionInfoTextColor` | Package and usage info text. |
 | `subscriptionTrafficBackgroundColor` | Usage meter track. |
 | `topBarButtonsColor` | Home toolbar action icons. |
@@ -399,10 +370,12 @@ row:
   launches. A provider-pinned group (above) cannot be folded.
 - **Pull-to-refresh** — pulling the home list refreshes every source,
   applying all provider fields in one pass.
-- **Source card** — the expanded card shows a one-line announcement with
-  More for the full text. Support and Website (when provided) and Send
-  logs stay visible even while collapsed: as labeled chips by default or
-  header icons in Compact home layout. Update cadence remains in the header.
+- **Source card** — standard cards show a one-line announcement with
+  More for the full text; compact cards center it over up to three
+  lines, with More only when it does not fit. Support and Website (when
+  provided) and Send logs stay visible even while collapsed: as labeled
+  chips by default, or as icons in the Compact plan band and header.
+  The last check and update cadence are visible in both layouts.
 - **Diagnostics handoff** — a Send logs bundle that a user shares with
   you holds the response status and headers verbatim, the source's panel
   fields and the HWID, the redacted runtime config and core log tails —

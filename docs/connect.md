@@ -46,14 +46,17 @@ Group headers collapse per source ("N servers" summary, persisted):
 collapsing hides the rows and the announcement while plan info, expiry
 and the provider actions — **Support**, **Send logs**, **Website** —
 stay reachable as labeled chips. **Settings → Appearance → Compact home
-layout** moves those actions to labeled header icons and tightens
-spacing; it's off by default, local to the device and excluded from
-backups. A provider-pinned group stays expanded. Headers carry the
+layout** reshapes the card instead: **Refresh**, **Send logs** and
+**More** sit beside the provider name in the header with the last check
+and update cadence beneath it, and a separate plan band carries a usage
+pill — filled in proportion for capped plans, ∞ for unlimited — the
+expiry and the **Support** and **Website** actions. It's off by default, local to the
+device and excluded from backups. A provider-pinned group stays expanded. Headers carry the
 provider's logo while its branding is active, the last-check time and
-update cadence; provider descriptions appear under the title.
-Announcements show one line with **More** for the full text — linked
-announcements open their destination, and support actions can hand off
-to Telegram or email.
+update cadence.
+Standard announcements show one line with **More** for the full text;
+compact ones center up to three lines with **More** only when the text
+does not fit, and support actions can hand off to Telegram or email.
 
 With no servers, the hero stays and the list shows a borderless *No
 servers yet* section with **Add connection**. The idle hero then opens

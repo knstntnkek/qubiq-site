@@ -61,16 +61,11 @@ OR. Fields Qubiq honours:
 | Field | What you see |
 | --- | --- |
 | `profile-title` | Names the source unless you typed a name |
-| `subscription-name` | Title fallback after `profile-title` |
 | `content-disposition` | Filename supplies the last title fallback |
-| `profile-description` | Secondary text under the provider title |
 | `subscription-userinfo` | Plan usage + expiry on the group card |
 | `announce` | Announcement line in the group card |
-| `announce-url` | Makes the announcement tappable (web or Telegram) |
 | `support-url` | Support action (web, Telegram or email) |
-| `support-email` | Email fallback when `support-url` is absent |
 | `profile-web-page-url` | Website action to the provider's page |
-| `homepage` | Website fallback when `profile-web-page-url` is absent |
 | `profile-update-interval` | Per-source refresh cadence (1–720 h) |
 | `new-url` / `new-domain` | Subscription address migrates automatically |
 | `fallback-domain` | Mirror host retried once when the URL fails |
@@ -81,11 +76,11 @@ OR. Fields Qubiq honours:
 Running a panel? The full reference — validation rules, the Happ colour
 mapping, logo limits — is in [For providers](providers.md).
 
-A blank editable name resolves as `profile-title` → `subscription-name`
-→ the `content-disposition` filename → the URL's host; a name you typed
+A blank editable name resolves as `profile-title` →
+the `content-disposition` filename → the URL's host; a name you typed
 always wins and survives refreshes. Provider fields are withdrawn when
 they disappear from a later response, and cleared when you change the
-request URL.
+request URL or Age keys.
 
 ## Provider branding
 
@@ -162,16 +157,20 @@ the real domain first, a pending migration target outranks it, and a
 mirror response can itself declare migrations. The fallback stays armed
 until the real URL answers again or you edit the request.
 
-## Stored request fields
+## User-Agent & Age keys
 
-Each source also carries per-source request values — User-Agent and Age
-key pair — kept from the stored or default state:
+Every download — subscriptions, Geodata and other fetches alike — sends
+the app's own live User-Agent:
+`Happ/4.0 Qubiq/<app version> (<package>; build:<build>; <platform>)`.
+The `Happ/4.0` prefix is kept so panels recognise the client; there is
+no per-source or global control, and an upgraded app always sends its
+current identity.
 
-- **User-Agent** — defaults to a compat UA for panel recognition.
-- **Age keys** — where present, `ageSecretKey` decrypts **locally** and
-  `agePublicKey` goes to the server via `X-Age-Public-Key`. Age protects
-  the response body only — it doesn't hide the URL or replace HTTPS, and
-  failed decryption keeps the old cache.
+Age keys are the one per-source request value: where present,
+`ageSecretKey` decrypts **locally** and `agePublicKey` goes to the
+server via `X-Age-Public-Key`. Age protects the response body only —
+it doesn't hide the URL or replace HTTPS, and failed decryption keeps
+the old cache.
 
 ## Add-to-Qubiq links
 
