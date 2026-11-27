@@ -1,12 +1,47 @@
 {
-  "tag": "main",
-  "build": "35",
-  "published": "2026-11-27T13:12:41Z",
+  "tag": "v1.0.0",
+  "build": "39",
+  "published": "2026-11-27T18:05:22Z",
   "files": [
     {
       "name": "Qubiq-android-arm64.apk",
-      "bytes": 84410788,
+      "bytes": 84413308,
       "url": "/qubiq-site/downloads/Qubiq-android-arm64.apk"
+    },
+    {
+      "name": "Qubiq-linux-x86_64.deb",
+      "bytes": 39915860,
+      "url": "/qubiq-site/downloads/Qubiq-linux-x86_64.deb"
+    },
+    {
+      "name": "Qubiq-linux-x86_64.rpm",
+      "bytes": 50155922,
+      "url": "/qubiq-site/downloads/Qubiq-linux-x86_64.rpm"
+    },
+    {
+      "name": "Qubiq-linux-x86_64.zip",
+      "bytes": 54988857,
+      "url": "/qubiq-site/downloads/Qubiq-linux-x86_64.zip"
+    },
+    {
+      "name": "Qubiq-macos-arm64.dmg",
+      "bytes": 49587597,
+      "url": "/qubiq-site/downloads/Qubiq-macos-arm64.dmg"
+    },
+    {
+      "name": "Qubiq-macos-x86_64.dmg",
+      "bytes": 53768535,
+      "url": "/qubiq-site/downloads/Qubiq-macos-x86_64.dmg"
+    },
+    {
+      "name": "Qubiq-windows-amd64.exe",
+      "bytes": 37615619,
+      "url": "/qubiq-site/downloads/Qubiq-windows-amd64.exe"
+    },
+    {
+      "name": "Qubiq-windows-amd64.zip",
+      "bytes": 57277927,
+      "url": "/qubiq-site/downloads/Qubiq-windows-amd64.zip"
     }
   ]
 }
