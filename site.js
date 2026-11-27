@@ -5,6 +5,10 @@
   const S = {
     mb:        { en: "MB",        ru: "МБ" },
     published: { en: "published", ru: "опубликовано" },
+    iosReq: {
+      en: "iOS 16+ · sideload or enterprise signing",
+      ru: "iOS 16+ · sideload или корпоративная подпись",
+    },
   };
   const t = k => S[k][LANG];
 
@@ -63,10 +67,24 @@
   // keep their "soon" placeholder row.
   const labels = { windows: 'Windows', linux: 'Linux', macos: 'macOS',
                    android: 'Android', ios: 'iOS / iPadOS' };
+  const platformOrder = { windows: 0, macos: 1, linux: 2,
+                          ios: 3, android: 4 };
+  const requirements = {
+    windows: 'Windows 10 20H2+',
+    linux: 'glibc 2.39+',
+    macos: 'macOS 13+ · System Extension',
+    android: 'Android 10+',
+    ios: t('iosReq'),
+  };
+  let downloadsHydrated = false;
+  let downloadsLoading = false;
   const hydrateDownloads = () => {
+    if (downloadsHydrated || downloadsLoading) return;
+    downloadsLoading = true;
     fetch(ROOT + 'downloads/release.json')
       .then(r => r.ok ? r.json() : null)
       .then(m => {
+        downloadsLoading = false;
         const files = m && Array.isArray(m.files) ? m.files : [];
         const cols = document.querySelectorAll('#modal-download .modal-col');
         if (!files.length || cols.length < 2) return;
@@ -75,21 +93,31 @@
           const mm = f.name.match(/^Qubiq-(windows|linux|macos|android|ios)(?:-(.+))?\.(exe|dmg|apk|ipa|deb|rpm|zip)$/);
           if (!mm) return null;
           const [, plat, arch, ext] = mm;
+          const rawArch = (arch || '').toLowerCase();
+          const archText = rawArch === 'amd64' || rawArch === 'x86_64' ? 'x64'
+            : rawArch === 'aarch64' || rawArch === 'arm64' ? 'ARM64'
+            : (arch || '').replaceAll('_', ' ');
           const mb = (f.bytes / 1048576).toFixed(1);
+          const requirement = plat === 'windows' &&
+            (rawArch === 'aarch64' || rawArch === 'arm64')
+            ? 'Windows 11'
+            : requirements[plat];
           return { plat, html: `<a class="dl-row" href="${ROOT}downloads/${f.name}">
             <span class="dl-main">
-              <span class="dl-name">${labels[plat]}${arch ? ' ' + arch.replaceAll('_', ' ') : ''}</span>
-              <span class="dl-meta">.${ext} · ${mb} ${t('mb')}</span>
+              <span class="dl-name">${labels[plat]}${archText ? ' ' + archText : ''}</span>
+              <span class="dl-meta">.${ext} · ${mb} ${t('mb')} · ${requirement}</span>
             </span>
             <span class="dl-arrow">↓</span>
           </a>` };
         }).filter(Boolean);
         if (!parsed.length) return;
+        downloadsHydrated = true;
 
         // first column desktop platforms, second column mobile
         const desktop = /^(windows|linux|macos)$/;
         [cols[0], cols[1]].forEach((col, i) => {
-          const slice = parsed.filter(p => i === 0 ? desktop.test(p.plat) : !desktop.test(p.plat));
+          const slice = parsed.filter(p => i === 0 ? desktop.test(p.plat) : !desktop.test(p.plat))
+            .sort((a, b) => platformOrder[a.plat] - platformOrder[b.plat]);
           if (!slice.length) return;
           // drop the generic row for platforms the manifest covers
           col.querySelectorAll('.dl-row').forEach(el => {
@@ -100,12 +128,12 @@
         });
 
         const foot = document.querySelector('#modal-download .modal-foot');
-        if (foot && m.tag) {
+        if (foot && m.tag && m.tag !== 'main') {
           foot.insertAdjacentHTML('afterbegin',
             `<strong>${m.tag}</strong> — ${t('published')} ${String(m.published).slice(0, 10)}.<br>`);
         }
       })
-      .catch(() => {});
+      .catch(() => { downloadsLoading = false; });
   };
 
   document.querySelectorAll('[data-modal="modal-download"]').forEach(el =>

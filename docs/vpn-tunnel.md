@@ -1,69 +1,53 @@
 # VPN tunnel & platforms
 
-*Settings → Advanced → VPN tunnel & Xray* opens a page with **Tunnel**
-and **Xray** tabs. The Tunnel tab applies a per-platform policy on
-every connect — restore-defaults doesn't save, cancel writes nothing,
-and only changes effective on the current platform ask to reconnect.
+*Settings → Advanced → VPN tunnel & Xray* contains platform tunnel
+options and Xray diagnostics. These are advanced settings; most users can
+leave them unchanged.
 
 ## Common behavior
 
-- **Addresses** — the tunnel's IPv4/IPv6 network addresses are
-  read-only.
-- **DNS** — IPv4/IPv6 resolvers are editable, plus the Apple DoT
-  server domain; IPv6 sits behind its own switch.
-- **Exit interface** — **Windows and Linux**: must be chosen
-  explicitly; the saved outbound interface is re-checked before each
-  connect, and a missing or invalid one prompts a re-pick at that
-  point rather than a silent fallback.
+- **Addresses** — the tunnel's IPv4/IPv6 addresses are shown read-only.
+- **DNS** — edit IPv4/IPv6 resolvers; IPv6 can be switched separately.
+- **Exit interface** — on Windows and Linux, choose the network interface
+  that connects to the internet. Qubiq asks again if the saved interface
+  is no longer valid.
 
 ## Apple (iOS / macOS)
 
-The page offers always-on, Wi-Fi auto-connect/disconnect, cellular
-(iOS) or Ethernet (macOS) behavior. With full-traffic takeover on,
-four system exclusion switches show; with it off, your own excluded
-ranges apply instead and are editable. iOS also offers hide-VPN-icon,
-which only takes effect without full takeover.
+Apple platforms offer always-on and network-dependent connection behavior,
+plus exclusion options when full traffic takeover is enabled. iOS can also
+hide the VPN indicator in configurations where the system allows it.
 
 ## Android
 
-Three app modes — **all**, **only selected** and **except selected** —
-with independent include/exclude lists. The app picker pins checked
-apps to the top and supports search. Broadcast automation from other
-apps is configured on its own detail page under the Android system-VPN
-page, saves immediately and never reconnects — see
-[Connect & system entries](connect.md).
+Choose whether all apps use the VPN, only selected apps use it, or
+selected apps bypass it. The app picker supports search and keeps checked
+apps easy to find. Automation access for other apps is configured from
+its own detail page.
 
 ## Windows
 
-- The system-VPN entry shows only on the **MSIX** build —
-  auto-connect, LAN bypass and excluded ranges.
-- **EXE/ZIP** builds apply the common settings and the exit interface;
-  the first connect registers the *Qubiq VPN Core* scheduled tasks via
-  one UAC elevation — see [Getting started](getting-started.md).
+MSIX and portable/installer packages expose different system VPN options.
+All Windows builds can use the common DNS and exit-interface settings.
+The first connection may show a one-time security prompt; approve it so
+the VPN core can start.
 
 ## Linux
 
-Common settings and the exit interface apply; there is no platform
-policy surface (and no backup target — see [Backup](backup.md)).
+Linux uses the common DNS and exit-interface settings. There is no
+platform-policy page and no backup target on Linux.
 
 ## Xray tab
 
-The **Xray** tab holds four cards — run state, check & diagnostics,
-connection & resources, and share & interfaces:
+The **Xray** tab is for diagnostics and advanced resource settings:
 
-- **Run state** — the core name and real version.
-- **Check & diagnostics** — a read-only diagnostics page showing the
-  current phase, the original error, version, run duration and the
-  real run JSON/log; refresh only re-reads state — it never starts or
-  stops the VPN. **Log settings** and restore-defaults live on their
-  own page — hidden on the macOS System Extension build.
-- **Connection & resources** — routing data, data updates
-  (subscription and Geodata auto-update switches with 24/72/168-hour
-  intervals), node-latency settings (delay URL, timeout and
-  **Latency display**) and server dialing (domain resolution and Happy
-  Eyeballs).
-- **Share & interfaces** — the **LAN share** switch and port, applied
-  on the next app-compiled connection: HTTP/SOCKS5 with no
-  authentication on all interfaces — trusted networks only — and never
-  applied to personal Raw or provider configs. On desktop the local
-  HTTP API joins it.
+- **Run state** — core name and version.
+- **Check & diagnostics** — current state, error details, configuration
+  and logs for troubleshooting.
+- **Connection & resources** — routing-data updates, latency testing and
+  server dialing options.
+- **Share & interfaces** — share the local proxy on trusted networks and
+  configure the local HTTP API where available.
+
+Do not enable LAN sharing on untrusted networks: the local proxy does not
+use authentication.

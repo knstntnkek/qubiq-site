@@ -1,192 +1,101 @@
 # Subscriptions & providers
 
-A subscription is a server list your provider maintains — Qubiq downloads
-it over HTTPS, imports the entries and refreshes on demand or on a
-schedule. The add form asks for exactly two things: a **name** (optional)
-and the **HTTPS URL**.
+A subscription is a server list your provider maintains. Qubiq downloads
+it over HTTPS, imports the entries and refreshes it when asked or on a
+schedule.
 
-## Modes: app-managed vs provider-managed
+Running a provider panel? The technical integration reference is in
+[For providers](providers.md).
 
-What a response contains decides how its entries behave:
+## Add a subscription
 
-- **Ordinary nodes** — share-link style entries managed by you.
-- **Complete configs** — whole Xray JSON documents the provider manages
-  (e.g. Remnawave panels): each runs its own stored routing and stays
-  read-only.
+Tap **＋**, choose **Subscription**, then paste the HTTPS URL from your
+provider. A name is optional — it only helps you recognize the source.
 
-New sources enter with the Remnawave panel default and an undecided mode
-— the response format settles it: ordinary nodes become app-managed,
-complete JSON becomes provider-managed, and the stored mode shows on the
-source afterwards.
+Qubiq detects what the subscription contains:
 
-A Remnawave source that answers with non-JSON text **converts silently** —
-the same response's nodes are parsed and the source becomes generic
-app-managed, no prompt and no re-download. When that happens Qubiq makes
-one recovery attempt: it retries the same URL with `/json` appended
-(query preserved, using the compatibility User-Agent) — a usable
-provider-managed result replaces the ordinary one, while any error or
-non-provider response keeps the original ordinary result. The stored URL
-is never rewritten.
+- ordinary servers you can organize and edit;
+- provider-managed configurations, which stay read-only and follow the
+  provider's updates.
+
+Nothing connects automatically after import.
 
 ## Refresh behaviour
 
-- Pull the home list down to refresh **every** source in one pass.
-- Auto-update runs on a shared switch and a **24/72/168-hour** interval —
-  or a provider-set `profile-update-interval` per source.
-- A refresh merges: identical new rows adopt the survivor's favorite,
-  delay, order and your selection; running configs are never rewritten
-  in place.
-- Failed refreshes keep the old cache, plan data and drafts — a refresh
-  can never empty your list.
+- Pull the Home list down to refresh **every** subscription.
+- Auto-update can run every **24, 72 or 168 hours**; a provider can also
+  suggest a different cadence for its own source.
+- Refresh keeps your favorites, selection and server order where
+  possible.
+- If refresh fails, the previously downloaded server list and plan
+  information remain available.
 
 ## Plan information
 
-Providers reporting `subscription-userinfo` give Qubiq usage bytes
-(`upload`/`download`/`total`) and an `expire` timestamp. The group card
-shows the usage and expiry — a thin used/total meter for capped plans,
-text for unlimited ones — labelled as provider-reported, not live app
-traffic, with a warning tint inside the last 7 days. `expire=0` means
-no expiry. An expired or exhausted plan only informs —
-it never blocks connecting. Mobile can remind you 72 hours before expiry
-when the provider opts in.
+When a provider supplies plan data, the subscription card can show:
 
-## Provider fields
+- used and total traffic;
+- expiry date;
+- announcements, support and provider website links.
 
-Panels control parts of the UI through response headers or `#key: value`
-body comments. For text and URL fields a valid header wins over the same
-body key, and missing or invalid header values may be filled from the
-body; flags like the expiry reminder and collapse lock merge by logical
-OR. Fields Qubiq honours:
-
-| Field | What you see |
-| --- | --- |
-| `profile-title` | Names the source unless you typed a name |
-| `content-disposition` | Filename supplies the last title fallback |
-| `subscription-userinfo` | Plan usage + expiry on the group card |
-| `announce` | Announcement line in the group card |
-| `support-url` | Support action (web, Telegram or email) |
-| `profile-web-page-url` | Website action to the provider's page |
-| `profile-update-interval` | Per-source refresh cadence (1–720 h) |
-| `new-url` / `new-domain` | Subscription address migrates automatically |
-| `fallback-domain` | Mirror host retried once when the URL fails |
-| `subscriptions-collapse` | `0`/`false` pins the group open |
-| `notification-subs-expire` | Opts into expiry reminders (mobile) |
-| `color-profile` / `profile-logo` | Provider theme and logo — see [Provider branding](subscriptions.md#provider-branding) |
-
-Running a panel? The full reference — validation rules, the theme-key
-mapping, logo limits — is in [For providers](providers.md).
-
-A blank editable name resolves as `profile-title` →
-the `content-disposition` filename → the URL's host; a name you typed
-always wins and survives refreshes. Provider fields are withdrawn when
-they disappear from a later response, and cleared when you change the
-request URL or Age keys.
+An expired or exhausted plan is shown as information only — it does not
+by itself block connecting. On mobile, Qubiq can remind you before expiry
+when the provider enables reminders.
 
 ## Provider branding
 
-A provider can restyle the app while its subscription is in use — two
-response fields drive it:
+A provider can apply its colors and logo while its subscription is in
+use. Branding can affect Home, the Connect button and that provider's
+subscription card; other subscriptions and manual servers keep their own
+appearance.
 
-- **`color-profile`** — a [theme profile](providers.md#color-profile),
-  sent as JSON or `base64:` JSON. It colors Home, the Connect
-  circle and Settings controls, plus the provider's own headers, rows and
-  usage info — other subscriptions and manual servers keep their look.
-  Hex values only, 16 KB cap; unknown keys, old Qubiq-only palette keys
-  and malformed JSON are ignored. The literal `resetcolors` — or
-  removing the field — withdraws the theme.
-- **`profile-logo`** — the provider's mark in the Home header in place
-  of the Qubiq logo, on its source card and on the details page. Inline `data:` images or HTTPS URLs
-  (≤512 KB, format-verified, cached across refreshes; a failed refetch
-  keeps the cache, a withdrawn declaration clears it).
-
-Branding follows the subscription in use — the connected provider
-profile, otherwise the selected source or server, otherwise the only
-branded provider. Switching source swaps the theme; deleting the source
-reverts it. Each subscription's details page lists what the provider set
-and carries a **Provider appearance** switch that opts that source out —
-the choice is yours and survives edits and refreshes. Branding never
-touches the window title, the app identity, or what you can edit.
+To disable it for one source, open the subscription details and turn off
+**Provider appearance**. Your choice is remembered. Branding never
+changes the app identity, window title or what you can edit.
 
 ## Send logs
 
-The group card strip also carries a **Send logs** action — it writes a
-single `qubiq-diagnostics-*.txt` bundle; mobile hands it to the system
-share sheet while desktop goes straight to a save dialog. The bundle
-holds:
+The subscription card includes **Send logs** for support requests. It
+creates one `qubiq-diagnostics-*.txt` bundle; mobile opens the system
+share sheet, while desktop asks where to save the file.
 
-- app, platform and connection metadata, live traffic counters and
-  per-path probe results
-- the source's panel fields and the HWID — **never** its URL
-- a live re-request of the subscription URL — its response status and
-  headers are dumped verbatim
-- the runtime Xray config with credentials `***`-redacted and core file
-  paths trimmed to basenames
-- the last 256 KB of each core log file — the warning-level error log is
-  always collected per session, so it exists even with record-logs off
+The bundle can include:
 
-Disconnected or after a failed start, the bundle still recovers the
-previous session's config (redacted the same way) and declared log paths.
-Empty logs are marked `(empty)` — nothing is silently omitted.
+- app, platform and connection details;
+- traffic counters, latency/probe results and recent VPN-core logs;
+- the random app-installation ID and provider-supplied source fields;
+- a redacted copy of the running configuration;
+- the status and technical details of a fresh subscription check.
 
-## Address migration & fallback
+Credentials are redacted, core file paths are shortened, and the
+subscription URL itself is not included. Review the bundle before sharing
+it publicly.
 
-When a provider's domain is blocked or moved, the old URL's response can
-carry `new-url` (replaces the whole subscription URL) or `new-domain`
-(rewrites just the host of an HTTPS URL). A declared target is adopted
-**only after it proves itself** — Qubiq downloads it through the normal
-pipeline and stores it only when it returns a usable subscription. The
-check runs on add and on every refresh — one hop per refresh, each
-response's own declaration scheduling the next.
+## Address changes
 
-A target that fails is remembered per source and retried on every
-refresh — the current URL keeps working meanwhile, so a provider can
-announce a new address before it goes live. The newest declaration
-replaces a remembered one; the pending target is dropped when the
-provider stops declaring it or you edit the request. If the current URL
-stops responding entirely, the remembered target is tried right away as
-the recovery address. A target that collides with another stored
-subscription is deferred without a probe and adopted automatically once
-the collision clears.
+If a provider moves the subscription to a new address or offers a backup
+mirror, Qubiq can follow that automatically when the provider supports
+it. Normally no action is needed.
 
-`fallback-domain` is a mirror, not a move. A successful response can
-declare a bare mirror host; when the stored URL later stops answering,
-the same request is retried once with the host swapped to it — port,
-path and query preserved — and the mirror's data serves that refresh.
-The stored URL is never rewritten to the fallback: every refresh tries
-the real domain first, a pending migration target outranks it, and a
-mirror response can itself declare migrations. The fallback stays armed
-until the real URL answers again or you edit the request.
-
-## User-Agent & Age keys
-
-Every download — subscriptions, Geodata and other fetches alike — sends
-the app's live User-Agent. It consists of a fixed compatibility product
-token followed by
-`Qubiq/<app version> (<package>; build:<build>; <platform>)`.
-The compatibility token is kept so panels recognise the client; there is
-no per-source or global control, and an upgraded app always sends its
-current identity.
-
-Age keys are the one per-source request value: where present,
-`ageSecretKey` decrypts **locally** and `agePublicKey` goes to the
-server via `X-Age-Public-Key`. Age protects the response body only —
-it doesn't hide the URL or replace HTTPS, and failed decryption keeps
-the old cache.
+If a subscription stops updating, refresh it first. If it still fails,
+check whether the provider published a new subscription URL or contact
+its support. Editing the URL in Qubiq clears provider-supplied details
+until the next successful refresh.
 
 ## Add-to-Qubiq links
 
-Providers can put a `qubiq://add?url=…&name=…` button on their panel —
-tapping it opens the prefilled subscription form (name optional);
-nothing saves or connects without your confirmation.
-`qubiq://import?data=…` does the same for node or config content, taking
-Base64, Base64url or percent-encoded text. Links carry credentials in
-plain encoding — providers should treat them like secrets and keep real
-tokens out of examples. Providers can generate a button with the
-[link builder](providers.md#link-builder).
+Providers can place an **Add to Qubiq** button on their website. Tapping
+it opens Qubiq with the subscription form already filled in. Nothing is
+saved or connected until you confirm.
 
 ## Source actions
 
-Group-header actions open the source's **edit** page (name and URL),
-**share**, update and delete. Editing the URL clears provider metadata
-until the next refresh; deleting the source clears its caches and
-associated selections.
+A subscription's header and details page provide actions to:
+
+- rename it or edit its URL;
+- refresh or share it;
+- inspect plan and provider information;
+- delete the source and its downloaded entries.
+
+If the deleted source provided the selected server, selection returns to
+automatic.

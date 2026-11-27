@@ -20,6 +20,10 @@ const I18N = {
       "troubleshooting": "Troubleshooting & FAQ",
     },
     guide: "Guide",
+    navStart: "Get started",
+    navUser: "Use Qubiq",
+    navAdvanced: "Advanced",
+    navProviders: "For providers",
     onThisPage: "On this page",
     titleSuffix: "— Qubiq docs",
     loadFailH: "Couldn't load this page",
@@ -57,6 +61,10 @@ const I18N = {
       "troubleshooting": "Устранение неполадок и вопросы",
     },
     guide: "Руководство",
+    navStart: "Начало",
+    navUser: "Использование",
+    navAdvanced: "Продвинутое",
+    navProviders: "Провайдерам",
     onThisPage: "На этой странице",
     titleSuffix: "— документация Qubiq",
     loadFailH: "Не удалось загрузить страницу",
@@ -85,8 +93,15 @@ const I18N = {
 const T = I18N[LANG];
 
 const PAGE_SLUGS = [
-  "getting-started", "servers", "subscriptions", "providers",
-  "routing", "connect", "vpn-tunnel", "backup", "troubleshooting",
+  "getting-started", "connect", "servers", "subscriptions", "backup",
+  "troubleshooting", "routing", "vpn-tunnel", "providers",
+];
+const PAGE_GROUPS = [
+  { key: "start", slugs: ["getting-started"] },
+  { key: "user", slugs: ["connect", "servers", "subscriptions",
+                         "backup", "troubleshooting"] },
+  { key: "advanced", slugs: ["routing", "vpn-tunnel"] },
+  { key: "providers", slugs: ["providers"] },
 ];
 const PAGES = PAGE_SLUGS.map(slug => ({ slug, title: T.titles[slug] }));
 
@@ -481,8 +496,21 @@ function countView() {
 }
 
 // sidebar
+const navGroupTitle = {
+  start: T.navStart,
+  user: T.navUser,
+  advanced: T.navAdvanced,
+  providers: T.navProviders,
+};
+const pageLink = slug => {
+  const p = PAGES.find(page => page.slug === slug);
+  return `<a href="?page=${p.slug}" data-slug="${p.slug}">${p.title}</a>`;
+};
 navEl.innerHTML = `<p class="docs-nav-title">${T.guide}</p>` +
-  PAGES.map(p => `<a href="?page=${p.slug}" data-slug="${p.slug}">${p.title}</a>`).join("");
+  PAGE_GROUPS.map(group =>
+    `<p class="docs-nav-group">${navGroupTitle[group.key]}</p>` +
+    group.slugs.map(pageLink).join("")
+  ).join("");
 
 // same-document navigation: ?page= links render without a reload
 document.addEventListener("click", e => {

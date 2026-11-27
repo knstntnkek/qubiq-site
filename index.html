@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qubiq — a cross-platform Xray client for all your devices</title>
-<meta name="description" content="Qubiq is a cross-platform Xray-core client for iPhone, iPad, Mac, Android, Windows and Linux — your own servers and subscriptions; the app has no account and no analytics.">
-<meta property="og:title" content="Qubiq — one Xray client for every device">
-<meta property="og:description" content="Cross-platform Xray-core client for iOS, macOS, Android, Windows and Linux. Your servers, your routing — no accounts, no telemetry.">
+<title>Qubiq — a cross-platform VPN client for your own servers</title>
+<meta name="description" content="Qubiq is a cross-platform VPN client built on the Xray core for iPhone, iPad, Mac, Android, Windows and Linux — your own servers and subscriptions; no account and no analytics.">
+<meta property="og:title" content="Qubiq — one VPN client for every device">
+<meta property="og:description" content="Cross-platform VPN client built on the Xray core for iOS, macOS, Android, Windows and Linux. Your servers, your routing — no accounts, no telemetry.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://knstntnkek.github.io/qubiq-site/">
 <meta property="og:site_name" content="Qubiq">
@@ -14,8 +14,8 @@
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="1024">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Qubiq — one Xray client for every device">
-<meta name="twitter:description" content="Cross-platform Xray-core client for iOS, macOS, Android, Windows and Linux. Your servers, your routing — no accounts, no telemetry.">
+<meta name="twitter:title" content="Qubiq — one VPN client for every device">
+<meta name="twitter:description" content="Cross-platform VPN client built on the Xray core for iOS, macOS, Android, Windows and Linux. Your servers, your routing — no accounts, no telemetry.">
 <meta name="twitter:image" content="https://knstntnkek.github.io/qubiq-site/og.png">
 <link rel="canonical" href="https://knstntnkek.github.io/qubiq-site/">
 <link rel="alternate" hreflang="en" href="https://knstntnkek.github.io/qubiq-site/">
@@ -31,7 +31,7 @@
   "downloadUrl": "https://knstntnkek.github.io/qubiq-site/",
   "operatingSystem": "iOS, iPadOS, macOS, Android, Windows, Linux",
   "applicationCategory": "UtilitiesApplication",
-  "description": "A cross-platform Xray-core client for phones, tablets and desktops. Bring your own servers or subscription — no accounts, no analytics.",
+  "description": "A cross-platform VPN client built on the Xray core for phones, tablets and desktops. Use your own servers or subscription — no accounts, no analytics.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "author": { "@type": "Person", "name": "Konstantin Barinov" }
 }
@@ -41,7 +41,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261127-1">
+<link rel="stylesheet" href="style.css?v=20261127-2">
 </head>
 <body>
 
@@ -55,7 +55,7 @@
       <img class="brand-icon" src="icon.png" alt="Qubiq logo">
       <span class="brand-text">
         <strong>Qubiq</strong>
-        <span>Xray client</span>
+        <span>VPN client</span>
       </span>
     </a>
     <nav>
@@ -72,11 +72,11 @@
   <main>
     <section class="hero">
       <img class="hero-logo" src="icon.png" alt="Qubiq">
-      <span class="hero-eyebrow">Xray core · Private by design</span>
+      <span class="hero-eyebrow">Cross-platform · Private by design</span>
       <h1>Your servers. Your rules.<br><em>One client, every device.</em></h1>
-      <p class="hero-sub">Qubiq is a cross-platform Xray-core client for iOS,
-      macOS, Android, Windows and Linux. It provides no VPN access — you
-      bring your own servers or subscription, and it runs them everywhere.</p>
+      <p class="hero-sub">Qubiq is a cross-platform VPN client built on the
+      Xray core. It is not a VPN provider — connect your own servers
+      or subscription on iOS, macOS, Android, Windows and Linux.</p>
       <div class="hero-cta">
         <button class="btn btn-primary" data-modal="modal-download">
           Download Qubiq
@@ -92,22 +92,22 @@
     <section class="bento">
       <button class="bento-card wide reveal" data-modal="modal-download">
         <span class="bento-kicker">Downloads</span>
-        <h2>One build per platform, served from this site</h2>
+        <h2>Download for every platform</h2>
         <ul class="bento-list">
           <li><b>iOS / iPadOS</b><small>ipa · sideload or enterprise signing</small></li>
-          <li><b>macOS</b><small>universal dmg · System Extension</small></li>
-          <li><b>Android</b><small>arm64 apk</small></li>
-          <li><b>Windows</b><small>exe / zip · x64 and ARM64</small></li>
-          <li><b>Linux</b><small>deb, rpm, zip · x86_64 and aarch64</small></li>
+          <li><b>macOS</b><small>dmg · x64 and ARM64 · System Extension</small></li>
+          <li><b>Android</b><small>ARM64 apk</small></li>
+          <li><b>Windows</b><small>exe / zip · x64</small></li>
+          <li><b>Linux</b><small>deb, rpm, zip · x64</small></li>
         </ul>
         <span class="bento-cta">Open downloads →</span>
       </button>
 
       <a class="bento-card third reveal" href="docs.html">
         <span class="bento-kicker">Documentation</span>
-        <h2>User guide</h2>
-        <p>Setup per platform, subscriptions, routing, VPN tunnel,
-        backups and troubleshooting.</p>
+        <h2>Documentation</h2>
+        <p>Install, connect, use subscriptions, tune advanced routing or
+        integrate a provider panel.</p>
         <span class="bento-cta">Browse the docs →</span>
       </a>
 
@@ -123,7 +123,7 @@
         <span class="bento-kicker">Privacy</span>
         <h2>No account, nothing phoned home</h2>
         <p>No ads, analytics, telemetry or crash reporting. Nodes and
-        credentials stay in the app's local database — logs leave only
+        credentials stay on your device — logs leave only
         when you share them.</p>
         <span class="bento-cta">Privacy policy →</span>
       </a>
@@ -131,7 +131,7 @@
       <button class="bento-card half reveal" data-modal="modal-support">
         <span class="bento-kicker neutral">Support</span>
         <h2>Found a bug?</h2>
-        <p>Issues and feature requests are tracked on the site repository —
+        <p>Issues and feature requests are tracked on GitHub —
         attach a Send logs bundle for connection problems.</p>
         <span class="bento-cta">Get help →</span>
       </button>
@@ -146,22 +146,18 @@
       <div class="providers-grid">
         <div class="provider-feature">
           <h3>Your branding</h3>
-          <p>Compatible <code>color-profile</code> themes apply
-          unchanged; a <code>profile-logo</code> puts your mark on the app
-          bar and group card.</p>
+          <p>Providers can apply their own colors and logo while their
+          subscription is in use.</p>
         </div>
         <div class="provider-feature">
           <h3>Plan &amp; support</h3>
-          <p><code>subscription-userinfo</code> shows usage and expiry;
-          <code>announce</code>, <code>support-url</code> and
-          <code>profile-web-page-url</code> put notices and help on the
-          group card.</p>
+          <p>Subscriptions can show usage and expiry, announcements,
+          support and provider website links.</p>
         </div>
         <div class="provider-feature">
           <h3>Blocked domain? Move it</h3>
-          <p><code>new-url</code> and <code>new-domain</code> migrate
-          subscriptions once the new address answers;
-          <code>fallback-domain</code> adds a mirror for outages.</p>
+          <p>Subscriptions can move to a new address or use a backup
+          mirror when the provider changes domains.</p>
         </div>
         <div class="provider-feature">
           <h3>One-tap import</h3>
@@ -179,20 +175,20 @@
       <div class="step">
         <p class="step-num">01</p>
         <h3>Add your source</h3>
-        <p>Paste share links, import an Xray JSON config, or add a
-        subscription — Remnawave panels are picked up automatically.</p>
+        <p>Paste share links, import an Xray configuration, or add a
+        subscription — Qubiq detects the format automatically.</p>
       </div>
       <div class="step">
         <p class="step-num">02</p>
         <h3>Pick a server</h3>
-        <p>Check latency and tap a row to pin it — or pin nothing and
-        let automatic selection pick.</p>
+        <p>Check latency and tap a row to choose it — or leave the choice
+        to automatic selection.</p>
       </div>
       <div class="step">
         <p class="step-num">03</p>
         <h3>Press the button</h3>
-        <p>The system VPN takes over. Tray icon and widgets show state;
-        the button reports the real failure reason when one happens.</p>
+        <p>Qubiq connects. Tray icon and widgets show status; if something
+        fails, the error explains what went wrong.</p>
       </div>
     </section>
   </main>
@@ -213,27 +209,26 @@
   <div class="modal-card" role="dialog" aria-modal="true" aria-label="Download Qubiq">
     <button class="modal-x" data-close aria-label="Close">×</button>
     <h2 class="modal-title">Download</h2>
-    <p class="modal-sub">Choose your platform — packages are served right
-    here, no repo access needed.</p>
+    <p class="modal-sub">Choose your platform to download Qubiq.</p>
     <div class="modal-cols">
       <div class="modal-col">
         <p class="modal-col-title">Desktop</p>
         <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">Windows</span>
-            <span class="dl-meta">x64 / ARM64 · exe, zip · Win 10 20H2+ · soon</span>
+            <span class="dl-meta">x64 · exe, zip · Windows 10 20H2+ · soon</span>
           </span>
         </div>
         <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">macOS</span>
-            <span class="dl-meta">universal dmg · macOS 13+ · System Extension · soon</span>
+            <span class="dl-meta">x64 / ARM64 · dmg · macOS 13+ · System Extension · soon</span>
           </span>
         </div>
         <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">Linux</span>
-            <span class="dl-meta">x86_64 / aarch64 · deb, rpm, zip · glibc 2.39+ · soon</span>
+            <span class="dl-meta">x64 · deb, rpm, zip · glibc 2.39+ · soon</span>
           </span>
         </div>
       </div>
@@ -242,20 +237,19 @@
         <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">iOS / iPadOS</span>
-            <span class="dl-meta">ipa · iOS 16+ · sideload / enterprise signing · soon</span>
+            <span class="dl-meta">ipa · iOS 16+ · sideload or enterprise signing · soon</span>
           </span>
         </div>
         <div class="dl-row dl-static">
           <span class="dl-main">
             <span class="dl-name">Android</span>
-            <span class="dl-meta">arm64 apk · Android 10+ · soon</span>
+            <span class="dl-meta">ARM64 apk · Android 10+ · soon</span>
           </span>
         </div>
       </div>
     </div>
-    <p class="modal-foot">Published builds replace their platform row with a
-    direct download automatically. First connect asks for the platform VPN
-    permission — see <a href="docs.html?page=getting-started">Getting
+    <p class="modal-foot">When you first connect, the system will ask for
+    VPN permission — see <a href="docs.html?page=getting-started">Getting
     started</a>.</p>
   </div>
 </div>
@@ -270,7 +264,7 @@
         <a class="dl-row" href="https://github.com/knstntnkek/qubiq-site/issues">
           <span class="dl-main">
             <span class="dl-name">GitHub Issues</span>
-            <span class="dl-meta">site repo · bug reports &amp; feature requests</span>
+            <span class="dl-meta">bug reports &amp; feature requests</span>
           </span>
           <span class="dl-arrow">→</span>
         </a>
@@ -326,7 +320,7 @@
   </div>
 </div>
 
-<script src="site.js?v=20261123-2"></script>
+<script src="site.js?v=20261127-2"></script>
 <script data-goatcounter="https://konstantin11.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

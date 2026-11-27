@@ -67,6 +67,44 @@ A field that disappears from a later response is treated as withdrawn and
 cleared; a manual edit that changes the request (URL or Age keys)
 clears all provider fields until the next refresh.
 
+## Subscription modes & recovery
+
+What a response contains decides how its entries behave:
+
+- **Ordinary nodes** — share-link style entries managed by the user.
+- **Complete configs** — whole Xray JSON documents the provider manages:
+  each runs its own stored routing and stays read-only.
+
+New sources enter with the Remnawave panel default and an undecided mode
+— the response format settles it: ordinary nodes become app-managed,
+complete JSON becomes provider-managed, and the stored mode shows on the
+source afterwards.
+
+A Remnawave source that answers with non-JSON text **converts silently** —
+the same response's nodes are parsed and the source becomes generic
+app-managed, no prompt and no re-download. When that happens Qubiq makes
+one recovery attempt: it retries the same URL with `/json` appended
+(query preserved, using the compatibility User-Agent) — a usable
+provider-managed result replaces the ordinary one, while any error or
+non-provider response keeps the original ordinary result. The stored URL
+is never rewritten.
+
+## User-Agent & Age keys
+
+Every download — subscriptions, Geodata and other fetches alike — sends
+the app's live User-Agent. It consists of a fixed compatibility product
+token followed by
+`Qubiq/<app version> (<package>; build:<build>; <platform>)`.
+The compatibility token is kept so panels recognise the client; there is
+no per-source or global control, and an upgraded app always sends its
+current identity.
+
+Age keys are the one per-source request value: where present,
+`ageSecretKey` decrypts **locally** and `agePublicKey` goes to the
+server via `X-Age-Public-Key`. Age protects the response body only —
+it doesn't hide the URL or replace HTTPS, and failed decryption keeps
+the old cache.
+
 ## Field reference
 
 | Field | Sent as | What the user sees |

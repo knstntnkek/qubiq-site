@@ -1,67 +1,64 @@
 # Backup & restore
 
-The backup entry lives in **Settings → data section**. One bound target
-serves both backup and restore — there's no version list, no two-way
-sync and no cloud account to sign into.
+The backup entry lives in **Settings → Data**. Choose one file or
+cloud location and use it for both backup and restore. There is no version
+history, two-way sync or Qubiq cloud account.
 
-> **The backup file is unencrypted.** It contains node credentials,
-> subscription URLs and Age private keys — Base64 is encoding,
-> not secrecy. Choose where it lives accordingly.
+> **The backup file is unencrypted.** It contains server credentials,
+> subscription URLs and Age private keys. Store it somewhere you trust.
 
 ## Targets by platform
 
-| Platform | Target |
+| Platform | Backup target |
 | --- | --- |
-| iOS / macOS | iCloud Drive (`Documents/Qubiq-backup.json`) or a user-picked file — both share the same backup, restore and schedule |
-| Android | A document in the system picker (SAF) — shows the provider's real filename |
-| Windows | A file in a user-picked, OneDrive-synced directory |
+| iOS / macOS | iCloud Drive or a file you choose |
+| Android | A document chosen in the system file picker |
+| Windows | A file in a OneDrive-synced folder you choose |
 | Linux | Not available |
 
-Pick a target outside app-private folders so the file survives
-uninstall — reinstalling loses the binding, not the file; re-picking the
-same file is enough to restore.
+Choose a location outside app-private folders so the file survives
+uninstalling the app. Reinstalling loses the binding, not the backup file;
+choose the same file again to restore.
 
 ## How binding works
 
-Binding first probes the file's content:
+When you choose a target:
 
-- **Empty file** → the first backup writes directly.
-- **File with content** → choose *restore* or *overwrite*; cancelling
-  leaves the old binding and file untouched.
+- an empty file is prepared for the first backup;
+- a file with existing content can be restored or overwritten;
+- cancelling leaves the previous file and binding untouched.
 
-Later backups overwrite the same file. Unbind or change-target is always
-available; unbinding never deletes the file, and neither does clearing
-app data.
+Later backups overwrite the same file. Unbinding or changing the target
+never deletes the file.
 
 ## Automatic backup
 
-A switch beside the section title plus an interval setting — scheduled
-writes go to the bound target under the same rules as manual ones
-(including the VPN-idle conditions). A successful write means the file
-was accepted locally — cloud sync finishing is the provider's job.
+Use the backup switch and interval setting to write to the bound target
+on a schedule. Automatic backups follow the same rules as manual ones.
+Cloud synchronization itself is handled by the storage provider.
 
 ## Restore
 
-Restore reads the whole file, validates it and shows a preview
-confirmation before anything is replaced. It swaps connection assets —
-nodes, subscriptions, configs, routing assets — and matching-platform
-VPN settings, while keeping local bindings, authorizations and
-preferences. After restore, plan info refetches on the next normal
-update.
+Qubiq reads and validates the backup, then shows a confirmation before
+anything is replaced. Restore replaces rather than merges — a valid empty
+backup can clear the current connection setup. Confirming stops the VPN
+and does not reconnect automatically.
 
-If the binding write fails, restore doesn't start; if restore fails,
-the original binding rolls back.
+Restore brings back local servers, subscriptions, complete configs,
+routing settings and VPN settings that match the current platform. Local
+preferences, authorizations, the physical interface and the backup binding
+stay local. Subscription server lists and provider plan details are not
+stored in the backup; refresh subscriptions after restoring.
 
 ## Cleanup vs wipe
 
-Two different destructive operations in Settings:
+Settings has two different destructive actions:
 
-- **Clear connection resources** — removes nodes, subscriptions, Raw
-  and caches, manual groups, custom routes and Geodata, and old run
-  logs. Keeps platform policies, preferences, the login item, backup
-  binding, API/automation authorizations and default Geodata.
-- **Clear all app data** — also cancels the login item, clears
-  preferences and rebuilds defaults. Only this removes the local backup binding.
+- **Clear connection resources** — removes servers, subscriptions,
+  configs, custom routes, caches and old run logs, while keeping app
+  preferences, system permissions and the backup binding.
+- **Clear all app data** — also removes preferences, startup entries and
+  the local backup binding.
 
-Neither deletes external files — iCloud, OneDrive or SAF copies stay
-where they are.
+Neither action deletes backup files stored in iCloud, OneDrive, Android
+storage or another external location.

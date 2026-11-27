@@ -2,99 +2,76 @@
 
 ## First stop: the failure note
 
-When a connect attempt fails, the hero shows **Try Again** with the real
-reason beside it — read that first; it reports the actual phase and
-error, not a generic message. The row names also reflect the real run:
-the connected server name is the actual entry, which may differ from
-what you pinned if automatic fallback stepped in.
+When connecting fails, the Connect button shows **Try Again** and the
+reason nearby. Read that first. Also check the server name shown while
+connected — automatic selection can choose a different usable server.
 
-When reporting a bug via the
-[site repository's issues](https://github.com/knstntnkek/qubiq-site/issues):
-include the
-platform, app and core versions (Settings → About) and reproduction
-steps. For provider or connection issues, the group's **Send logs**
-action shares a `qubiq-diagnostics-*.txt` bundle with credentials
-redacted and the subscription URL removed — it even covers the previous
-session after a failed start, and it re-requests that URL live to dump
-the response status and headers verbatim. Attach it to the issue rather
-than pasting raw configs or logs yourself.
+When reporting a bug in
+[GitHub Issues](https://github.com/knstntnkek/qubiq-site/issues), include
+your platform, app and Xray-core versions and the steps to reproduce the
+problem. For subscription or connection problems, use **Send logs** in
+the app and attach the bundle. It redacts credentials and removes the
+subscription URL.
 
 ## Connect fails or hangs
 
-- **Nothing usable to run** — the plan needs at least one active,
-  readable candidate: a node, or a complete config matching the source's
-  mode. Refresh a subscription whose cache is empty.
-- **macOS System Extension pending** — approve it: macOS 15+ *General →
-  Login Items & Extensions → Network Extensions*; macOS 14- *Privacy &
-  Security*. Connect re-submits activation on retry.
-- **Windows EXE first connect** — the one-time UAC elevation registers
-  the *Qubiq VPN Core* scheduled tasks; declining it leaves the core
-  unable to start.
-- **Windows/Linux exit interface** — a missing or invalid saved
-  interface prompts a re-pick at connect time.
-- **Permission denied earlier** — denied VPN/LAN permissions don't
-  re-ask on every entry, but connect retries the authorization; tap the
-  explanation to open system settings.
+- **No usable server** — add a server or refresh a subscription whose
+  server list is empty.
+- **macOS network extension not approved** — approve it in System
+  Settings, then try again.
+- **Windows security prompt declined** — connect again and approve the
+  one-time prompt so the VPN core can start.
+- **Windows/Linux interface missing** — choose the network interface
+  that connects to the internet.
+- **VPN permission denied** — connect again and allow the system prompt,
+  or open system settings from the explanation shown in the app.
 
 ## Connected but nothing flows
 
-- Check which server the hero names — automatic fallback may have run a
-  different (or provider) config when ordinary candidates were
-  insufficient.
-- A provider/Remnawave row runs its **own** routing — app-side Smart
-  and traffic-mode preferences don't apply to it.
-- For app-managed runs, the saved Smart Routing set decides direct vs
-  proxied traffic — see [Routing](routing.md).
+- Check which server is actually shown as running.
+- A provider-managed configuration uses the provider's own routing, not
+  your app routing preferences.
+- For ordinary servers, check your Smart Routing direct/proxy choices in
+  [Routing](routing.md).
+- Try another server or refresh the subscription.
 
 ## Latency numbers look wrong
 
-- Tests run **through the VPN** when connected — test disconnected for
-  real numbers.
-- Provider (Remnawave) rows intentionally show no delay — they never
-  join single-outbound tests.
-- Untested/failed states are shown as status, not delay values — a
-  timeout isn't "9999 ms".
+- Test while disconnected; tests run through the VPN while it is connected.
+- Provider-managed rows may not show ordinary latency.
+- A failed test is shown as a failure, not as a very large delay.
 
 ## Subscription problems
 
-- **Refresh failed** — the old cache, plan and your edits are kept; the
-  error sits on the source. Check the URL, then pull-to-refresh again.
-- **Remnawave returned links, not JSON** — the nodes import as an
-  ordinary app-managed subscription silently, then one `/json` retry
-  recovers the provider view if the panel has it.
-- **Provider renamed/migrated the sub** — `new-url`/`new-domain` targets
-  are adopted only after they answer with a usable subscription; a
-  failing target is remembered and retried on each refresh, and a manual
-  URL edit clears provider metadata until the next refresh.
-- **Main URL down, provider has a mirror** — a declared
-  `fallback-domain` is retried once per refresh with the host swapped;
-  the stored URL itself never rewrites to it.
-- **Plan meter gone** — the provider stopped sending
-  `subscription-userinfo`; withdrawn fields clear on the response that
-  omits them.
+- **Refresh failed** — the previous server list and plan information are
+  kept. Check the URL and refresh again.
+- **Subscription is empty or changed** — contact the provider or check
+  whether it published a replacement URL.
+- **Provider moved the subscription** — Qubiq follows supported moves
+  automatically; otherwise add the new URL from the provider.
+- **Plan information disappeared** — the provider may have stopped
+  sending it. The subscription can still work without it.
 
 ## FAQ
 
 **Does Qubiq provide VPN servers?**
-No — it's a client for servers and subscriptions you bring.
+No — it is a client for servers and subscriptions you bring.
 
-**Where's my data?**
-In the app's local database — nodes, keys, HWID, plan caches. Nothing
-syncs anywhere unless you bind a backup target yourself.
+**Where is my data?**
+On your device. Nothing syncs anywhere unless you choose a backup target.
 
-**What does HWID send?**
-A random UUID generated once when the app is installed — no
-hardware/ad/system identifier. It goes to your subscription providers
-with every subscription download; there is no opt-out.
+**What is the HWID sent to subscription providers?**
+A random ID generated once when the app is installed. It is not a
+hardware, advertising or system identifier, and it is sent with
+subscription downloads so providers can recognize the installation.
 
 **Where are routing, tunnel and server settings?**
-Under *Settings → Advanced*: **Routing**, **Servers** and **VPN tunnel
-& Xray**. Favorites, manual groups and ordering live in the Servers
-manager.
+Under *Settings → Advanced*: **Routing**, **Servers** and **VPN tunnel &
+Xray**.
 
-**iOS can't be installed from the App Store?**
-The `.ipa` requires sideloading or enterprise signing today.
+**Can I install iOS from the App Store?**
+Not today. The `.ipa` requires sideloading or enterprise signing.
 
 **Is there telemetry?**
-No — no analytics SDK, no crash reporting, no accounts. Logs are local
-and opt-in.
+No — no analytics SDK, crash reporting or accounts. Logs are local and
+leave only when you share them.

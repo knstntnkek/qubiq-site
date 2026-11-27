@@ -1,107 +1,80 @@
 # Servers & nodes
 
-Servers live right on the home screen under the connect hero —
-ungrouped manual servers first, then manual groups, then one card per
-subscription. There are three resource types: **nodes**
-(single outbounds), **complete configs** (whole Xray JSON documents) and
-**subscriptions** (the sources that feed the first two).
+Your servers appear on Home below the Connect button: manual servers and
+groups first, then one card for each subscription. Add them once, choose
+one, or let Qubiq choose automatically.
 
 ## Working with the list
 
-- **Tap** a row to pin it as the connection target.
-- **Double-tap / double-click** to pin and connect in one move — it
-  never disconnects a live tunnel.
-- **Favorites** live in the
-  [Servers manager](servers.md#servers-manager) and in a resource's
-  details — not on the home rows.
-- **Pull down** refreshes every source.
-- Group headers **collapse** per source — the choice persists across
-  launches; a provider-pinned group stays open. Headers carry the
-  provider logo while its branding is active — opt out per source via
-  its details page's *Provider appearance* switch.
+- **Tap** a server row to choose it as the connection target.
+- **Double-tap / double-click** a row to choose it and connect in one
+  move.
+- **Pull down** to refresh every subscription.
+- Subscription headers can collapse their server rows. Qubiq remembers
+  your choice; a provider can keep its own group expanded.
+- Latency is shown as milliseconds or signal bars, depending on the
+  *Latency display* setting. Colors give a quick quality hint; the exact
+  value remains available where supported.
 
-Ordinary node rows carry protocol/transport/security and a latency
-badge — exact milliseconds by default, or **signal bars** per the
-node-latency settings' *Latency display* option (three green bars up to
-300 ms, two amber through 800 ms, one red above; tooltips keep the exact
-ms). Untested/failed states show dedicated status text — never dressed
-up as a delay value. Provider rows display their Remnawave type and no
-ordinary delay.
+Provider branding can add a logo or colors to a subscription card. Turn
+it off for that source in its details page with **Provider appearance**.
 
 ## Import methods
 
-The **＋** action opens the import flow:
+Tap **＋** and choose how to add servers:
 
-- **Subscription** — an HTTPS URL; see
-  [Subscriptions & providers](subscriptions.md).
-- **Share links** — VMessAEAD/VLESS, legacy VMess QR
-  (`vmess://Base64(JSON)`), WireGuard (`wireguard://`, `wg://`),
-  Hysteria2 (`hysteria2://`, `hy2://`), SS, SOCKS (`socks://`,
-  `socks5://`, `socks5h://`), Trojan — one per line. Clash/Mihomo
-  formats are not supported.
-- **QR scan** — iOS and Android.
-- **File** — the system picker, including WireGuard `.conf` files and
-  single-outbound WireGuard JSON.
+- **Subscription** — paste the HTTPS URL from your provider.
+- **Share links** — paste one or more VMess/VLESS, WireGuard, Hysteria2,
+  Shadowsocks, SOCKS or Trojan links. Clash/Mihomo configuration files
+  are not supported.
+- **QR scan** — scan a server code on iOS or Android.
+- **File** — import a WireGuard `.conf` or another supported JSON
+  configuration.
 
-Imported nodes join the automatic latency queue — results are not
-required before connecting.
+Imported servers can be used right away; latency results are not required
+before connecting.
 
 ## What refresh keeps
 
-A subscription refresh merges rather than overwrites: identical fresh
-rows adopt the survivor's favorite, delay, order and your selection;
-running configs are never rewritten in place. Failed refreshes keep the
-old cache, plan data and drafts — a refresh can never empty your list.
+Refreshing a subscription keeps your favorites, selection and server
+order where possible. If refresh fails, the previously downloaded servers
+remain available, so a failed update cannot empty your list.
 
 ## Complete configs
 
-A complete config runs an entire Xray JSON — its own outbounds, routing
-and DNS — instead of the app-compiled routing.
+A complete config is a whole Xray configuration rather than a single
+server outbound.
 
-- **Provider configs** (e.g. Remnawave) arrive via subscription, are
-  read-only and follow refresh updates.
-- **Personal Raw** copies are editable and capped at three assets across
-  Raw and custom routing combined.
+- **Provider configs** arrive through subscriptions, stay read-only and
+  use the provider's own routing.
+- **Personal Raw configs** are editable copies. Raw configs and custom
+  routing assets share a three-item limit.
 
-Sharing a complete config asks for a sensitive-information confirmation
-first.
+Sharing a complete config asks for confirmation because it can contain
+sensitive information.
 
 ## Subscription sources
 
-Group-header actions open a source's **edit** (name and URL) and
-**share** pages. The source detail tracks the active mode
-(app-managed or provider-managed), cache status, plan info and the
-update entry — see
-[Subscriptions & providers](subscriptions.md).
+A subscription card shows its servers, plan information when supplied,
+announcements and provider actions. Its details page lets you rename or
+edit the source, refresh it, control provider appearance, share it or
+delete it.
+
+See [Subscriptions & providers](subscriptions.md) for the user-side
+subscription flow.
 
 ## Servers manager
 
-*Settings → Advanced → Servers* opens the resource manager — the full
-browser behind the home list. Tabs cover **nodes**, **complete
-configs** and **subscriptions**, with a search field over the lists.
-With nothing added yet it shows the same *No servers yet* section with
-**Add connection**, plus **Restore from backup** where backups are
-supported; with subscriptions but no cached servers it offers
-**Updates and sources** and **Add server** instead.
+*Settings → Advanced → Servers* opens the full manager for nodes,
+complete configs and subscriptions. Use it to:
 
-- **Sort** — default, name or delay; the choice saves locally, also
-  orders the desktop tray and the final-exit picker, and the default
-  order never shifts from latency updates.
-- **Favorites** — favorite or unfavorite nodes and provider configs
-  and filter a list to favorites; personal Raw has no favorites.
-- **Manual groups** — one level of groups for ordinary manual nodes:
-  create, rename and move nodes via the node menu; dissolving a group
-  keeps its nodes.
-- **Arrange** — reorder via phone long-press handles, desktop drag
-  handles or the up/down buttons, only while search is empty and the
-  favorite filter is off.
-- **Automatic selection** — a button that returns the connection
-  target to automatic.
+- search, sort and filter servers;
+- favorite frequently used servers;
+- create one-level manual groups;
+- reorder rows when search and favorites filtering are off;
+- return the connection target to **Automatic selection**.
 
-A resource's details show its protocol, source and delay plus a
-read-only JSON preview — browsing never changes the connection target,
-**use** does. Ordinary nodes edit as JSON; provider configs can be
-viewed, shared, deleted or copied to personal Raw (the copy counts
-toward the three-Raw quota). A subscription's detail shows its current
-mode, plan and cache status, with **Update**, **Edit** and a
-destructive **Delete this source**.
+A server's details page shows its type, source, latency and a read-only
+configuration preview. Ordinary nodes can be edited as JSON. Provider
+configs can be viewed, shared, deleted or copied to personal Raw within
+the three-item limit.

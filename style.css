@@ -490,14 +490,17 @@ button.bento-card:hover {
   top: 24px;
   align-self: start;
 }
-.docs-nav .docs-nav-title {
+.docs-nav .docs-nav-title,
+.docs-nav .docs-nav-group {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--text-mute);
-  margin-bottom: 12px;
 }
+.docs-nav .docs-nav-title { margin-bottom: 12px; }
+.docs-nav .docs-nav-group { margin: 18px 0 6px; }
+.docs-nav .docs-nav-title + .docs-nav-group { margin-top: 0; }
 .docs-nav a {
   display: block;
   color: var(--text-soft);
@@ -790,7 +793,7 @@ button.bento-card:hover {
     gap: 6px;
     margin-bottom: 8px;
   }
-  .docs-nav .docs-nav-title { display: none; }
+  .docs-nav .docs-nav-title, .docs-nav .docs-nav-group { display: none; }
   .docs-nav a { border-left: 0; border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; }
   .hero { padding: 40px 0; }
   .footer { justify-content: center; text-align: center; }
