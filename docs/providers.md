@@ -64,8 +64,8 @@ an enabling body comment. Values that contain characters unsafe for headers
 can be sent as `base64:<payload>` (base64url) — Qubiq decodes it transparently.
 
 A field that disappears from a later response is treated as withdrawn and
-cleared; a manual edit that changes the request (URL or Age keys)
-clears all provider fields until the next refresh.
+cleared; a manual edit that changes the URL clears all provider
+fields until the next refresh.
 
 ## Subscription modes & recovery
 
@@ -89,7 +89,7 @@ provider-managed result replaces the ordinary one, while any error or
 non-provider response keeps the original ordinary result. The stored URL
 is never rewritten.
 
-## User-Agent & Age keys
+## User-Agent
 
 Every download — subscriptions, Geodata and other fetches alike — sends
 the app's live User-Agent. It consists of a fixed compatibility product
@@ -98,12 +98,6 @@ token followed by
 The compatibility token is kept so panels recognise the client; there is
 no per-source or global control, and an upgraded app always sends its
 current identity.
-
-Age keys are the one per-source request value: where present,
-`ageSecretKey` decrypts **locally** and `agePublicKey` goes to the
-server via `X-Age-Public-Key`. Age protects the response body only —
-it doesn't hide the URL or replace HTTPS, and failed decryption keeps
-the old cache.
 
 ## Field reference
 

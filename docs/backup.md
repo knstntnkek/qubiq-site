@@ -4,8 +4,8 @@ The backup entry lives in **Settings → Data**. Choose one file or
 cloud location and use it for both backup and restore. There is no version
 history, two-way sync or Qubiq cloud account.
 
-> **The backup file is unencrypted.** It contains server credentials,
-> subscription URLs and Age private keys. Store it somewhere you trust.
+> **The backup file is unencrypted.** It contains the credentials needed
+> to use your servers and subscriptions. Store it somewhere you trust.
 
 ## Targets by platform
 
