@@ -83,7 +83,7 @@ clears all provider fields until the next refresh.
 | `fallback-domain` | header / comment | Mirror host retried once when the URL fails |
 | `subscriptions-collapse` | header / comment | `0` or `false` pins the group open against manual collapse |
 | `notification-subs-expire` | header / comment | Opt-in flag for expiry reminders |
-| `color-profile` | header / comment | Happ theme for Home, the Connect circle and the provider's own rows while the subscription is in use |
+| `color-profile` | header / comment | Provider theme for Home, the Connect circle and the provider's own rows while the subscription is in use |
 | `profile-logo` | header / comment | Provider logo in the Home header, on its source card and details page |
 
 ### `profile-title`
@@ -219,14 +219,14 @@ Reminders are inexact alarms — no special alarm permission is requested.
 
 ### `color-profile`
 
-A [Happ theme](https://www.happ.su/main/dev-docs/app-management) is sent unchanged, for example
+A theme profile is a JSON object, for example
 `color-profile: {"buttonColor":"#1E3AFF","backgroundColors":["#0B1020","#1A2340"]}`.
 Send plain JSON, or `base64:` followed by base64-encoded UTF-8 JSON; the
 profile is capped at 16 KB after decoding. Keys are case-sensitive and
 colors are `#RRGGBB` or alpha-last `#RRGGBBAA`. Invalid fields and
 unknown keys are ignored; malformed JSON is ignored as a whole.
 
-| Happ key | Qubiq role (hex unless noted) |
+| Theme key | Qubiq role (hex unless noted) |
 |---|---|
 | `backgroundColors` | Ordered hex list; Home gradient and canvas. A single stop is solid. |
 | `backgroundGradientRotationAngle` | Finite number; accepted, not applied. |
@@ -263,10 +263,10 @@ profile. Removing the field also withdraws the theme on the next
 successful refresh.
 
 There are no Qubiq-only keys. The older flat Qubiq palette keys
-(`background`, `primary`, `card` …) are ignored, even mixed into a Happ
+(`background`, `primary`, `card` …) are ignored, even mixed into a theme
 profile. To migrate a legacy Home gradient, replace `background` and
 `pageBackgroundEnd` with `backgroundColors`. Palettes cached in the old
-format no longer apply; the next successful refresh loads your Happ
+format no longer apply; the next successful refresh loads your theme
 profile.
 
 The theme follows the subscription in use — the running provider,

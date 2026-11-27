@@ -23,7 +23,7 @@ A Remnawave source that answers with non-JSON text **converts silently** —
 the same response's nodes are parsed and the source becomes generic
 app-managed, no prompt and no re-download. When that happens Qubiq makes
 one recovery attempt: it retries the same URL with `/json` appended
-(query preserved, `Happ/4.0` User-Agent guaranteed) — a usable
+(query preserved, using the compatibility User-Agent) — a usable
 provider-managed result replaces the ordinary one, while any error or
 non-provider response keeps the original ordinary result. The stored URL
 is never rewritten.
@@ -73,7 +73,7 @@ OR. Fields Qubiq honours:
 | `notification-subs-expire` | Opts into expiry reminders (mobile) |
 | `color-profile` / `profile-logo` | Provider theme and logo — see [Provider branding](subscriptions.md#provider-branding) |
 
-Running a panel? The full reference — validation rules, the Happ colour
+Running a panel? The full reference — validation rules, the theme-key
 mapping, logo limits — is in [For providers](providers.md).
 
 A blank editable name resolves as `profile-title` →
@@ -87,8 +87,8 @@ request URL or Age keys.
 A provider can restyle the app while its subscription is in use — two
 response fields drive it:
 
-- **`color-profile`** — a [Happ theme](providers.md#color-profile),
-  sent unchanged as JSON or `base64:` JSON. It colors Home, the Connect
+- **`color-profile`** — a [theme profile](providers.md#color-profile),
+  sent as JSON or `base64:` JSON. It colors Home, the Connect
   circle and Settings controls, plus the provider's own headers, rows and
   usage info — other subscriptions and manual servers keep their look.
   Hex values only, 16 KB cap; unknown keys, old Qubiq-only palette keys
@@ -160,9 +160,10 @@ until the real URL answers again or you edit the request.
 ## User-Agent & Age keys
 
 Every download — subscriptions, Geodata and other fetches alike — sends
-the app's own live User-Agent:
-`Happ/4.0 Qubiq/<app version> (<package>; build:<build>; <platform>)`.
-The `Happ/4.0` prefix is kept so panels recognise the client; there is
+the app's live User-Agent. It consists of a fixed compatibility product
+token followed by
+`Qubiq/<app version> (<package>; build:<build>; <platform>)`.
+The compatibility token is kept so panels recognise the client; there is
 no per-source or global control, and an upgraded app always sends its
 current identity.
 

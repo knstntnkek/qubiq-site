@@ -372,7 +372,7 @@ function wireCopy(btn, code, copiedLabel) {
 
 const HEX_COLOR = /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
-// Happ theme JSON blocks get a color preview strip and a Copy button.
+// Theme-profile JSON blocks get a color preview strip and a Copy button.
 function mountThemeExamples(root) {
   root.querySelectorAll("pre > code.language-json").forEach(code => {
     let theme;
