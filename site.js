@@ -14,6 +14,12 @@
 
   // language switch: carry the current query + hash across languages
   const langSwitch = document.querySelector("a.lang-switch");
+  if (langSwitch) {
+    langSwitch.addEventListener("click", () => {
+      if (window.QubiqLanguage)
+        window.QubiqLanguage.setPreference(LANG === "ru" ? "en" : "ru");
+    });
+  }
   const syncLangSwitch = () => {
     if (!langSwitch) return;
     const base = langSwitch.getAttribute("href").split(/[?#]/)[0];

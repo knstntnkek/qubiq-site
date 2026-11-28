@@ -69,9 +69,6 @@ subscription downloads so providers can recognize the installation.
 Under *Settings → Advanced*: **Routing**, **Servers** and **VPN tunnel &
 Xray**.
 
-**Can I install iOS from the App Store?**
-Not today. The `.ipa` requires sideloading or enterprise signing.
-
 **Is there telemetry?**
 No — no analytics SDK, crash reporting or accounts. Logs are local and
 leave only when you share them.

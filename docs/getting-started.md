@@ -11,7 +11,6 @@ Download the package for your device from the
 
 | Platform | Package | Requirements |
 | --- | --- | --- |
-| iPhone / iPad | `.ipa` | iOS / iPadOS 16+; sideloading or enterprise signing is required |
 | macOS | `.dmg` (x64 or ARM64) | macOS 13+, Apple silicon or Intel |
 | Android | `.apk` (ARM64) | Android 10+ |
 | Windows | `.exe` or `.zip` (x64) | Windows 10 20H2+ |
@@ -22,8 +21,8 @@ Download the package for your device from the
 There is no account and no setup wizard — Qubiq opens on the **Connect**
 home. During first setup or connect, the system may ask for permission:
 
-- **iOS / macOS / Android** — allow the system VPN prompt. Android may
-  also ask for local-network permission.
+- **macOS / Android** — allow the system VPN prompt. Android may also
+  ask for local-network permission.
 - **macOS** — approve the network extension once:
   - macOS 15+: *System Settings → General → Login Items & Extensions →
     Network Extensions*
@@ -45,7 +44,7 @@ Tap **＋** in the header — or, on an empty Home, the Connect circle or
 - **Subscription** — paste the HTTPS URL your provider gave you, or use
   the provider's **Add to Qubiq** button.
 - **Share links** — paste one or more server links.
-- **QR scan** — scan a server code on iOS or Android.
+- **QR scan** — scan a server code on Android.
 - **File** — import a supported configuration file.
 
 Qubiq detects the format automatically. Supported formats and import

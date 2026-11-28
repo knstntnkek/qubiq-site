@@ -31,8 +31,8 @@ is recommended), or percent-encoded text.
 - Only HTTPS subscription URLs are accepted — other target schemes and
   URLs with `user:password@` credentials are rejected.
 - Encoded links are limited to 256 KiB.
-- The iOS, macOS, Android, Windows installer/MSIX and Linux DEB/RPM
-  builds register `qubiq://`; the portable Windows ZIP does not.
+- The macOS, Android, Windows installer/MSIX and Linux DEB/RPM builds
+  register `qubiq://`; the portable Windows ZIP does not.
 - VPN-control links are a separate, default-off user permission that
   provider fields cannot enable.
 
